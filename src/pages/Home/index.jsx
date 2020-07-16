@@ -1,10 +1,19 @@
 import React from 'react';
-import { Button } from 'antd';
+import Logotipo from '../../components/Logotipo' 
+import styled from 'styled-components';
+import Menu from '../../components/Menu';
+
+const LogoWrapper = styled.div`
+   text-align: center;
+`;
 
 const Home = () => {
    return(
-      <div>Paloma
-         <Button>FECHAR</Button>
+      <div>
+         <LogoWrapper>
+            <Logotipo/>     
+            <Menu/>       
+         </LogoWrapper>
       </div>
    )
 }
