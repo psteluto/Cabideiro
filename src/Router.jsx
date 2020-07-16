@@ -20,7 +20,7 @@ const Router = () => {
                 <Route path="/about" exact component={About} />
                 <Route path="/login" exact component={Login} />                 
                 <Route path="/catalog" exact component={Catalog} />                 
-                <Route path="/login/register" exact component={LoginRegister} />
+                <Route path="/login/register" exact componenpm install antdnt={LoginRegister} />
                 <Route path="/profile" exact component={Profile} />
                 <Route path="/product/register" exact component={ProductRegister} />
                 <Route path="/product/:id/details" exact component={Details} />

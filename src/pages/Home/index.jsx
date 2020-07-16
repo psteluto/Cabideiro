@@ -1,8 +1,11 @@
 import React from 'react';
+import { Button } from 'antd';
 
 const Home = () => {
    return(
-      <div>Paloma</div>
+      <div>Paloma
+         <Button>FECHAR</Button>
+      </div>
    )
 }
 
