@@ -12,7 +12,7 @@ const Home = () => {
       <div>
          <LogoWrapper>
             <Logotipo/>     
-            <Menu/>       
+            <Menu/>                   
          </LogoWrapper>
       </div>
    )

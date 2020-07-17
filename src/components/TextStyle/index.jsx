@@ -6,7 +6,8 @@ const { Text } = Typography;
 const TextStyle = styled(Text)`
     color: ${props => props.color || "#ffffff"};    
     margin-left: ${props => props.marginLeft || "0"};    
-    font-size: 12px;
+    font-size: ${props => props.fontSize || "12px"};
+    opacity: ${props => props.opacity || "1"};    
 `;
 
 export default TextStyle;
