@@ -22,7 +22,7 @@ const LogoWrapper = styled.div`
 `;
 
 const FormStyle = styled.div`
-   margin: 0px 160px;
+   padding: 0px 160px 80px 160px;
 `;
 
 const ButtonStyle = styled(Button)`
