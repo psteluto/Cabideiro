@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import TextStyle from '../TextStyle';
+import CloudPlatform from '../../images/cloud-platform.png'
+import Autentique from '../../images/autentique.png'
+import LetsEncrypt from '../../images/lets-encrypt.png'
 
 const FooterStyle = styled.div`
     display: flex;
@@ -26,6 +29,11 @@ const FooterWrapper = styled.div`
     justify-content: space-around;
     padding: 25px 0;
     background-color: #ee365f;
+`;
+
+const ImageStyle = styled.img`
+    width: 30%;
+    height: 20%;
 `;
 
 const Footer = () => {
@@ -74,12 +82,12 @@ const Footer = () => {
                     <TextStyle opacity="0.8">Modelo de Contrato de Locação</TextStyle>
                 </ColumnWrapper>
                 <ColumnWrapper>
-                    <TextStyle fontSize="10px" strong>Estrutura</TextStyle>
-                    <TextStyle opacity="0.8">Google CloudPlatform</TextStyle>
-                    <TextStyle fontSize="10px" strong>Site Seguro</TextStyle>
-                    <TextStyle opacity="0.8">Let's Encrypt</TextStyle>
-                    <TextStyle fontSize="10px" strong>Assinatura Digital</TextStyle>
-                    <TextStyle opacity="0.8">AUTENTIQUE</TextStyle>
+                    <TextStyle fontSize="10px" marginLeft="5px" strong>Estrutura</TextStyle>
+                    <ImageStyle src={CloudPlatform}/>
+                    <TextStyle fontSize="10px" marginLeft="5px" strong>Site Seguro</TextStyle>
+                    <ImageStyle src={LetsEncrypt}/>
+                    <TextStyle fontSize="10px" marginLeft="5px" strong>Assinatura Digital</TextStyle>
+                    <ImageStyle src={Autentique}/>
                 </ColumnWrapper>
             </FooterWrapper>      
         </div>       
