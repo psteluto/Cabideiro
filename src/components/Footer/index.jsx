@@ -6,7 +6,7 @@ const FooterStyle = styled.div`
     display: flex;
     justify-content: space-between;
     background-color: #ebebeb;
-    padding: 37px 52px;
+    padding: 25px 52px;
 `;
 
 const ColumnWrapper = styled.div`
@@ -24,7 +24,7 @@ const ItemWrapper = styled.div`
 const FooterWrapper = styled.div`
     display: flex;
     justify-content: space-around;
-    padding: 37px 0;
+    padding: 25px 0;
     background-color: #ee365f;
 `;
 

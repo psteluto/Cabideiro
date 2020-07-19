@@ -12,7 +12,7 @@ const MenuWrapper = styled.div`
 
 const InputWrapper = styled.div`
    margin: 0 240px;
-   margin-top: 24px;
+   margin-top: 20px;
 `;
 
 const Menu = () => {
