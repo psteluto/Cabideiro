@@ -41,8 +41,8 @@ const Login = () => {
             <FormStyle>
                <Row gutter={[14, 14]}>
                   <Col span={24}>
-                     <TextStyle color="#656668">CPF</TextStyle>
-                     <Input placeholder="000.000.000-00"/>
+                     <TextStyle color="#656668">E-mail</TextStyle>
+                     <Input/>
                   </Col>                                 
                </Row>
                <Row gutter={[14, 14]}>

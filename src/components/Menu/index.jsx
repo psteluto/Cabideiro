@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TextStyle from '../TextStyle';
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
 
 const MenuWrapper = styled.div`
    display: flex;
@@ -15,6 +15,10 @@ const InputWrapper = styled.div`
    margin-top: 20px;
 `;
 
+const ButtonStyle = styled(Button)`
+   color: #000000;
+`;
+
 const Menu = () => {
    return(
       <div>
@@ -22,8 +26,8 @@ const Menu = () => {
             <TextStyle color="#000000" strong>NOVIDADES</TextStyle>
             <TextStyle color="#000000" strong>MARCAS</TextStyle> 
             <TextStyle color="#000000" strong>FEMININO</TextStyle>
-            <TextStyle color="#000000" strong>MASCULINO</TextStyle>
-            <TextStyle color="#000000" strong>PUBLIQUE UMA PEÇA</TextStyle>
+            <TextStyle color="#000000" strong>MASCULINO</TextStyle>            
+            <ButtonStyle type="primary">PUBLIQUE UMA PEÇA</ButtonStyle>
          </MenuWrapper>
          <InputWrapper>
             <Input placeholder="O que você está procurando ?"></Input>
