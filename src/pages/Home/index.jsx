@@ -21,7 +21,7 @@ const LogoWrapper = styled.div`
 
 const BodyWrapper = styled.img`
    width: 100%;
-   height: 400px;
+   height: 513px;
    margin: 38px 0;
 `;
 
@@ -38,6 +38,7 @@ const HowItWorks = styled.div`
 
 const HowItWorksWrapper = styled.div`
    display: flex;
+   justify-content: space-around;
    align-items: center;
 `;
 
@@ -47,6 +48,7 @@ const HowItWorksItemWrapper = styled.div`
    flex-direction: column;
    margin: 30px 50px;
    text-align: center;
+   max-width: 200px;
 `;
 
 const TextWrapper = styled.div`
@@ -60,13 +62,30 @@ const ImageWrapper = styled.img`
    height: 100%;
 `;
 
+const Container = styled.div`
+   position: relative;
+`;
+
+const PositionText = styled.div`
+   position: absolute;
+   bottom: 15%;
+   left: 0%;
+   margin-left: 73px;
+`;
+
 const Home = () => {
    return(
       <div>
          <LogoWrapper>
             <Logotipo/>     
-            <Menu/>  
-            <BodyWrapper src={HomeImage}/>            
+            <Menu/>
+            <Container>  
+               <BodyWrapper src={HomeImage}/>
+               <PositionText>
+                  <div><TextStyle fontSize="55px">Roupas </TextStyle><TextStyle fontSize="55px" color="#e73554">selecionadas</TextStyle></div>
+                  <div><TextStyle fontSize="55px" marginLeft="200px">para </TextStyle> <TextStyle color="#ffcb00" fontSize="55px">qualquer ocasião</TextStyle></div>         
+               </PositionText>
+            </Container>
          </LogoWrapper>
          <CarouselWrapper>
             <Carousel infinite arrows slidesPerPage={4} slidesPerScroll={3} animationSpeed={2000} autoPlay={4000} offset={15} itemWidth={200} stopAutoPlayOnHover centered

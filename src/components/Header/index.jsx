@@ -16,8 +16,8 @@ const Header = () => {
       <HeaderStyle>
         <TextStyle color="#ffcb00">Bem-vindo ao cabideiro</TextStyle>
         <div>
-            <TextStyle>Quem somos</TextStyle>
-            <TextStyle marginLeft="68px">Entrar | Criar conta</TextStyle>
+          <a href="/about"><TextStyle>Quem somos</TextStyle></a>
+          <a href="/login"><TextStyle marginLeft="68px">Entrar | Criar conta</TextStyle></a>
         </div>        
       </HeaderStyle>
    )

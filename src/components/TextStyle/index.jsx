@@ -9,7 +9,8 @@ const TextStyle = styled(Text)`
     margin-top: ${props => props.marginTop || "0"};    
     margin-bottom: ${props => props.marginBottom || "0"};    
     font-size: ${props => props.fontSize || "12px"};
-    opacity: ${props => props.opacity || "1"};    
+    opacity: ${props => props.opacity || "1"};
+    position: ${props => props.position || ""};   
 `;
 
 export default TextStyle;
