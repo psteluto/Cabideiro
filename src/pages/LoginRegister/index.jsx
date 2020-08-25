@@ -2,15 +2,17 @@ import React from 'react';
 import Logotipo from '../../components/Logotipo' 
 import styled from 'styled-components';
 import TextStyle from '../../components/TextStyle';
+import BackgroundLogin from '../../images/background-login.jpg';
 import { Row, Col, Input, Button } from 'antd';
 
 const Background = styled.div`
-   background-color: #979797;
+   background: url(${BackgroundLogin});
+   background-size: contain;
 `;
 
 const FormWrapper = styled.div`
    background-color: #ffffff;
-   width: 70%;
+   width: 60%;
    margin: 0 auto;
 `;
 
@@ -22,7 +24,7 @@ const LogoWrapper = styled.div`
 `;
 
 const FormStyle = styled.div`
-   padding: 0px 160px 80px 160px;
+   padding: 0px 115px 80px 115px;
 `;
 
 const ButtonStyle = styled(Button)`
@@ -31,7 +33,7 @@ const ButtonStyle = styled(Button)`
 
 const LoginRegister = () => {
    return(
-      <Background>
+      <Background src={BackgroundLogin}>
          <FormWrapper>
             <LogoWrapper>
                <Logotipo/>

@@ -2,10 +2,12 @@ import React from 'react';
 import Logotipo from '../../components/Logotipo' 
 import styled from 'styled-components';
 import TextStyle from '../../components/TextStyle';
+import BackgroundLogin from '../../images/background-login.jpg';
 import { Row, Col, Input, Button } from 'antd';
 
 const Background = styled.div`
-   background-color: #979797;
+   background: url(${BackgroundLogin});
+   background-size: contain;
 `;
 
 const FormWrapper = styled.div`
@@ -22,7 +24,7 @@ const LogoWrapper = styled.div`
 `;
 
 const FormStyle = styled.div`
-   padding: 43px 160px 80px 160px;
+   padding: 43px 115px 80px 115px;
 `;
 
 const ButtonStyle = styled(Button)`
@@ -32,7 +34,7 @@ const ButtonStyle = styled(Button)`
 
 const Login = () => {
    return(
-      <Background>
+      <Background src={BackgroundLogin}>
          <FormWrapper>
             <LogoWrapper>
                <Logotipo/>

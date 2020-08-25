@@ -2,7 +2,7 @@ import React from 'react';
 import Logotipo from '../../components/Logotipo' 
 import styled from 'styled-components';
 import Menu from '../../components/Menu';
-import HomeImage from '../../images/home.png'
+import HomeImage from '../../images/banner.jpg'
 import Locador from '../../images/locador.png'
 import Locatario from '../../images/locatario.png'
 import Money from '../../images/money.png'
@@ -82,8 +82,8 @@ const Home = () => {
             <Container>  
                <BodyWrapper src={HomeImage}/>
                <PositionText>
-                  <div><TextStyle fontSize="55px">Roupas </TextStyle><TextStyle fontSize="55px" color="#e73554">selecionadas</TextStyle></div>
-                  <div><TextStyle fontSize="55px" marginLeft="200px">para </TextStyle> <TextStyle color="#ffcb00" fontSize="55px">qualquer ocasião</TextStyle></div>         
+                  <div><TextStyle fontSize="50px">Roupas </TextStyle><TextStyle fontSize="50px" color="#e73554">selecionadas</TextStyle></div>
+                  <div><TextStyle fontSize="50px" marginLeft="200px">para </TextStyle> <TextStyle color="#ffcb00" fontSize="50px">qualquer ocasião</TextStyle></div>         
                </PositionText>
             </Container>
          </LogoWrapper>
