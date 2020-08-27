@@ -38,7 +38,7 @@ const Login = () => {
          <FormWrapper>
             <LogoWrapper>
                <Logotipo/>
-               <TextStyle color="#262626" fontSize="16px">ENTRAR / CRIAR CONTA</TextStyle>                
+               <TextStyle color="#262626" fontSize="16px">ENTRAR</TextStyle>                
             </LogoWrapper>
             <FormStyle>
                <Row gutter={[14, 14]}>

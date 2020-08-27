@@ -14,10 +14,11 @@ const HeaderStyle = styled.div`
 const Header = () => {
    return(
       <HeaderStyle>
-        <TextStyle color="#ffcb00">Bem-vindo ao cabideiro</TextStyle>
+        <a href="/"><TextStyle color="#ffcb00">Bem-vindo ao cabideiro</TextStyle></a>
         <div>
           <a href="/about"><TextStyle>Quem somos</TextStyle></a>
-          <a href="/login"><TextStyle marginLeft="68px">Entrar | Criar conta</TextStyle></a>
+          <a href="/login"><TextStyle marginLeft="68px">Entrar | </TextStyle></a>
+          <a href="/login/register"><TextStyle>Criar conta</TextStyle></a>
         </div>        
       </HeaderStyle>
    )

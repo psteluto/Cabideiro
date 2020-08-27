@@ -29,6 +29,7 @@ const FormStyle = styled.div`
 
 const ButtonStyle = styled(Button)`
    color: #000000;
+   margin-top: 20px;
 `;
 
 const LoginRegister = () => {
@@ -71,8 +72,32 @@ const LoginRegister = () => {
                   </Col>
                   <Col span={12}>
                      <TextStyle color="#656668">CEP</TextStyle>
+                     <Input placeholder="00000-000"/>
+                  </Col>  
+                  <Col span={12}>
+                     <TextStyle color="#656668">Estado</TextStyle>
                      <Input/>
-                  </Col>               
+                  </Col>   
+                  <Col span={12}>
+                     <TextStyle color="#656668">Cidade</TextStyle>
+                     <Input/>
+                  </Col>
+                  <Col span={12}>
+                     <TextStyle color="#656668">Bairro</TextStyle>
+                     <Input/>
+                  </Col> 
+                  <Col span={24}>
+                     <TextStyle color="#656668">Rua / Avenida</TextStyle>
+                     <Input/>
+                  </Col>
+                  <Col span={12}>
+                     <TextStyle color="#656668">Número</TextStyle>
+                     <Input/>
+                  </Col>
+                  <Col span={12}>
+                     <TextStyle color="#656668">Complemento</TextStyle>
+                     <Input/>
+                  </Col>           
                </Row>
                <Row>
                   <Col span={12} offset={12}>
