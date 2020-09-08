@@ -23,12 +23,8 @@ const SelectStyle = styled(Select)`
    width: 160px;
 `;
 
-const ProductWrapper = styled.div`
-   margin: 0 240px 69px 240px;
-`;
-
-const ProductStyle = styled(Card)`
-
+const CardWrapper = styled(Card)`
+   margin-right:
 `;
 
 const Catalog = () => {
@@ -45,23 +41,25 @@ const Catalog = () => {
                <SelectStyle defaultValue="Marca"></SelectStyle>
                <SelectStyle defaultValue="Cor"></SelectStyle>            
             </FilterWrapper>
+         </Row>         
+         <Row>
+            <FilterWrapper>
+               <Col span={6}>
+                  <Card/>
+               </Col>
+               <Col span={6}>
+                  <Card/>
+               </Col>
+               <Col span={6}>
+                  <Card/>
+               </Col>
+               <Col span={6}>
+                  <Card/>
+               </Col>
+            </FilterWrapper>
          </Row>
-         <ProductWrapper>
-            <Row>
-               <Col span={6}>
-                  <ProductStyle/>
-               </Col>
-               <Col span={6}>
-                  <ProductStyle/>
-               </Col>
-               <Col span={6}>
-                  <ProductStyle/>
-               </Col>
-               <Col span={6}>
-                  <ProductStyle/>
-               </Col>
-            </Row>
-            <Row>
+         <Row>
+            <FilterWrapper>
                <Col span={6}>
                   <Card/>
                </Col>
@@ -74,8 +72,10 @@ const Catalog = () => {
                <Col span={6}>
                   <Card/>
                </Col>
-            </Row>
-            <Row>
+            </FilterWrapper>
+         </Row>
+         <Row>
+            <FilterWrapper>
                <Col span={6}>
                   <Card/>
                </Col>
@@ -88,8 +88,10 @@ const Catalog = () => {
                <Col span={6}>
                   <Card/>
                </Col>
-            </Row>
-            <Row>
+            </FilterWrapper>
+         </Row>
+         <Row>
+            <FilterWrapper>
                <Col span={6}>
                   <Card/>
                </Col>
@@ -102,8 +104,8 @@ const Catalog = () => {
                <Col span={6}>
                   <Card/>
                </Col>
-            </Row>
-         </ProductWrapper>
+            </FilterWrapper>
+         </Row>
       </div>
    )
 }

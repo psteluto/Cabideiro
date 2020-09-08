@@ -1,19 +1,20 @@
 import React from 'react';
-import Logotipo from '../../components/Logotipo' 
 import styled from 'styled-components';
-import Menu from '../../components/Menu';
+import Logotipo from '../../components/Logotipo' 
 
 const LogoWrapper = styled.div`
-   text-align: center;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
 `;
 
 const ProductRegister = () => {
    return(
       <div>
          <LogoWrapper>
-            <Logotipo/>     
-            <Menu/>                   
-         </LogoWrapper>
+            <Logotipo/>  
+         </LogoWrapper>        
       </div>
    )
 }

@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import Logotipo from '../../components/Logotipo' 
 import TextStyle from '../../components/TextStyle';
 import WomanImage from '../../images/mulher.jpg';
-import DetailImage1 from '../../images/details-1.png';
-import DetailImage2 from '../../images/details-2.png';
-import DetailImage3 from '../../images/details-3.png';
 import ListImage1 from '../../images/image1.jpg'
 import ListImage2 from '../../images/image2.jpg'
 import ListImage3 from '../../images/image3.jpg'
@@ -76,6 +73,11 @@ const CardWrapper = styled.div`
 
 const FeedbackWrapper = styled.div`
    text-align: center;
+   margin-bottom: 16px;
+`;
+
+const FeedbackStyle = styled.div`
+   
 `;
 
 const Profile = () => {
@@ -283,7 +285,7 @@ const Profile = () => {
                               </Col>
                               <Col span={18}>
                                  <Row>
-                                    <TextStyle color="#262626" fontSize="12px" style={{fontWeight: "600"}}>Paloma Steluto <Link style={{marginLeft: "10px"}}>Seguir</Link></TextStyle>
+                                    <TextStyle color="#262626" fontSize="12px" style={{fontWeight: "600"}}>Luiza Cassiano <Link style={{marginLeft: "10px"}}>Seguir</Link></TextStyle>
                                  </Row>
                                  <Row>
                                     <Rate defaultValue={3} disabled/>
@@ -305,10 +307,10 @@ const Profile = () => {
                               </Col>
                               <Col span={18}>
                                  <Row>
-                                    <TextStyle color="#262626" fontSize="12px" style={{fontWeight: "600"}}>Paloma Steluto <Link style={{marginLeft: "10px"}}>Seguir</Link></TextStyle>
+                                    <TextStyle color="#262626" fontSize="12px" style={{fontWeight: "600"}}>Fernanda Lima <Link style={{marginLeft: "10px"}}>Seguir</Link></TextStyle>
                                  </Row>
                                  <Row>
-                                    <Rate defaultValue={3} disabled/>
+                                    <Rate defaultValue={5} disabled/>
                                  </Row>                               
                               </Col>
                            </Row>
@@ -320,7 +322,9 @@ const Profile = () => {
                      </Row>
                   </TabPane>
                   <TabPane tab="Histórico" key="3">
-                     Comprar Novamente
+                     <Row>
+                        Comprar Novamente
+                     </Row>
                   </TabPane>
                </Tabs>
          </IconsWrapper>
