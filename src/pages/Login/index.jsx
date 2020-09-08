@@ -10,6 +10,10 @@ const Background = styled.div`
    background-size: contain;
 `;
 
+const BackgroundImage = styled.img`
+   opacity: 0.5;
+`;
+
 const FormWrapper = styled.div`
    background-color: #ffffff;
    width: 50%;
@@ -34,7 +38,7 @@ const ButtonStyle = styled(Button)`
 
 const Login = () => {
    return(
-      <Background src={BackgroundLogin}>
+      <Background src={BackgroundImage}>
          <FormWrapper>
             <LogoWrapper>
                <Logotipo/>

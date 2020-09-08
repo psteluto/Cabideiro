@@ -50,7 +50,7 @@ const ButtonStyle = styled(Button)`
 `;
 
 const ButtonPayment = styled(Button)`
-    width: 33%;
+    width: 50%;
     
     &:hover {
         background-color: ${props => props.backHoverButton || "#ea3251"};
@@ -105,7 +105,6 @@ const Checkout = () => {
                   <RowDescriptionItem>
                   <Row>
                      <ButtonPayment type="primary" backColorButtom="background-color: #ea3251">CARTÃO</ButtonPayment>
-                     <ButtonPayment>PAYPAL</ButtonPayment>
                      <ButtonPayment>BOLETO</ButtonPayment>
                   </Row>
                      <CreditCard/>
