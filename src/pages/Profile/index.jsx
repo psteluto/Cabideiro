@@ -6,7 +6,7 @@ import WomanImage from '../../images/mulher.jpg';
 import ListImage1 from '../../images/image1.jpg'
 import ListImage2 from '../../images/image2.jpg'
 import ListImage3 from '../../images/image3.jpg'
-import { Row, Col, Tabs, Avatar, Rate, Input, Checkbox, List, Image, Upload, Button, Select, Card } from 'antd';
+import { Row, Col, Tabs, Avatar, Rate, Input, Checkbox, List, Upload, Button, Select, Card } from 'antd';
 import { Link } from 'react-router-dom';
 import ImgCrop from 'antd-img-crop';
 
@@ -76,40 +76,7 @@ const FeedbackWrapper = styled.div`
    margin-bottom: 16px;
 `;
 
-const FeedbackStyle = styled.div`
-   
-`;
-
 const Profile = () => {
-
-   const [fileList, setFileList] = useState([
-      {
-         uid: '-1',
-         name: 'image.png',
-         status: 'done',
-         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-   ]);
-
-   const onChange = ({ fileList: newFileList }) => {
-      setFileList(newFileList);
-   };
-  
-    const onPreview = async file => {
-      let src = file.url;
-      if (!src) {
-        src = await new Promise(resolve => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file.originFileObj);
-          reader.onload = () => resolve(reader.result);
-        });
-      }
-      const image = new Image();
-      image.src = src;
-      const imgWindow = window.open(src);
-      imgWindow.document.write(image.outerHTML);
-    };
-
    return(
       <div>
          <LogoWrapper>
@@ -149,7 +116,7 @@ const Profile = () => {
             </Row>
          </ProfileWrapper>
          <IconsWrapper>
-            <Tabs defaultActiveKey="2" centered>
+            <Tabs defaultActiveKey="1" centered>
                <TabPane tab="Meu Closet" key="1">
                   <Row>
                      <Col span={10}>  
@@ -255,16 +222,8 @@ const Profile = () => {
                            </ItensWrapper>
                            <ItensWrapper>
                               <List style={{padding: "7px 0 7px 0"}}>
-                                 <ImgCrop rotate>
-                                    <Upload
-                                       action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                       listType="picture-card"
-                                       fileList={fileList}
-                                       onChange={onChange}
-                                       onPreview={onPreview}
-                                       >
-                                       {fileList.length < 5 && '+ Upload'}
-                                    </Upload>
+                                 <ImgCrop>
+                                    <Upload listType="picture-card">+ Upload</Upload>
                                  </ImgCrop>
                               </List>
                            </ItensWrapper>
@@ -317,7 +276,7 @@ const Profile = () => {
                            </FeedbackWrapper>
                         </Col>
                         <Col span={16}>
-                           <TextStyle color="#262626" fontSize="11px">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</TextStyle>
+                           <TextStyle color="#262626" fontSize="11px">Atendimento incrível, envio rápido e qualidade excelente. Amei!!!</TextStyle>
                         </Col>                   
                      </Row>
                   </TabPane>

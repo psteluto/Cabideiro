@@ -3,7 +3,8 @@ import Logotipo from '../../components/Logotipo'
 import styled from 'styled-components';
 import Menu from '../../components/Menu';
 import Card from '../../components/Card'
-import { Row, Col, Select } from 'antd';
+import { Row, Col, Select, Pagination } from 'antd';
+import { Link } from 'react-router-dom'
 
 const { Option } = Select;
 
@@ -23,8 +24,10 @@ const SelectStyle = styled(Select)`
    width: 160px;
 `;
 
-const CardWrapper = styled(Card)`
-   margin-right:
+const PaginationWrapper = styled.div`
+   display: flex;
+   justify-content: center;
+   margin: 24px 0 24px 0;
 `;
 
 const Catalog = () => {
@@ -44,68 +47,123 @@ const Catalog = () => {
          </Row>         
          <Row>
             <FilterWrapper>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>                  
                </Col>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
                </Col>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
                </Col>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
                </Col>
-            </FilterWrapper>
-         </Row>
-         <Row>
-            <FilterWrapper>
-               <Col span={6}>
-                  <Card/>
-               </Col>
-               <Col span={6}>
-                  <Card/>
-               </Col>
-               <Col span={6}>
-                  <Card/>
-               </Col>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
                </Col>
             </FilterWrapper>
          </Row>
          <Row>
             <FilterWrapper>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>                  
                </Col>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
                </Col>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
                </Col>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
+               </Col>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
                </Col>
             </FilterWrapper>
          </Row>
          <Row>
             <FilterWrapper>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>                  
                </Col>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
                </Col>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
                </Col>
-               <Col span={6}>
-                  <Card/>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
+               </Col>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
                </Col>
             </FilterWrapper>
          </Row>
+         <Row>
+            <FilterWrapper>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>                  
+               </Col>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
+               </Col>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
+               </Col>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
+               </Col>
+               <Col span={4}>
+                  <Link to="/product/1/details" replace>
+                     <Card/>
+                  </Link>
+               </Col>
+            </FilterWrapper>
+         </Row>
+         <PaginationWrapper>
+            <Pagination defaultCurrent={1} total={50} />
+         </PaginationWrapper>         
       </div>
    )
 }
