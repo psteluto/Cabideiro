@@ -1,5 +1,5 @@
-import React from 'react';
-import Logotipo from '../../components/Logotipo' 
+import React, {Component} from 'react';
+import Logotipo from '../../components/Logotipo'
 import styled from 'styled-components';
 import Menu from '../../components/Menu';
 import HomeImage from '../../images/banner.jpg'
@@ -10,10 +10,11 @@ import Graphic from '../../images/graphic.png'
 import Poiner from '../../images/pointer.png'
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
-import { LeftSquareFilled, RightSquareFilled } from '@ant-design/icons';
-import { Row, Col } from 'antd';
+import {LeftSquareFilled, RightSquareFilled} from '@ant-design/icons';
+import {Row, Col} from 'antd';
 import TextStyle from '../../components/TextStyle';
 import Card from '../../components/Card'
+import ProductService from '../../services/Product';
 
 const LogoWrapper = styled.div`
    text-align: center;
@@ -73,74 +74,120 @@ const PositionText = styled.div`
    margin-left: 73px;
 `;
 
-const Home = () => {
-   return(
+class Home extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      carouselProducts: []
+    }
+  }
+
+  componentDidMount() {
+    this.getProducts();
+    console.log(this.props.history)
+  }
+
+  async getProducts() {
+    const res = await ProductService.getAll();
+    console.log(res.data)
+    this.setState({carouselProducts: res.data})
+  }
+
+  clickProduct(id) {
+    this.props.history.push(`/product/${id}/details`);
+  }
+
+  render() {
+    const {carouselProducts} = this.state;
+
+    return (
       <div>
-         <LogoWrapper>
-            <Logotipo/>     
-            <Menu/>
-            <Container>  
-               <BodyWrapper src={HomeImage}/>
-               <PositionText>
-                  <div><TextStyle fontSize="50px">Roupas </TextStyle><TextStyle fontSize="50px" color="#e73554">selecionadas</TextStyle></div>
-                  <div><TextStyle fontSize="50px" marginLeft="200px">para </TextStyle> <TextStyle color="#ffcb00" fontSize="50px">qualquer ocasião</TextStyle></div>         
-               </PositionText>
-            </Container>
-         </LogoWrapper>
-         <CarouselWrapper>
-            <Carousel infinite arrows slidesPerPage={4} slidesPerScroll={3} animationSpeed={2000} autoPlay={4000} offset={15} itemWidth={200} stopAutoPlayOnHover centered
-            arrowLeft={<LeftSquareFilled style={{fontSize: '30px', color: '#000000'}}/>}
-            arrowRight={<RightSquareFilled style={{fontSize: '30px', color: '#000000'}}/>} addArrowClickHandler>
-               <Card/>
-               <Card/>
-               <Card/>
-               <Card/>
-            </Carousel>
-         </CarouselWrapper>
-         <HowItWorks>
-            <TextStyle fontSize="20px" color="#262626">Como funciona?</TextStyle>
-            <HowItWorksWrapper>
-               <HowItWorksItemWrapper>
-                  <img src={Money} />
-                  <TextStyle color="#262626" strong>Escolha</TextStyle>
-                  <TextStyle color="#656668" marginTop="5px">Encontre aquela sua peça perfeita, pendurada há um tempo e que esteja disponível para aluguel.</TextStyle>
-               </HowItWorksItemWrapper>
-               <HowItWorksItemWrapper>
-                  <img src={Graphic} />
-                  <TextStyle color="#262626" strong>Preparo</TextStyle>
-                  <TextStyle color="#656668" marginTop="5px">Tire fotos de bons ângulos que capite o quão incrível e especial é a sua peça.</TextStyle>
-               </HowItWorksItemWrapper>
-               <HowItWorksItemWrapper>
-                  <img src={Poiner} />
-                  <TextStyle color="#262626" strong>Alugando</TextStyle>
-                  <TextStyle color="#656668" marginTop="5px">Preencha o formulário para locação da sua peça e ela estará disponível na loja para que outras pessoas tenham experiências incríveis com o seu look.</TextStyle>
-               </HowItWorksItemWrapper>
-            </HowItWorksWrapper>
-         </HowItWorks>         
-         <Row>         
-            <Col span={12}>
-               <ImageWrapper src={Locador}/>
-            </Col>                 
-            <Col span={12}>
-               <TextWrapper>
-               <TextStyle color="#262626" fontSize="20px">Locador</TextStyle>
-               <TextStyle color="#656668" marginTop="10px">Coloque suas melhores vestimentas e acessórios para eventos aqui no Cabideiro e ganhe dinheiro com isto.</TextStyle>
-               </TextWrapper>
-            </Col>
-         </Row>
-         <Row>    
-            <Col span={12}>
-               <TextWrapper>
-               <TextStyle color="#262626" fontSize="20px">Locatário</TextStyle>
-               <TextStyle color="#656668" marginTop="10px">Encontre o seu look perfeito e aprecie usando-o em momentos especiais por alguns dias.</TextStyle>
-               </TextWrapper>
-            </Col>     
-            <Col span={12}>
-               <ImageWrapper src={Locatario}/>
-            </Col>
-         </Row>
+        <LogoWrapper>
+          <Logotipo/>
+          <Menu/>
+          <Container>
+            <BodyWrapper src={HomeImage}/>
+            <PositionText>
+              <div>
+                <TextStyle fontSize="50px">Roupas </TextStyle>
+                <TextStyle fontSize="50px" color="#e73554">selecionadas</TextStyle>
+              </div>
+              <div>
+                <TextStyle fontSize="50px" marginLeft="200px">para </TextStyle>
+                <TextStyle color="#ffcb00" fontSize="50px">qualquer ocasião</TextStyle>
+              </div>
+            </PositionText>
+          </Container>
+        </LogoWrapper>
+        <CarouselWrapper>
+          <Carousel infinite arrows slidesPerPage={4} slidesPerScroll={3} animationSpeed={2000} autoPlay={4000}
+                    offset={15} itemWidth={200} stopAutoPlayOnHover centered
+                    arrowLeft={<LeftSquareFilled style={{fontSize: '30px', color: '#000000'}}/>}
+                    arrowRight={<RightSquareFilled style={{fontSize: '30px', color: '#000000'}}/>} addArrowClickHandler>
+
+            {carouselProducts.map(product =>
+              <Card
+                key={product.id}
+                imageUrl={product.image_products[0].image_url}
+                name={`${product.name} - ${product.description}`}
+                price={product.price.replace('.', ',')}
+                onClick={() => this.clickProduct(product.id)}
+              />)}
+
+          </Carousel>
+        </CarouselWrapper>
+        <HowItWorks>
+          <TextStyle fontSize="20px" color="#262626">Como funciona?</TextStyle>
+          <HowItWorksWrapper>
+            <HowItWorksItemWrapper>
+              <img src={Money}/>
+              <TextStyle color="#262626" strong>Escolha</TextStyle>
+              <TextStyle color="#656668" marginTop="5px">Encontre aquela sua peça perfeita, pendurada há um tempo e que
+                esteja disponível para aluguel.</TextStyle>
+            </HowItWorksItemWrapper>
+            <HowItWorksItemWrapper>
+              <img src={Graphic}/>
+              <TextStyle color="#262626" strong>Preparo</TextStyle>
+              <TextStyle color="#656668" marginTop="5px">Tire fotos de bons ângulos que capite o quão incrível e
+                especial é a sua peça.</TextStyle>
+            </HowItWorksItemWrapper>
+            <HowItWorksItemWrapper>
+              <img src={Poiner}/>
+              <TextStyle color="#262626" strong>Alugando</TextStyle>
+              <TextStyle color="#656668" marginTop="5px">Preencha o formulário para locação da sua peça e ela estará
+                disponível na loja para que outras pessoas tenham experiências incríveis com o seu look.</TextStyle>
+            </HowItWorksItemWrapper>
+          </HowItWorksWrapper>
+        </HowItWorks>
+        <Row>
+          <Col span={12}>
+            <ImageWrapper src={Locador}/>
+          </Col>
+          <Col span={12}>
+            <TextWrapper>
+              <TextStyle color="#262626" fontSize="20px">Locador</TextStyle>
+              <TextStyle color="#656668" marginTop="10px">Coloque suas melhores vestimentas e acessórios para eventos
+                aqui no Cabideiro e ganhe dinheiro com isto.</TextStyle>
+            </TextWrapper>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <TextWrapper>
+              <TextStyle color="#262626" fontSize="20px">Locatário</TextStyle>
+              <TextStyle color="#656668" marginTop="10px">Encontre o seu look perfeito e aprecie usando-o em momentos
+                especiais por alguns dias.</TextStyle>
+            </TextWrapper>
+          </Col>
+          <Col span={12}>
+            <ImageWrapper src={Locatario}/>
+          </Col>
+        </Row>
       </div>
-   )
+    )
+  }
+
 }
 
 export default Home;
