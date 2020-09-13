@@ -1,9 +1,8 @@
 import React from 'react';
 import Logotipo from '../../components/Logotipo' 
 import styled from 'styled-components';
-import Menu from '../../components/Menu';
 import Card from '../../components/Card'
-import { Row, Col, Select, Pagination } from 'antd';
+import { Row, Col, Select, Pagination, Input } from 'antd';
 import { Link } from 'react-router-dom'
 
 const { Option } = Select;
@@ -30,12 +29,19 @@ const PaginationWrapper = styled.div`
    margin: 24px 0 24px 0;
 `;
 
+const InputWrapper = styled.div`
+   margin: 0 240px;
+   margin-top: 20px;
+`;
+
 const Catalog = () => {
    return(
       <div>
          <LogoWrapper>
-            <Logotipo/>     
-            <Menu/> 
+            <Logotipo/>  
+            <InputWrapper>
+               <Input placeholder="O que você está procurando ?"></Input>
+            </InputWrapper>
          </LogoWrapper>
          <Row>
             <FilterWrapper>

@@ -24,25 +24,22 @@ const Menu = () => {
    return(
       <div>
          <MenuWrapper>
-            <Link to="/catalog" replace> 
-               <TextStyle color="#000000" strong>NOVIDADES</TextStyle>
-            </Link>            
-            <Link to="/catalog" replace>    
-               <TextStyle color="#000000" strong>FEMININO</TextStyle>
-            </Link>
-            <Link to="/catalog" replace>
-               <TextStyle color="#000000" strong>MASCULINO</TextStyle>            
-            </Link>
-            <Link to="/catalog" replace> 
-               <TextStyle color="#000000" strong>ACESSÓRIOS</TextStyle> 
-            </Link>
-            <ButtonStyle type="primary">
-               PUBLIQUE UMA PEÇA
-            </ButtonStyle>
-         </MenuWrapper>
-         <InputWrapper>
-            <Input placeholder="O que você está procurando ?"></Input>
-         </InputWrapper>
+               <Link to="/catalog" replace> 
+                  <TextStyle color="#000000" strong>NOVIDADES</TextStyle>
+               </Link>            
+               <Link to="/catalog" replace>    
+                  <TextStyle color="#000000" strong>FEMININO</TextStyle>
+               </Link>
+               <Link to="/catalog" replace>
+                  <TextStyle color="#000000" strong>MASCULINO</TextStyle>            
+               </Link>
+               <Link to="/catalog" replace> 
+                  <TextStyle color="#000000" strong>ACESSÓRIOS</TextStyle> 
+               </Link>
+               <ButtonStyle type="primary">
+                  PUBLIQUE UMA PEÇA
+               </ButtonStyle>
+            </MenuWrapper>                  
       </div>          
    )
 }
