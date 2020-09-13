@@ -12,16 +12,29 @@ const HeaderStyle = styled.div`
 `;
 
 const Header = () => {
-   return(
-      <HeaderStyle>
-        <a href="/"><TextStyle color="#ffcb00">Bem-vindo ao cabideiro</TextStyle></a>
-        <div>
-          <a href="/about"><TextStyle>Quem somos</TextStyle></a>
-          <a href="/login"><TextStyle marginLeft="68px">Entrar | </TextStyle></a>
-          <a href="/login/register"><TextStyle>Criar conta</TextStyle></a>
-        </div>        
-      </HeaderStyle>
-   )
+  const logout = () => {
+    localStorage.removeItem("token");
+  }
+
+  return (
+    <HeaderStyle>
+      <a href="/"><TextStyle color="#ffcb00">Bem-vindo ao cabideiro</TextStyle></a>
+      <div>
+        <a href="/about"><TextStyle>Quem somos</TextStyle></a>
+        {localStorage.getItem("token") ? (
+          <span>
+            <a href="/profile"><TextStyle marginLeft="68px">Meu Perfil | </TextStyle></a>
+            <a href="/" onClick={logout}><TextStyle>Sair</TextStyle></a>
+          </span>
+        ) : (
+          <span>
+            <a href="/login"><TextStyle marginLeft="68px">Entrar | </TextStyle></a>
+            <a href="/login/register"><TextStyle>Criar conta</TextStyle></a>
+          </span>
+        )}
+      </div>
+    </HeaderStyle>
+  )
 }
 
 export default Header;
