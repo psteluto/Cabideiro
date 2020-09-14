@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import Router from './Router';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import store from './redux/store';
+import App from "./App";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Header />
-    <Router />
-    <Footer />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App/>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

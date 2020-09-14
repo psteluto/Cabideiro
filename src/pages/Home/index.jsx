@@ -85,12 +85,10 @@ class Home extends Component {
 
   componentDidMount() {
     this.getProducts();
-    console.log(this.props.history)
   }
 
   async getProducts() {
     const res = await ProductService.getAll();
-    console.log(res.data)
     this.setState({carouselProducts: res.data})
   }
 
