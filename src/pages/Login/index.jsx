@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Row, Col, Input, Button, Alert} from 'antd';
-import LoginService from '../../services/Login'
+import UserService from '../../services/User'
 import Logotipo from '../../components/Logotipo'
 import styled from 'styled-components';
 import TextStyle from '../../components/TextStyle';
@@ -61,7 +61,7 @@ class Login extends Component{
 
     if (emailCpf && password){
       try {
-        const res = await LoginService.login(emailCpf, password);
+        const res = await UserService.login(emailCpf, password);
         localStorage.setItem('token', res.data.token);
         dispatchToken(res.data.token);
         this.props.history.push(`/`);
