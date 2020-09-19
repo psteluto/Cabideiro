@@ -62,13 +62,11 @@ class LoginRegister extends Component {
     }
   }
 
-  changeFilter = (field, value) => {
+  changeFields = (field, value) => {
     const fields = {
       ...this.state.fields,
       [field]: value
     }
-    console.log(field, value)
-    console.log(fields);
     this.setState({fields})
   }
 
@@ -140,59 +138,59 @@ class LoginRegister extends Component {
             <Row gutter={[14, 14]}>
               <Col span={24}>
                 <TextStyle color="#656668">Nome completo</TextStyle>
-                <Input onChange={(e) => this.changeFilter('name', e.target.value)}/>
+                <Input onChange={(e) => this.changeFields('name', e.target.value)}/>
               </Col>
               <Col span={24}>
                 <TextStyle color="#656668">E-mail</TextStyle>
-                <Input onChange={(e) => this.changeFilter('email', e.target.value)}/>
+                <Input onChange={(e) => this.changeFields('email', e.target.value)}/>
               </Col>
               <Col span={8}>
                 <TextStyle color="#656668">CPF</TextStyle>
-                <Input onChange={(e) => this.changeFilter('cpf', e.target.value)} placeholder="000.000.000-00"/>
+                <Input onChange={(e) => this.changeFields('cpf', e.target.value)} placeholder="000.000.000-00"/>
               </Col>
               <Col span={8}>
                 <TextStyle color="#656668">Celular</TextStyle>
-                <Input onChange={(e) => this.changeFilter('cellphone', e.target.value)} placeholder="(00) 00000-0000"/>
+                <Input onChange={(e) => this.changeFields('cellphone', e.target.value)} placeholder="(00) 00000-0000"/>
               </Col>
               <Col span={8}>
                 <TextStyle color="#656668">Telefone alternativo</TextStyle>
-                <Input onChange={(e) => this.changeFilter('phone', e.target.value)} placeholder="(00) 00000-0000"/>
+                <Input onChange={(e) => this.changeFields('phone', e.target.value)} placeholder="(00) 00000-0000"/>
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">Senha</TextStyle>
-                <Input onChange={(e) => this.changeFilter('password', e.target.value)}/>
+                <Input onChange={(e) => this.changeFields('password', e.target.value)}/>
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">Confirmar Senha</TextStyle>
-                <Input onChange={(e) => this.changeFilter('confirmPassword', e.target.value)}/>
+                <Input onChange={(e) => this.changeFields('confirmPassword', e.target.value)}/>
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">CEP</TextStyle>
-                <Input onChange={(e) => this.changeFilter('zipcode', e.target.value)} placeholder="00000-000"/>
+                <Input onChange={(e) => this.changeFields('zipcode', e.target.value)} placeholder="00000-000"/>
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">Estado</TextStyle>
-                <Input onChange={(e) => this.changeFilter('state', e.target.value)}/>
+                <Input onChange={(e) => this.changeFields('state', e.target.value)}/>
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">Cidade</TextStyle>
-                <Input onChange={(e) => this.changeFilter('city', e.target.value)}/>
+                <Input onChange={(e) => this.changeFields('city', e.target.value)}/>
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">Bairro</TextStyle>
-                <Input onChange={(e) => this.changeFilter('neighborhood', e.target.value)}/>
+                <Input onChange={(e) => this.changeFields('neighborhood', e.target.value)}/>
               </Col>
               <Col span={24}>
                 <TextStyle color="#656668">Rua / Avenida</TextStyle>
-                <Input onChange={(e) => this.changeFilter('street', e.target.value)}/>
+                <Input onChange={(e) => this.changeFields('street', e.target.value)}/>
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">Número</TextStyle>
-                <Input onChange={(e) => this.changeFilter('number', e.target.value)}/>
+                <Input onChange={(e) => this.changeFields('number', e.target.value)}/>
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">Complemento</TextStyle>
-                <Input onChange={(e) => this.changeFilter('complement', e.target.value)}/>
+                <Input onChange={(e) => this.changeFields('complement', e.target.value)}/>
               </Col>
             </Row>
             <Row>
