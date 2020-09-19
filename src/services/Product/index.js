@@ -11,6 +11,7 @@ const getOne = async (id) => {
 const calculateShipping = async (zipcode) => {
   // return await api.get("/");
   //TODO esperando endpoint
+  return {data: 12.00}
 }
 
 const sendPropose = async (value, days) => {

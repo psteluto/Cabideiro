@@ -16,6 +16,7 @@
     "customize-cra": "^1.0.0",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
+    "moment": "^2.28.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-app-rewired": "^2.1.5",

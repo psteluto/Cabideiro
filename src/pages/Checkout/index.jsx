@@ -91,7 +91,6 @@ class Checkout extends Component {
    
    saveAddress = () => {
       const {fields} = this.state;
-      console.log(fields);
       //TODO
    }
 

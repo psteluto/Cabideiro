@@ -100,9 +100,8 @@ class Details extends Component {
   calculateShipping = async () => {
     const {zipCode} = this.state;
     if (!zipCode) return;
-    //TODO usar resposta
     const res = await ProductService.calculateShipping(zipCode);
-    this.setState({shippingPrice: 12.00})
+    this.setState({shippingPrice: res.data})
   }
 
   sendPropose = async () => {
