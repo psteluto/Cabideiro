@@ -98,7 +98,7 @@ class Login extends Component{
             <Row gutter={[14, 14]}>
               <Col span={24}>
                 <TextStyle color="#656668">Senha</TextStyle>
-                <Input onChange={(e) => this.changeField('password', e.target.value)}/>
+                <Input.Password onChange={(e) => this.changeField('password', e.target.value)}/>
                 <TextStyle color="#656668" fontSize="10px">Esqueceu a sua senha? Clique aqui </TextStyle>
               </Col>
             </Row>
