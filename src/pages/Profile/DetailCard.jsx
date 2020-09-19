@@ -54,7 +54,7 @@ const RentButton = styled(Button)`
   background-color: #e73554;
 `;
 
-const DetailCard = ({image, status, name, color, owner, devolutionDate, rentValue}) => {
+const DetailCard = ({image, status, name, color, owner, client, devolutionDate, rentValue, paymentStatus}) => {
   rentValue = Number(rentValue);
 
   const daysLeft = moment(devolutionDate).diff(moment(), "days");
@@ -72,16 +72,35 @@ const DetailCard = ({image, status, name, color, owner, devolutionDate, rentValu
       break;
   }
 
+  let paymentStatusDescription = "";
+  switch (paymentStatus) {
+    case "APPROVED":
+      paymentStatusDescription = "Aprovado";
+      break;
+    case "PROCESS":
+      paymentStatusDescription = "Em Processo";
+      break;
+    case "DENIED":
+      paymentStatusDescription = "Negado";
+      break;
+  }
+
+  let userDescription = "";
+  if (owner) userDescription = "Proprietário";
+  if (client) userDescription = "Cliente";
+
+  const userName = owner || client || "";
+
   return (
     <Container>
       <Image width={185} src={image}/>
       <TextWrapper>
         <StatusText>Status {status === 'FINISHED' ? statusDescription : (<span>{statusDescription}</span>)}</StatusText>
         <NameText>{name} - {color}</NameText>
-        {owner && (
+        {userDescription && (
           <span>
             <p>
-              Proprietário: {owner}&nbsp;
+              {userDescription}: {userName}&nbsp;
               <ProfileLink href="#">Visitar Perfil</ProfileLink>
             </p>
           </span>
@@ -92,7 +111,11 @@ const DetailCard = ({image, status, name, color, owner, devolutionDate, rentValu
         </p>
         <p>Valor de Aluguel: <ContrastText>R$ {rentValue.toFixed(2).replace('.', ',')}</ContrastText></p>
 
-        {status === 'FINISHED' && (
+        {paymentStatusDescription && (
+          <p>Pagamento: {paymentStatusDescription}</p>
+        )}
+
+        {!paymentStatus && status === 'FINISHED' && (
           <ButtonWrapper><RentButton type="primary">ALUGAR NOVAMENTO</RentButton></ButtonWrapper>
         )}
       </TextWrapper>
@@ -106,8 +129,10 @@ DetailCard.propTypes = {
   name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   owner: PropTypes.string,
+  client: PropTypes.string,
   devolutionDate: PropTypes.string.isRequired,
-  rentValue: PropTypes.string.isRequired
+  rentValue: PropTypes.string.isRequired,
+  paymentStatus: PropTypes.oneOf(["APPROVED", "DENIED", "PROCESS"])
 }
 
 export default DetailCard;

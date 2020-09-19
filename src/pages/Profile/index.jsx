@@ -7,6 +7,7 @@ import {Row, Col, Tabs, Avatar, Rate} from 'antd';
 import MyCloset from "./MyCloset";
 import Rating from "./Rating";
 import History from "./History";
+import Income from "./Income";
 
 const {TabPane} = Tabs;
 
@@ -85,6 +86,9 @@ const Profile = () => {
           </TabPane>
           <TabPane tab="Histórico" key="3">
             <History/>
+          </TabPane>
+          <TabPane tab="Rendimentos" key="4">
+            <Income/>
           </TabPane>
         </Tabs>
       </IconsWrapper>
