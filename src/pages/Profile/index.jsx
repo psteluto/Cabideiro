@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Tabs, Avatar} from 'antd';
+import {Row, Col, Tabs, Avatar, Upload, Spin} from 'antd';
 import styled from 'styled-components';
 import UserService from '../../services/User';
 import MyCloset from "./MyCloset";
@@ -42,7 +42,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userData: {}
+      userData: {},
+      loadImage: false
     }
   }
 
@@ -52,11 +53,37 @@ class Profile extends Component {
 
   getUserData = async () => {
     const res = await UserService.getUserData()
-    console.log(res);
-    this.setState({userData: res.data});
+    const user = res.data;
+    user.countProducts = 33;
+    user.followers = 700;
+    user.following = 300;
+    this.setState({userData: user});
+  }
+
+  changeImage = async (info) => {
+    const fileList = [...info.fileList];
+
+    this.setState({loadImage: true});
+
+    let file = null;
+    if (fileList[0])
+      file = fileList[0].originFileObj;
+
+    if (file) {
+      const res = await UserService.uploadPhoto(file);
+      const user = res.data;
+      user.countProducts = 33;
+      user.followers = 700;
+      user.following = 300;
+      this.setState({userData: user});
+    }
+
+    this.setState({loadImage: false});
   }
 
   render() {
+    const {userData, loadImage} = this.state;
+
     return (
       <div>
         <LogoWrapper>
@@ -66,28 +93,31 @@ class Profile extends Component {
         <ProfileWrapper>
           <Row>
             <Col span={8}>
-              <Avatar style={{marginRight: 60}} size={80} src={WomanImage}/>
+              <Upload onChange={this.changeImage} fileList={[]}>
+                <Avatar style={{marginRight: 60}} size={80} src={userData.avatar_url}></Avatar>
+                {loadImage && (<Spin />)}
+              </Upload>
             </Col>
             <Col span={16}>
               <Row>
-                <TextStyle color="#262626" fontSize="14px">PALOMA STELUTO</TextStyle>
+                <TextStyle color="#262626" fontSize="14px">{userData.name}</TextStyle>
               </Row>
               <RowInformation>
                 <Col span={4}>
                   <Row>
-                    <TextStyle color="#262626" fontSize="15px" strong>33</TextStyle>
+                    <TextStyle color="#262626" fontSize="15px" strong>{userData.countProducts}</TextStyle>
                     <TextStyle color="#262626" fontSize="11px">Produtos</TextStyle>
                   </Row>
                 </Col>
                 <Col span={4}>
                   <Row>
-                    <TextStyle color="#262626" fontSize="15px" strong>700</TextStyle>
+                    <TextStyle color="#262626" fontSize="15px" strong>{userData.followers}</TextStyle>
                     <TextStyle color="#262626" fontSize="11px">Seguidores</TextStyle>
                   </Row>
                 </Col>
                 <Col span={4}>
                   <Row>
-                    <TextStyle color="#262626" fontSize="15px" strong>300</TextStyle>
+                    <TextStyle color="#262626" fontSize="15px" strong>{userData.following}</TextStyle>
                     <TextStyle color="#262626" fontSize="11px">Seguindo</TextStyle>
                   </Row>
                 </Col>

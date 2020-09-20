@@ -19,9 +19,17 @@ const getUserData = async () => {
   return await api.get("/profile");
 }
 
+const uploadPhoto = async (file) => {
+  const fd = new FormData();
+  fd.append('avatar', file);
+
+  return await api.patch("/users/avatar", fd)
+}
+
 export default {
   signUp,
   login,
   addAddress,
-  getUserData
+  getUserData,
+  uploadPhoto
 }
