@@ -15,8 +15,13 @@ const login = async (email_cpf, password) => {
   return await api.post("/sessions", params);
 }
 
+const getUserData = async () => {
+  return await api.get("/profile");
+}
+
 export default {
   signUp,
   login,
-  addAddress
+  addAddress,
+  getUserData
 }
