@@ -86,8 +86,7 @@ class Details extends Component {
   getProduct = async () => {
     const {match} = this.props;
     const res = await ProductService.getOne(match.params.id)
-    console.log(res.data)
-    // TODO usar resposta, (erro 500)
+    this.setState({product: res.data})
   }
 
   clickRent = () => {
@@ -112,7 +111,7 @@ class Details extends Component {
   }
 
   render() {
-    const {showShipping, showProposal, shippingPrice, successMsg} = this.state;
+    const {product, showShipping, showProposal, shippingPrice, successMsg} = this.state;
 
     return (
       <div>
@@ -124,34 +123,45 @@ class Details extends Component {
           <Col span={4}>
             <ColImages>
               <RowDescriptionItem marginBottom="16px">
-                <ImageWrapper src={Details2}></ImageWrapper>
+                {product.image_products && product.image_products[1] && product.image_products[1].image_url && (
+                  <ImageWrapper src={product.image_products && product.image_products[1].image_url}></ImageWrapper>
+                )}
+              </RowDescriptionItem>
+              <RowDescriptionItem marginBottom="16px">
+                {product.image_products && product.image_products[2] && product.image_products[2].image_url && (
+                  <ImageWrapper src={product.image_products && product.image_products[2].image_url}></ImageWrapper>
+                )}
               </RowDescriptionItem>
               <RowDescriptionItem>
-                <ImageWrapper src={Details3}></ImageWrapper>
+                {product.image_products && product.image_products[3] && product.image_products[3].image_url && (
+                  <ImageWrapper src={product.image_products && product.image_products[3].image_url}></ImageWrapper>
+                )}
               </RowDescriptionItem>
             </ColImages>
           </Col>
           <Col span={10}>
             <ColImage>
-              <ImageWrapper src={Details1}></ImageWrapper>
+              <ImageWrapper src={product.image_products && product.image_products[0].image_url}></ImageWrapper>
             </ColImage>
           </Col>
           <Col span={10}>
             <ColDescription>
               <RowDescriptionItem aling="text-align: center">
                 <RowDescriptionItem marginBottom="22px">
-                  <TextStyle color="#262626" strong>Blusa Chiffon Recorte nas Mangas - Azul Marinho</TextStyle>
+                  <TextStyle color="#262626" strong>{product.name}</TextStyle>
                 </RowDescriptionItem>
                 <RowDescriptionItem marginBottom="10px">
-                  <TextStyle color="#e73554" strong>R$ 69,90</TextStyle>
+                  <TextStyle color="#e73554" strong>
+                    R$ {Number(product.price).toFixed(2).replace('.',',')}
+                  </TextStyle>
                 </RowDescriptionItem>
                 <RowDescriptionItem>
                   <TextStyle color="#000000">TAMANHO: </TextStyle>
-                  <TextStyle color="#000000" strong>M</TextStyle>
+                  <TextStyle color="#000000" strong>{product.size}</TextStyle>
                 </RowDescriptionItem>
                 <RowDescriptionItem>
                   <TextStyle color="#000000" marginBottom="24px">MARCA: </TextStyle>
-                  <TextStyle color="#000000" marginBottom="24px" strong>Riachuelo</TextStyle>
+                  <TextStyle color="#000000" marginBottom="24px" strong>{product.brand && product.brand.name}</TextStyle>
                 </RowDescriptionItem>
               </RowDescriptionItem>
               <RowDescriptionItem>
@@ -200,9 +210,16 @@ class Details extends Component {
               <RowDescriptionItem marginBottom="18px">
                 <Collapse defaultActiveKey={['0']} ghost>
                   <Panel header="DETALHES">
-                    <TextStyle color="#262626">Blusa de chiffon confeccionada em modelagem ampla que possui decote em U,
-                      mangas longas com recortes e detalhe de amarração. Leve e fresh, ótima para compor looks
-                      casuais.</TextStyle>
+                    <TextStyle color="#262626">{product.description}</TextStyle>
+                  </Panel>
+                </Collapse>
+
+                <Collapse defaultActiveKey={['0']} ghost>
+                  <Panel header="Mais Informações">
+                    <TextStyle color="#262626">
+                      Proprietário:&nbsp;
+                      <a href="#">{product.user && product.user.name}&nbsp;</a>
+                    </TextStyle>
                   </Panel>
                 </Collapse>
               </RowDescriptionItem>

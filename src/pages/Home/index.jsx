@@ -128,7 +128,7 @@ class Home extends Component {
               <Card
                 key={product.id}
                 imageUrl={product.image_products[0].image_url}
-                name={`${product.name} - ${product.description}`}
+                name={`${product.name}`}
                 price={product.price.replace('.', ',')}
                 onClick={() => this.clickProduct(product.id)}
               />)}
