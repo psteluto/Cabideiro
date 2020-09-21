@@ -53,10 +53,10 @@ class Profile extends Component {
 
   getUserData = async () => {
     const res = await UserService.getUserData()
-    const user = res.data;
-    user.countProducts = 33;
-    user.followers = 700;
-    user.following = 300;
+    const user = res.data.user;
+    user.countProducts = res.data.totalProducts;
+    user.followers = res.data.totalFollowers;
+    user.following = res.data.totalFollowing;
     this.setState({userData: user});
   }
 
