@@ -72,23 +72,14 @@ class LoginRegister extends Component {
 
   clickSubmit = async () => {
     const {history} = this.props;
-    const {name, email, cpf, cellphone, phone, password,
-      zipcode, state, city, neighborhood, street, number, complement} = this.state.fields;
+    const {fields} = this.state;
     
-    const valid = this.validateForm(this.state.fields);
+    const valid = this.validateForm(fields);
     if (!valid) return;
-    
-    const {} = this.state;
-    const userData = {
-      name, email, cpf, cellphone, phone, password
-    }
-    const res = await UserService.signUp(userData);
 
-    const addressData = {
-      zipcode, state, city, neighborhood, street, number, complement,
-      userId: res.data.id
-    }
-    await UserService.addAddress(addressData);
+    delete fields.confirmPassword;
+    delete fields.number;
+    await UserService.signUp(fields);
 
     this.setState({successMsg: "Usuário cadatrado com sucesso", errorMsg: ""});
     history.push('/login')
