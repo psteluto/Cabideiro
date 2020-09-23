@@ -13,6 +13,14 @@ const getUserData = async () => {
   return await api.get("/profile");
 }
 
+const getAddress = async () => {
+  return await api.get("/users/address");
+}
+
+const updateAddress = async (address) => {
+  return await api.post("/users/address", address);
+}
+
 const uploadPhoto = async (file) => {
   const fd = new FormData();
   fd.append('avatar', file);
@@ -24,5 +32,7 @@ export default {
   signUp,
   login,
   getUserData,
-  uploadPhoto
+  uploadPhoto,
+  getAddress,
+  updateAddress
 }
