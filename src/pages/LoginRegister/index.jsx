@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Row, Col, Input, Button, Alert as AntdAlert} from 'antd';
 import styled from 'styled-components';
+import {Row, Col, Input, Button, Alert as AntdAlert} from 'antd';
+import MaskedInput from 'antd-mask-input'
 import UserService from '../../services/User';
 import Logotipo from '../../components/Logotipo'
 import TextStyle from '../../components/TextStyle';
@@ -136,27 +137,43 @@ class LoginRegister extends Component {
               </Col>
               <Col span={8}>
                 <TextStyle color="#656668">CPF</TextStyle>
-                <Input onChange={(e) => this.changeFields('cpf', e.target.value)} placeholder="000.000.000-00"/>
+                <MaskedInput
+                  mask='111.111.111-11'
+                  onChange={(e) => this.changeFields('cpf', e.target.value)}
+                  placeholder="000.000.000-00"
+                />
               </Col>
               <Col span={8}>
                 <TextStyle color="#656668">Celular</TextStyle>
-                <Input onChange={(e) => this.changeFields('cellphone', e.target.value)} placeholder="(00) 00000-0000"/>
+                <MaskedInput
+                  mask="(11) 11111-1111"
+                  onChange={(e) => this.changeFields('cellphone', e.target.value)}
+                  placeholder="(00) 00000-0000"
+                />
               </Col>
               <Col span={8}>
                 <TextStyle color="#656668">Telefone alternativo</TextStyle>
-                <Input onChange={(e) => this.changeFields('phone', e.target.value)} placeholder="(00) 00000-0000"/>
+                <MaskedInput
+                  mask="(11) 11111-1111"
+                  onChange={(e) => this.changeFields('phone', e.target.value)}
+                  placeholder="(00) 00000-0000"
+                />
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">Senha</TextStyle>
-                <Input onChange={(e) => this.changeFields('password', e.target.value)}/>
+                <Input.Password onChange={(e) => this.changeFields('password', e.target.value)}/>
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">Confirmar Senha</TextStyle>
-                <Input onChange={(e) => this.changeFields('confirmPassword', e.target.value)}/>
+                <Input.Password onChange={(e) => this.changeFields('confirmPassword', e.target.value)}/>
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">CEP</TextStyle>
-                <Input onChange={(e) => this.changeFields('zipcode', e.target.value)} placeholder="00000-000"/>
+                <MaskedInput
+                  mask="11111-111"
+                  onChange={(e) => this.changeFields('zipcode', e.target.value)}
+                  placeholder="00000-000"
+                />
               </Col>
               <Col span={12}>
                 <TextStyle color="#656668">Estado</TextStyle>
