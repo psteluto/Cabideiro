@@ -30,22 +30,18 @@ const ButtonStyle = styled(Button)`
 const ColImage = styled.div`
    margin-top: 64px;
    margin-bottom: 48px;
-   margin-left: 170px;
    width: 360px;
-   height: 500px;
 `;
 
 const ColImages = styled.div`
    width: 122px;
    height: 152px;
    margin-top: 64px;
-   margin-left: 242px;
 `;
 
 const ColDescription = styled.div`
    width: 240px;
    margin-top: 64px;
-   margin-left: 30px;
 `;
 
 const RowDescriptionItem = styled.div`  
@@ -56,6 +52,9 @@ const RowDescriptionItem = styled.div`
 const ImageWrapper = styled.img`
    width: 100%;
    height: 100%;
+   &:hover {
+    cursor: pointer;
+   }
 `;
 
 
@@ -65,6 +64,7 @@ class Details extends Component {
     super(props);
     this.state = {
       product: {},
+      images: [],
       showShipping: false,
       showProposal: false,
       shippingPrice: 0,
@@ -86,7 +86,7 @@ class Details extends Component {
   getProduct = async () => {
     const {match} = this.props;
     const res = await ProductService.getOne(match.params.id)
-    this.setState({product: res.data})
+    this.setState({product: res.data, images: res.data.image_products})
   }
 
   clickRent = () => {
@@ -110,8 +110,17 @@ class Details extends Component {
     this.setState({successMsg: "Proposta enviada com sucesso"});
   }
 
+  clickImage(i) {
+    console.log('chama o pai')
+    const {images} = this.state;
+    [images[0], images[i]] = [images[i], images[0]];
+    console.log('teste2', images);
+    this.setState({images})
+  }
+
   render() {
-    const {product, showShipping, showProposal, shippingPrice, successMsg} = this.state;
+    const {product, images, showShipping, showProposal, shippingPrice, successMsg} = this.state;
+    console.log("teste1", images)
 
     return (
       <div>
@@ -119,32 +128,32 @@ class Details extends Component {
           <Logotipo/>
           <Menu/>
         </LogoWrapper>
-        <Row>
-          <Col span={4}>
+        <Row justify="center">
+          <Col span={3}>
             <ColImages>
               <RowDescriptionItem marginBottom="16px">
                 {product.image_products && product.image_products[1] && product.image_products[1].image_url && (
-                  <ImageWrapper src={product.image_products && product.image_products[1].image_url}></ImageWrapper>
+                  <ImageWrapper onClick={()=>this.clickImage(1)} src={images[1] && images[1].image_url}></ImageWrapper>
                 )}
               </RowDescriptionItem>
               <RowDescriptionItem marginBottom="16px">
                 {product.image_products && product.image_products[2] && product.image_products[2].image_url && (
-                  <ImageWrapper src={product.image_products && product.image_products[2].image_url}></ImageWrapper>
+                  <ImageWrapper onClick={()=>this.clickImage(2)} src={images[2] && images[2].image_url}></ImageWrapper>
                 )}
               </RowDescriptionItem>
               <RowDescriptionItem>
                 {product.image_products && product.image_products[3] && product.image_products[3].image_url && (
-                  <ImageWrapper src={product.image_products && product.image_products[3].image_url}></ImageWrapper>
+                  <ImageWrapper onClick={()=>this.clickImage(3)} src={images[3] && images[3].image_url}></ImageWrapper>
                 )}
               </RowDescriptionItem>
             </ColImages>
           </Col>
-          <Col span={10}>
+          <Col span={8}>
             <ColImage>
-              <ImageWrapper src={product.image_products && product.image_products[0].image_url}></ImageWrapper>
+              <ImageWrapper src={images[0] && images[0].image_url}></ImageWrapper>
             </ColImage>
           </Col>
-          <Col span={10}>
+          <Col span={6}>
             <ColDescription>
               <RowDescriptionItem aling="text-align: center">
                 <RowDescriptionItem marginBottom="22px">
