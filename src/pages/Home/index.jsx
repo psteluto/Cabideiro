@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import Logotipo from '../../components/Logotipo'
 import styled from 'styled-components';
+import {Row, Col} from 'antd';
+import {LeftSquareFilled, RightSquareFilled} from '@ant-design/icons';
+import Carousel from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
+import Logotipo from '../../components/Logotipo'
 import Menu from '../../components/Menu';
 import HomeImage from '../../images/banner.jpg'
 import Locador from '../../images/locador.png'
 import Locatario from '../../images/locatario.png'
-import Money from '../../images/money.png'
-import Graphic from '../../images/graphic.png'
-import Poiner from '../../images/pointer.png'
-import Carousel from '@brainhubeu/react-carousel';
-import '@brainhubeu/react-carousel/lib/style.css';
-import {LeftSquareFilled, RightSquareFilled} from '@ant-design/icons';
-import {Row, Col} from 'antd';
+import WardrobeIcon from '../../images/wardrobe.svg';
+import CameraIcon from '../../images/camera.svg';
+import HandIcon from '../../images/hand.svg';
 import TextStyle from '../../components/TextStyle';
 import Card from '../../components/Card'
 import ProductService from '../../services/Product';
@@ -41,6 +41,10 @@ const HowItWorksWrapper = styled.div`
    display: flex;
    justify-content: space-around;
    align-items: center;
+`;
+
+const HowWorkImages = styled.img`
+  margin-bottom: 22px; 
 `;
 
 const HowItWorksItemWrapper = styled.div`
@@ -139,19 +143,19 @@ class Home extends Component {
           <TextStyle fontSize="20px" color="#262626">Como funciona?</TextStyle>
           <HowItWorksWrapper>
             <HowItWorksItemWrapper>
-              <img src={Money}/>
+              <HowWorkImages src={WardrobeIcon}/>
               <TextStyle color="#262626" strong>Escolha</TextStyle>
               <TextStyle color="#656668" marginTop="5px">Encontre aquela sua peça perfeita, pendurada há um tempo e que
                 esteja disponível para aluguel.</TextStyle>
             </HowItWorksItemWrapper>
             <HowItWorksItemWrapper>
-              <img src={Graphic}/>
+              <HowWorkImages src={CameraIcon}/>
               <TextStyle color="#262626" strong>Preparo</TextStyle>
               <TextStyle color="#656668" marginTop="5px">Tire fotos de bons ângulos que capite o quão incrível e
                 especial é a sua peça.</TextStyle>
             </HowItWorksItemWrapper>
             <HowItWorksItemWrapper>
-              <img src={Poiner}/>
+              <HowWorkImages src={HandIcon}/>
               <TextStyle color="#262626" strong>Alugando</TextStyle>
               <TextStyle color="#656668" marginTop="5px">Preencha o formulário para locação da sua peça e ela estará
                 disponível na loja para que outras pessoas tenham experiências incríveis com o seu look.</TextStyle>
