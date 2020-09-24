@@ -32,7 +32,7 @@ class Income extends Component {
         client: "Larissa Manoela",
         devolutionDate: "2020-10-01",
         rentValue: "152",
-        paymentStatus: "APPROVED",
+        paymentStatus: "PROCESS",
         image: ListImage1
       },
       {
@@ -42,7 +42,7 @@ class Income extends Component {
         client: "Larissa Manoela",
         devolutionDate: "2020-10-01",
         rentValue: "152",
-        paymentStatus: "APPROVED",
+        paymentStatus: "AVAILABLE",
         image: ListImage2
       },
       {
@@ -62,7 +62,7 @@ class Income extends Component {
         client: "Larissa Manoela",
         devolutionDate: "2020-10-01",
         rentValue: "152",
-        paymentStatus: "DENIED",
+        paymentStatus: "AVAILABLE",
         image: ListImage4
       }
     ]

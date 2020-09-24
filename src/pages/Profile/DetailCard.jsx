@@ -74,14 +74,11 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate, 
 
   let paymentStatusDescription = "";
   switch (paymentStatus) {
-    case "APPROVED":
-      paymentStatusDescription = "Aprovado";
+    case "AVAILABLE":
+      paymentStatusDescription = "Disponível";
       break;
     case "PROCESS":
-      paymentStatusDescription = "Em Processo";
-      break;
-    case "DENIED":
-      paymentStatusDescription = "Negado";
+      paymentStatusDescription = "Em Andamento";
       break;
   }
 
@@ -112,7 +109,7 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate, 
         <p>Valor de Aluguel: <ContrastText>R$ {rentValue.toFixed(2).replace('.', ',')}</ContrastText></p>
 
         {paymentStatusDescription && (
-          <p>Pagamento: {paymentStatusDescription}</p>
+          <p>Resgate: {paymentStatusDescription}</p>
         )}
 
         {!paymentStatus && status === 'FINISHED' && (
@@ -132,7 +129,7 @@ DetailCard.propTypes = {
   client: PropTypes.string,
   devolutionDate: PropTypes.string.isRequired,
   rentValue: PropTypes.string.isRequired,
-  paymentStatus: PropTypes.oneOf(["APPROVED", "DENIED", "PROCESS"])
+  paymentStatus: PropTypes.oneOf(["AVAILABLE", "PROCESS"])
 }
 
 export default DetailCard;
