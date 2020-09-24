@@ -78,7 +78,6 @@ class LoginRegister extends Component {
     if (!valid) return;
 
     delete fields.confirmPassword;
-    delete fields.number;
     await UserService.signUp(fields);
 
     this.setState({successMsg: "Usuário cadatrado com sucesso", errorMsg: ""});
