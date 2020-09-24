@@ -1,11 +1,12 @@
-import React from 'react';
-import Logotipo from '../../components/Logotipo' 
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 import styled from 'styled-components';
+import {Row, Col, Select, Pagination, Input} from 'antd';
+import Logotipo from '../../components/Logotipo'
 import Card from '../../components/Card'
-import { Row, Col, Select, Pagination, Input } from 'antd';
-import { Link } from 'react-router-dom'
+import ProductService from '../../services/Product';
 
-const { Option } = Select;
+const {Option} = Select;
 
 const LogoWrapper = styled.div`
    text-align: center;
@@ -34,144 +35,180 @@ const InputWrapper = styled.div`
    margin-top: 20px;
 `;
 
-const Catalog = () => {
-   return(
+class Catalog extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filters: {
+        sizes: [],
+        clothingParts: [],
+        brands: []
+      }
+    }
+  }
+
+  componentDidMount() {
+    this.getFilters();
+  }
+
+  getFilters = async () => {
+    const res = await ProductService.getFilters()
+    this.setState({filters: res.data});
+  }
+
+  render() {
+    const {filters} = this.state;
+    
+    return (
       <div>
-         <LogoWrapper>
-            <Logotipo/>  
-            <InputWrapper>
-               <Input placeholder="O que você está procurando ?"></Input>
-            </InputWrapper>
-         </LogoWrapper>
-         <Row>
-            <FilterWrapper>
-               <SelectStyle defaultValue="Tamanho"></SelectStyle>
-               <SelectStyle defaultValue="Categoria"></SelectStyle>
-               <SelectStyle defaultValue="Marca"></SelectStyle>
-               <SelectStyle defaultValue="Cor"></SelectStyle>            
-            </FilterWrapper>
-         </Row>         
-         <Row>
-            <FilterWrapper>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>                  
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-            </FilterWrapper>
-         </Row>
-         <Row>
-            <FilterWrapper>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>                  
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-            </FilterWrapper>
-         </Row>
-         <Row>
-            <FilterWrapper>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>                  
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-            </FilterWrapper>
-         </Row>
-         <Row>
-            <FilterWrapper>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>                  
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-               <Col span={4}>
-                  <Link to="/product/1/details" replace>
-                     <Card/>
-                  </Link>
-               </Col>
-            </FilterWrapper>
-         </Row>
-         <PaginationWrapper>
-            <Pagination defaultCurrent={1} total={50} />
-         </PaginationWrapper>         
+        <LogoWrapper>
+          <Logotipo/>
+          <InputWrapper>
+            <Input placeholder="O que você está procurando ?"></Input>
+          </InputWrapper>
+        </LogoWrapper>
+        <Row>
+          <FilterWrapper>
+            <SelectStyle defaultValue="Tamanho">
+              {filters.sizes.map(size => (
+                <Option value={size}>{size}</Option>
+              ))}
+            </SelectStyle>
+            <SelectStyle defaultValue="Categoria">
+              {filters.clothingParts.map(part => (
+                <Option value={part.id}>{part.name}</Option>
+              ))}
+            </SelectStyle>
+            <SelectStyle defaultValue="Marca">
+              {filters.brands.map(brand => (
+                <Option value={brand.id}>{brand.name}</Option>
+              ))}
+            </SelectStyle>
+            <SelectStyle defaultValue="Cor"></SelectStyle>
+          </FilterWrapper>
+        </Row>
+        <Row>
+          <FilterWrapper>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+          </FilterWrapper>
+        </Row>
+        <Row>
+          <FilterWrapper>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+          </FilterWrapper>
+        </Row>
+        <Row>
+          <FilterWrapper>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+          </FilterWrapper>
+        </Row>
+        <Row>
+          <FilterWrapper>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Link to="/product/1/details" replace>
+                <Card/>
+              </Link>
+            </Col>
+          </FilterWrapper>
+        </Row>
+        <PaginationWrapper>
+          <Pagination defaultCurrent={1} total={50}/>
+        </PaginationWrapper>
       </div>
-   )
+    )
+  }
 }
 
 export default Catalog;

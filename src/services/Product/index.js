@@ -47,6 +47,10 @@ const remove = async (id) => {
   return await api.delete("/products-users", {data: {id}});
 }
 
+const getFilters = async () => {
+  return await api.get("/products/filters");
+}
+
 export default {
   getAll,
   getOne,
@@ -55,5 +59,6 @@ export default {
   getUserProducts,
   update,
   remove,
-  add
+  add,
+  getFilters
 }
