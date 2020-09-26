@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import {Row, Col, Button, Collapse, Input, Alert} from 'antd';
 import Logotipo from '../../components/Logotipo'
 import Menu from '../../components/Menu';
-import Details1 from '../../images/details-1.png';
-import Details2 from '../../images/details-2.png';
-import Details3 from '../../images/details-3.png';
 import TextStyle from '../../components/TextStyle';
 import ProductService from '../../services/Product';
 
@@ -110,17 +107,21 @@ class Details extends Component {
     this.setState({successMsg: "Proposta enviada com sucesso"});
   }
 
-  clickImage(i) {
-    console.log('chama o pai')
+  clickImage = (i) => {
     const {images} = this.state;
     [images[0], images[i]] = [images[i], images[0]];
-    console.log('teste2', images);
     this.setState({images})
+  }
+
+  clickOwner = () => {
+    const {product} = this.state;
+    const {history} = this.props;
+
+    history.push(`/user/${product.user.id}`);
   }
 
   render() {
     const {product, images, showShipping, showProposal, shippingPrice, successMsg} = this.state;
-    console.log("teste1", images)
 
     return (
       <div>
@@ -227,7 +228,7 @@ class Details extends Component {
                   <Panel header="Mais Informações">
                     <TextStyle color="#262626">
                       Proprietário:&nbsp;
-                      <a href="#">{product.user && product.user.name}&nbsp;</a>
+                      <a onClick={this.clickOwner} href="#">{product.user && product.user.name}&nbsp;</a>
                     </TextStyle>
                   </Panel>
                 </Collapse>

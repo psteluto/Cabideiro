@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Col, Row} from "antd";
+import { withRouter } from 'react-router-dom'
 import ListImage1 from "../../images/image1.jpg";
 import ListImage2 from "../../images/image2.jpg";
 import ListImage3 from "../../images/image3.jpg";
@@ -30,6 +31,7 @@ class Income extends Component {
         name: "Blusa Floral",
         color: "Rosa Claro",
         client: "Larissa Manoela",
+        clientId: 1,
         devolutionDate: "2020-10-01",
         rentValue: "152",
         paymentStatus: "PROCESS",
@@ -40,6 +42,7 @@ class Income extends Component {
         name: "Calça alfaiataria básico",
         color: "Preto",
         client: "Larissa Manoela",
+        clientId: 1,
         devolutionDate: "2020-10-01",
         rentValue: "152",
         paymentStatus: "AVAILABLE",
@@ -50,6 +53,7 @@ class Income extends Component {
         name: "Blusa Floral",
         color: "Rosa Claro",
         client: "Larissa Manoela",
+        clientId: 1,
         devolutionDate: "2020-10-01",
         rentValue: "152",
         paymentStatus: "PROCESS",
@@ -60,6 +64,7 @@ class Income extends Component {
         name: "Blusa Floral",
         color: "Rosa Claro",
         client: "Larissa Manoela",
+        clientId: 1,
         devolutionDate: "2020-10-01",
         rentValue: "152",
         paymentStatus: "AVAILABLE",
@@ -67,6 +72,11 @@ class Income extends Component {
       }
     ]
     this.setState({incomes: mock})
+  }
+
+  onCLickClient(item){
+    const {history} = this.props;
+    history.push(`/user/${item.clientId}`);
   }
 
   render() {
@@ -86,6 +96,7 @@ class Income extends Component {
                 devolutionDate={item.devolutionDate}
                 rentValue={item.rentValue}
                 paymentStatus={item.paymentStatus}
+                onClickProfile={()=>this.onCLickClient(item)}
               />
             </Col>
           ))}
@@ -95,4 +106,4 @@ class Income extends Component {
   }
 }
 
-export default Income
+export default withRouter(Income)

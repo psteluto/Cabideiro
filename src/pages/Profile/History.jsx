@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom'
 import {Col, Row} from "antd";
 import ListImage1 from "../../images/image1.jpg";
 import ListImage2 from "../../images/image2.jpg";
@@ -30,6 +31,7 @@ class History extends Component {
         name: "Blusa Floral",
         color: "Rosa Claro",
         owner: "Larissa Manoela",
+        ownerId: 1,
         devolutionDate: "2020-10-01",
         rentValue: "152",
         image: ListImage1
@@ -39,6 +41,7 @@ class History extends Component {
         name: "Calça alfaiataria básico",
         color: "Preto",
         owner: "Larissa Manoela",
+        ownerId: 1,
         devolutionDate: "2020-10-01",
         rentValue: "152",
         image: ListImage2
@@ -48,6 +51,7 @@ class History extends Component {
         name: "Blusa Floral",
         color: "Rosa Claro",
         owner: "Larissa Manoela",
+        ownerId: 1,
         devolutionDate: "2020-10-01",
         rentValue: "152",
         image: ListImage3
@@ -57,12 +61,18 @@ class History extends Component {
         name: "Blusa Floral",
         color: "Rosa Claro",
         owner: "Larissa Manoela",
+        ownerId: 1,
         devolutionDate: "2020-10-01",
         rentValue: "152",
         image: ListImage4
       }
     ]
     this.setState({history: mock})
+  }
+
+  onCLickOwner(item){
+    const {history} = this.props;
+    history.push(`/user/${item.ownerId}`);
   }
 
   render() {
@@ -81,6 +91,7 @@ class History extends Component {
                 owner={item.owner}
                 devolutionDate={item.devolutionDate}
                 rentValue={item.rentValue}
+                onClickProfile={()=>this.onCLickOwner(item)}
               />
             </Col>
           ))}
@@ -90,4 +101,4 @@ class History extends Component {
   }
 }
 
-export default History
+export default withRouter(History)

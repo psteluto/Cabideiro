@@ -54,7 +54,7 @@ const RentButton = styled(Button)`
   background-color: #e73554;
 `;
 
-const DetailCard = ({image, status, name, color, owner, client, devolutionDate, rentValue, paymentStatus}) => {
+const DetailCard = ({image, status, name, color, owner, client, devolutionDate, rentValue, paymentStatus, onClickProfile}) => {
   rentValue = Number(rentValue);
 
   const daysLeft = moment(devolutionDate).diff(moment(), "days");
@@ -98,7 +98,7 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate, 
           <span>
             <p>
               {userDescription}: {userName}&nbsp;
-              <ProfileLink href="#">Visitar Perfil</ProfileLink>
+              <ProfileLink onClick={onClickProfile} href="#">Visitar Perfil</ProfileLink>
             </p>
           </span>
         )}
@@ -129,7 +129,8 @@ DetailCard.propTypes = {
   client: PropTypes.string,
   devolutionDate: PropTypes.string.isRequired,
   rentValue: PropTypes.string.isRequired,
-  paymentStatus: PropTypes.oneOf(["AVAILABLE", "PROCESS"])
+  paymentStatus: PropTypes.oneOf(["AVAILABLE", "PROCESS"]),
+  onClickProfile: PropTypes.func.isRequired
 }
 
 export default DetailCard;
