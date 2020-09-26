@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import styled from "styled-components";
-import {Alert, Button, Card, Checkbox, Col, Input, List, Row, Select, Upload} from "antd";
+import {Alert, Button, Card, Checkbox, Col, Input, List, Row, Select, Upload, InputNumber} from "antd";
 import ImgCrop from "antd-img-crop";
 import ProductService from '../../services/Product';
 import TextStyle from "../../components/TextStyle";
 import BrandService from '../../services/Brand';
 import ClothingPartService from '../../services/ClothingPart';
+import MoneyInput from "../../components/MoneyInput";
 
 const {TextArea} = Input;
 const {Option} = Select;
@@ -39,6 +40,10 @@ const ButtonStyle = styled(Button)`
    height: 30px;
    margin-right: ${props => props.marginRight || "0"};
    font-size: 12px;   
+`;
+
+const InputNumberStyle = styled(InputNumber)`
+  width: 100%;
 `;
 
 const CardWrapper = styled.div`
@@ -250,20 +255,17 @@ class MyCloset extends Component {
             <Col span={6}>
               <ItensWrapper paddingRight="16px">
                 <TextStyle color="#262626">Valor</TextStyle>
-                <Input
-                  onChange={(e) => this.changeFields('price', e.target.value)}
-                  value={selectedProduct.price}
-                  placeholder="R$"
-                />
+                <MoneyInput
+                  onChange={(value) => this.changeFields('price', value)}
+                  value={selectedProduct.price}/>
               </ItensWrapper>
             </Col>
             <Col span={6}>
               <ItensWrapper paddingRight="16px">
                 <TextStyle color="#262626">Valor Original</TextStyle>
-                <Input
+                <MoneyInput
                   onChange={(e) => this.changeFields('full_price', e.target.value)}
                   value={selectedProduct.full_price}
-                  placeholder="R$"
                 />
               </ItensWrapper>
             </Col>
@@ -302,7 +304,8 @@ class MyCloset extends Component {
             <Col span={12}>
               <ItensWrapper>
                 <TextStyle color="#262626">Tempo Máximo de Locação</TextStyle>
-                <Input
+                <InputNumberStyle
+                  min={0}
                   onChange={(e) => this.changeFields('max_days_location', e.target.value)}
                   value={selectedProduct.max_days_location}
                 />
