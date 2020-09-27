@@ -22,7 +22,7 @@ const MoneyInput = ({value, onChange}) => {
       if (typeof val === "string" && !val.length) {
         val = "0.0";
       }
-      console.log(val)
+
       if (val.includes(',')) {
         if (val.split(',').length > 2) {
           val = val.split(",").join("")
@@ -30,7 +30,6 @@ const MoneyInput = ({value, onChange}) => {
         }
       } else {
         val = val.replace(/(\d\d)$$/, ",$1");
-        console.log('new', val)
       }
 
       // detecting and parsing between comma and dot
