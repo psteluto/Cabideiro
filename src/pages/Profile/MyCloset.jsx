@@ -264,7 +264,7 @@ class MyCloset extends Component {
               <ItensWrapper paddingRight="16px">
                 <TextStyle color="#262626">Valor Original</TextStyle>
                 <MoneyInput
-                  onChange={(e) => this.changeFields('full_price', e.target.value)}
+                  onChange={(value) => this.changeFields('full_price', value)}
                   value={selectedProduct.full_price}
                 />
               </ItensWrapper>
