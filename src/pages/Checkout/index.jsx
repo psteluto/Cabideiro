@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {Row, Col, Divider, Button, Collapse, Modal, Input} from 'antd';
+import {Row, Col, Divider, Button, Collapse, Modal, Input, Alert} from 'antd';
+import MaskedInput from 'antd-mask-input'
 import Logotipo from '../../components/Logotipo'
 import CreditCard from '../../components/CreditCard'
 import TextStyle from '../../components/TextStyle';
-import Details1 from '../../images/details-1.png';
 import UserService from '../../services/User';
 import ProductService from "../../services/Product";
 
@@ -80,7 +80,8 @@ class Checkout extends Component {
       },
       modalAddress: false,
       product: {},
-      shippingPrice: 0
+      shippingPrice: 0,
+      modalErrorMsg: ""
     }
   }
 
@@ -122,9 +123,12 @@ class Checkout extends Component {
 
   saveAddress = async () => {
     const {fields} = this.state;
-    await UserService.updateAddress(fields);
-    this.setState({modalAddress: false});
-    await this.calculateShipping();
+    if (this.validateForm(fields)){
+      await UserService.updateAddress(fields);
+      this.setState({modalAddress: false});
+      await this.calculateShipping();
+      this.setState({modalErrorMsg: ""});
+    }
   }
 
   calculateShipping = async () => {
@@ -133,8 +137,28 @@ class Checkout extends Component {
     this.setState({shippingPrice: res.data})
   }
 
+  validateForm = (fields) => {
+    const {zipcode, state, city, neighborhood, street, number, complement} = fields;
+
+    let msg = "";
+    if (!zipcode) msg += "Campo 'CEP' é obrigatório\n";
+    if (!state) msg += "Campo 'Estado' é obrigatório\n";
+    if (!city) msg += "Campo 'Cidade' é obrigatório\n";
+    if (!neighborhood) msg += "Campo 'Bairro' é obrigatório\n";
+    if (!street) msg += "Campo 'Rua' é obrigatório\n";
+    if (!number) msg += "Campo 'Número' é obrigatório\n";
+    if (!complement) msg += "Campo 'Complemento' é obrigatório\n";
+
+    if (msg) {
+      this.setState({modalErrorMsg: msg});
+      return false;
+    }
+
+    return true;
+  }
+
   render() {
-    const {modalAddress, fields, product, shippingPrice} = this.state;
+    const {modalAddress, fields, product, shippingPrice, modalErrorMsg} = this.state;
 
     const price = Number(product.price);
     const totalPrice = price + shippingPrice;
@@ -258,7 +282,8 @@ class Checkout extends Component {
           <Row gutter={[14, 14]}>
             <Col span={12}>
               <TextStyle color="#656668">CEP</TextStyle>
-              <Input
+              <MaskedInput
+                mask="11111-111"
                 value={fields.zipcode}
                 onChange={(e) => this.changeFields('zipcode', e.target.value)}
                 placeholder="00000-000"
@@ -307,6 +332,18 @@ class Checkout extends Component {
               />
             </Col>
           </Row>
+          {modalErrorMsg && (
+            <Row>
+              <Col span={24}>
+                <Alert
+                  style={{whiteSpace: 'pre'}}
+                  message={modalErrorMsg}
+                  type="error"
+                  showIcon
+                />
+              </Col>
+            </Row>
+          )}
         </Modal>
       </div>
     )

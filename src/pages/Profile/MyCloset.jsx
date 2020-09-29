@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import styled from "styled-components";
-import {Alert, Button, Card, Checkbox, Col, Input, List, Row, Select, Upload, InputNumber} from "antd";
+import {Alert, Card, Checkbox, Col, Input, List, Row, Select, Upload, InputNumber} from "antd";
 import ImgCrop from "antd-img-crop";
 import ProductService from '../../services/Product';
 import TextStyle from "../../components/TextStyle";
-import BrandService from '../../services/Brand';
-import ClothingPartService from '../../services/ClothingPart';
+import ButtonStyle from '../../components/ButtonStyle';
 import MoneyInput from "../../components/MoneyInput";
 
 const {TextArea} = Input;
@@ -27,21 +26,6 @@ const ButtonWrapper = styled.div`
    margin-bottom: 15px;
 `;
 
-const ButtonStyle = styled(Button)`
-   color: ${props => props.colorButton || "#000000"};
-   border: #ffffff;
-   &:hover { 
-      background: ${props => props.backHoverButton || "#ffcb00"}; 
-      color: ${props => props.color || "#ffffff"};   
-    } 
-   ${props => props.backColorButtom || ""};
-   margin-top: 15px;
-   width: ${props => props.width || "185px"};
-   height: 30px;
-   margin-right: ${props => props.marginRight || "0"};
-   font-size: 12px;   
-`;
-
 const InputNumberStyle = styled(InputNumber)`
   width: 100%;
 `;
@@ -58,6 +42,7 @@ class MyCloset extends Component {
     this.state = {
       products: [],
       brands: [],
+      sizes: [],
       clothingParts: [],
       selectedProduct: {
         id: "",
@@ -83,8 +68,7 @@ class MyCloset extends Component {
 
   componentDidMount() {
     this.getProducts();
-    this.getBrands();
-    this.getClothingParts();
+    this.getFilters();
   }
 
   changeFields = (field, value) => {
@@ -152,14 +136,14 @@ class MyCloset extends Component {
     this.setState({products, selectedProduct});
   }
 
-  getBrands = async () => {
-    const res = await BrandService.getAll();
-    this.setState({brands: res.data})
-  }
+  getFilters = async () => {
+    const res = await ProductService.getFilters()
 
-  getClothingParts = async () => {
-    const res = await ClothingPartService.getAll();
-    this.setState({clothingParts: res.data});
+    this.setState({
+      clothingParts: res.data.clothingParts,
+      brands: res.data.brands,
+      sizes: res.data.sizes
+    });
   }
 
   selectProduct = (product) => {
@@ -219,7 +203,8 @@ class MyCloset extends Component {
   }
 
   render() {
-    const {products, brands, clothingParts, selectedProduct, successMsg, errorMsg, editMode} = this.state;
+    const {products, brands, sizes, clothingParts,
+      selectedProduct, successMsg, errorMsg, editMode} = this.state;
 
     return (
       <Row>
@@ -272,10 +257,14 @@ class MyCloset extends Component {
             <Col span={6}>
               <ItensWrapper paddingRight="16px">
                 <TextStyle color="#262626">Tamanho</TextStyle>
-                <Input
+
+                <Select
+                  style={{width: "100%"}}
                   onChange={(e) => this.changeFields('size', e.target.value)}
                   value={selectedProduct.size}
-                />
+                >
+                  {sizes.map(size => <Option value={size}>{size}</Option>)}
+                </Select>
               </ItensWrapper>
             </Col>
             <Col span={6}>
