@@ -260,7 +260,7 @@ class MyCloset extends Component {
 
                 <Select
                   style={{width: "100%"}}
-                  onChange={(e) => this.changeFields('size', e.target.value)}
+                  onChange={(value) => this.changeFields('size', value)}
                   value={selectedProduct.size}
                 >
                   {sizes.map(size => <Option value={size}>{size}</Option>)}
