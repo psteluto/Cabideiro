@@ -51,6 +51,14 @@ const getFilters = async () => {
   return await api.get("/products/filters");
 }
 
+const validateCoupon = async (coupon) => {
+  return await api.post("/coupons", {coupon});
+}
+
+const registerOrder = async (productId, ownerId) => {
+  return await api.post("/orders", {owner_id: ownerId, product_id: productId});
+}
+
 export default {
   getAll,
   getOne,
@@ -60,5 +68,7 @@ export default {
   update,
   remove,
   add,
-  getFilters
+  getFilters,
+  validateCoupon,
+  registerOrder
 }

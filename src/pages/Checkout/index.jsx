@@ -78,10 +78,14 @@ class Checkout extends Component {
         number: "",
         complement: ""
       },
+      coupon: "",
+      discount: 0,
       modalAddress: false,
       product: {},
       shippingPrice: 0,
-      modalErrorMsg: ""
+      modalErrorMsg: "",
+      couponErrorMsg: "",
+      couponSuccessMsg: ""
     }
   }
 
@@ -123,7 +127,7 @@ class Checkout extends Component {
 
   saveAddress = async () => {
     const {fields} = this.state;
-    if (this.validateForm(fields)){
+    if (this.validateForm(fields)) {
       await UserService.updateAddress(fields);
       this.setState({modalAddress: false});
       await this.calculateShipping();
@@ -157,11 +161,30 @@ class Checkout extends Component {
     return true;
   }
 
+  sendCoupon = async () => {
+    const {coupon} = this.state;
+    try {
+      const res = await ProductService.validateCoupon(coupon);
+      this.setState({couponSuccessMsg: "Cupom aplicado com sucesso!", discount: res.data})
+    } catch (e) {
+      this.setState({couponErrorMsg: "Cupom inválido"})
+    }
+  }
+
+  registerOrder = async () => {
+    const {product} = this.state;
+    const {history} = this.props;
+
+    await ProductService.registerOrder(product.id, product.user.id);
+    history.push("/success")
+  }
+
   render() {
-    const {modalAddress, fields, product, shippingPrice, modalErrorMsg} = this.state;
+    const {modalAddress, fields, product, shippingPrice, discount, modalErrorMsg, couponErrorMsg, couponSuccessMsg} = this.state;
 
     const price = Number(product.price);
-    const totalPrice = price + shippingPrice;
+    const discountPrice = price * (discount/100);
+    const totalPrice = price - discountPrice + shippingPrice;
 
     return (
       <div>
@@ -196,8 +219,27 @@ class Checkout extends Component {
               <RowDescriptionItem>
                 <Collapse defaultActiveKey={['1']} ghost>
                   <Panel header="CUPONS, VALES OU CARTÕES PRESENTE">
-                    <Input style={{marginBottom: 8}} placeholder="Código"/>
-                    <ButtonStyle type="primary">Aplicar</ButtonStyle>
+                    <Input
+                      onChange={(e) => this.setState({coupon: e.target.value})}
+                      style={{marginBottom: 8}} placeholder="Código"
+                    />
+                    <ButtonStyle type="primary" onClick={this.sendCoupon}>Aplicar</ButtonStyle>
+                    {couponErrorMsg && (
+                      <Alert
+                        style={{whiteSpace: 'pre'}}
+                        message={couponErrorMsg}
+                        type="error"
+                        showIcon
+                      />
+                    )}
+                    {couponSuccessMsg && (
+                      <Alert
+                        style={{whiteSpace: 'pre'}}
+                        message={couponSuccessMsg}
+                        type="success"
+                        showIcon
+                      />
+                    )}
                   </Panel>
                 </Collapse>
                 <Divider/>
@@ -242,6 +284,7 @@ class Checkout extends Component {
                 <Col span={12}>
                   <ResumeRow>
                     <TextStyle color="#262626" fontSize="10px">SUBTOTAL:</TextStyle>
+                    {discount ? (<TextStyle color="#262626" fontSize="10px" marginTop="8px">DESCONTO:</TextStyle>) : null}
                     <TextStyle color="#262626" fontSize="10px" marginTop="8px">FRETE:</TextStyle>
                   </ResumeRow>
                 </Col>
@@ -250,6 +293,11 @@ class Checkout extends Component {
                     <TextStyle color="#262626" fontSize="10px" strong>
                       R$ {price.toFixed(2).replace('.', ',')}
                     </TextStyle>
+                    {discount ? (
+                      <TextStyle color="#262626" fontSize="10px" strong>
+                        R$ {discountPrice.toFixed(2).replace('.', ',')}
+                      </TextStyle>
+                    ) : null}
                     <TextStyle color="#262626" fontSize="10px" marginTop="8px" strong>
                       R$ {shippingPrice.toFixed(2).replace('.', ',')}
                     </TextStyle>
@@ -264,7 +312,7 @@ class Checkout extends Component {
                 </TextStyle>
               </Row>
               <Row>
-                <ButtonStyle type="primary" block>FINALIZAR ALUGUEL</ButtonStyle>
+                <ButtonStyle type="primary" block onClick={this.registerOrder}>FINALIZAR ALUGUEL</ButtonStyle>
               </Row>
             </ResumeWrapper>
           </Col>
