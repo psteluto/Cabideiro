@@ -10,6 +10,10 @@ import BackgroundLogin from '../../images/background-login.jpg';
 const Background = styled.div`
    background: url(${BackgroundLogin});
    background-size: contain;
+   
+   .background-color{
+    background-color: rgba(255,255,255,.5);
+   }
 `;
 
 const FormWrapper = styled.div`
@@ -75,7 +79,7 @@ class LoginRegister extends Component {
     const {history} = this.props;
     const {fields} = this.state;
 
-    try{
+    try {
       const valid = this.validateForm(fields);
       if (!valid) return;
 
@@ -92,9 +96,11 @@ class LoginRegister extends Component {
   }
 
   validateForm = (fields) => {
-    const {name, email, cpf, cellphone, password, confirmPassword,
-      zipcode, state, city, neighborhood, street, number} = fields;
-    
+    const {
+      name, email, cpf, cellphone, password, confirmPassword,
+      zipcode, state, city, neighborhood, street, number
+    } = fields;
+
     let msg = "";
     if (!name) msg += "Campo 'Nome Completo' é obrigatório\n";
     if (!email) msg += "Campo 'E-mail' é obrigatório\n";
@@ -121,118 +127,121 @@ class LoginRegister extends Component {
 
     return true;
   }
-  
+
   render() {
     const {errorMsg, successMsg} = this.state;
     return (
       <Background src={BackgroundLogin}>
-        <FormWrapper>
-          <LogoWrapper>
-            <Logotipo/>
-            <TextStyle color="#262626" fontSize="16px">CRIAR CONTA</TextStyle>
-          </LogoWrapper>
-          <FormStyle>
-            <Row gutter={[14, 14]}>
-              <Col span={24}>
-                <TextStyle color="#656668">Nome completo</TextStyle>
-                <Input onChange={(e) => this.changeFields('name', e.target.value)}/>
-              </Col>
-              <Col span={24}>
-                <TextStyle color="#656668">E-mail</TextStyle>
-                <Input onChange={(e) => this.changeFields('email', e.target.value)}/>
-              </Col>
-              <Col span={8}>
-                <TextStyle color="#656668">CPF</TextStyle>
-                <MaskedInput
-                  mask='111.111.111-11'
-                  onChange={(e) => this.changeFields('cpf', e.target.value)}
-                  placeholder="000.000.000-00"
-                />
-              </Col>
-              <Col span={8}>
-                <TextStyle color="#656668">Celular</TextStyle>
-                <MaskedInput
-                  mask="(11) 11111-1111"
-                  onChange={(e) => this.changeFields('cellphone', e.target.value)}
-                  placeholder="(00) 00000-0000"
-                />
-              </Col>
-              <Col span={8}>
-                <TextStyle color="#656668">Telefone alternativo</TextStyle>
-                <MaskedInput
-                  mask="(11) 11111-1111"
-                  onChange={(e) => this.changeFields('phone', e.target.value)}
-                  placeholder="(00) 00000-0000"
-                />
-              </Col>
-              <Col span={12}>
-                <TextStyle color="#656668">Senha</TextStyle>
-                <Input.Password onChange={(e) => this.changeFields('password', e.target.value)}/>
-              </Col>
-              <Col span={12}>
-                <TextStyle color="#656668">Confirmar Senha</TextStyle>
-                <Input.Password onChange={(e) => this.changeFields('confirmPassword', e.target.value)}/>
-              </Col>
-              <Col span={12}>
-                <TextStyle color="#656668">CEP</TextStyle>
-                <MaskedInput
-                  mask="11111-111"
-                  onChange={(e) => this.changeFields('zipcode', e.target.value)}
-                  placeholder="00000-000"
-                />
-              </Col>
-              <Col span={12}>
-                <TextStyle color="#656668">Estado</TextStyle>
-                <Input onChange={(e) => this.changeFields('state', e.target.value)}/>
-              </Col>
-              <Col span={12}>
-                <TextStyle color="#656668">Cidade</TextStyle>
-                <Input onChange={(e) => this.changeFields('city', e.target.value)}/>
-              </Col>
-              <Col span={12}>
-                <TextStyle color="#656668">Bairro</TextStyle>
-                <Input onChange={(e) => this.changeFields('neighborhood', e.target.value)}/>
-              </Col>
-              <Col span={24}>
-                <TextStyle color="#656668">Rua / Avenida</TextStyle>
-                <Input onChange={(e) => this.changeFields('street', e.target.value)}/>
-              </Col>
-              <Col span={12}>
-                <TextStyle color="#656668">Número</TextStyle>
-                <Input onChange={(e) => this.changeFields('number', e.target.value)}/>
-              </Col>
-              <Col span={12}>
-                <TextStyle color="#656668">Complemento</TextStyle>
-                <Input onChange={(e) => this.changeFields('complement', e.target.value)}/>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12} offset={12}>
-                <ButtonStyle onClick={this.clickSubmit} type="primary" block>CONTINUAR</ButtonStyle>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12} offset={12}>
-                <TextStyle color="#656668" fontSize="10px">Ao cadastrar-se, você concorda com nossos termos e condições
-                  de uso.</TextStyle>
-              </Col>
-            </Row>
-            {successMsg && (
-              <Row>
+        <div className='background-color'>
+          <FormWrapper>
+            <LogoWrapper>
+              <Logotipo/>
+              <TextStyle color="#262626" fontSize="16px">CRIAR CONTA</TextStyle>
+            </LogoWrapper>
+            <FormStyle>
+              <Row gutter={[14, 14]}>
                 <Col span={24}>
-                  <Alert message={successMsg} type="success" showIcon />
+                  <TextStyle color="#656668">Nome completo</TextStyle>
+                  <Input onChange={(e) => this.changeFields('name', e.target.value)}/>
+                </Col>
+                <Col span={24}>
+                  <TextStyle color="#656668">E-mail</TextStyle>
+                  <Input onChange={(e) => this.changeFields('email', e.target.value)}/>
+                </Col>
+                <Col span={8}>
+                  <TextStyle color="#656668">CPF</TextStyle>
+                  <MaskedInput
+                    mask='111.111.111-11'
+                    onChange={(e) => this.changeFields('cpf', e.target.value)}
+                    placeholder="000.000.000-00"
+                  />
+                </Col>
+                <Col span={8}>
+                  <TextStyle color="#656668">Celular</TextStyle>
+                  <MaskedInput
+                    mask="(11) 11111-1111"
+                    onChange={(e) => this.changeFields('cellphone', e.target.value)}
+                    placeholder="(00) 00000-0000"
+                  />
+                </Col>
+                <Col span={8}>
+                  <TextStyle color="#656668">Telefone alternativo</TextStyle>
+                  <MaskedInput
+                    mask="(11) 11111-1111"
+                    onChange={(e) => this.changeFields('phone', e.target.value)}
+                    placeholder="(00) 00000-0000"
+                  />
+                </Col>
+                <Col span={12}>
+                  <TextStyle color="#656668">Senha</TextStyle>
+                  <Input.Password onChange={(e) => this.changeFields('password', e.target.value)}/>
+                </Col>
+                <Col span={12}>
+                  <TextStyle color="#656668">Confirmar Senha</TextStyle>
+                  <Input.Password onChange={(e) => this.changeFields('confirmPassword', e.target.value)}/>
+                </Col>
+                <Col span={12}>
+                  <TextStyle color="#656668">CEP</TextStyle>
+                  <MaskedInput
+                    mask="11111-111"
+                    onChange={(e) => this.changeFields('zipcode', e.target.value)}
+                    placeholder="00000-000"
+                  />
+                </Col>
+                <Col span={12}>
+                  <TextStyle color="#656668">Estado</TextStyle>
+                  <Input onChange={(e) => this.changeFields('state', e.target.value)}/>
+                </Col>
+                <Col span={12}>
+                  <TextStyle color="#656668">Cidade</TextStyle>
+                  <Input onChange={(e) => this.changeFields('city', e.target.value)}/>
+                </Col>
+                <Col span={12}>
+                  <TextStyle color="#656668">Bairro</TextStyle>
+                  <Input onChange={(e) => this.changeFields('neighborhood', e.target.value)}/>
+                </Col>
+                <Col span={24}>
+                  <TextStyle color="#656668">Rua / Avenida</TextStyle>
+                  <Input onChange={(e) => this.changeFields('street', e.target.value)}/>
+                </Col>
+                <Col span={12}>
+                  <TextStyle color="#656668">Número</TextStyle>
+                  <Input onChange={(e) => this.changeFields('number', e.target.value)}/>
+                </Col>
+                <Col span={12}>
+                  <TextStyle color="#656668">Complemento</TextStyle>
+                  <Input onChange={(e) => this.changeFields('complement', e.target.value)}/>
                 </Col>
               </Row>
-            )}
-            {errorMsg && (
               <Row>
-                <Col span={24}>
-                  <Alert message={errorMsg} type="error" showIcon />
+                <Col span={12} offset={12}>
+                  <ButtonStyle onClick={this.clickSubmit} type="primary" block>CONTINUAR</ButtonStyle>
                 </Col>
               </Row>
-            )}
-          </FormStyle>
-        </FormWrapper>
+              <Row>
+                <Col span={12} offset={12}>
+                  <TextStyle color="#656668" fontSize="10px">Ao cadastrar-se, você concorda com nossos termos e
+                    condições
+                    de uso.</TextStyle>
+                </Col>
+              </Row>
+              {successMsg && (
+                <Row>
+                  <Col span={24}>
+                    <Alert message={successMsg} type="success" showIcon/>
+                  </Col>
+                </Row>
+              )}
+              {errorMsg && (
+                <Row>
+                  <Col span={24}>
+                    <Alert message={errorMsg} type="error" showIcon/>
+                  </Col>
+                </Row>
+              )}
+            </FormStyle>
+          </FormWrapper>
+        </div>
       </Background>
     )
   }
