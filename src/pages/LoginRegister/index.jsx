@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {Row, Col, Input, Button, Alert as AntdAlert} from 'antd';
+import {Row, Col, Input, Button, Alert as AntdAlert, message} from 'antd';
 import MaskedInput from 'antd-mask-input'
 import UserService from '../../services/User';
 import Logotipo from '../../components/Logotipo'
@@ -62,8 +62,7 @@ class LoginRegister extends Component {
         number: "",
         complement: ""
       },
-      errorMsg: "",
-      successMsg: ""
+      errorMsg: ""
     }
   }
 
@@ -86,7 +85,8 @@ class LoginRegister extends Component {
       delete fields.confirmPassword;
       await UserService.signUp(fields);
 
-      this.setState({successMsg: "Usuário cadatrado com sucesso", errorMsg: ""});
+      message.success("Usuário cadatrado com sucesso");
+      this.setState({errorMsg: ""});
       history.push('/login')
     } catch (e) {
       console.error(e);
@@ -117,12 +117,12 @@ class LoginRegister extends Component {
     if (!complement) msg += "Campo 'Complemento' é obrigatório\n";
 
     if (msg) {
-      this.setState({errorMsg: msg, successMsg: ""});
+      this.setState({errorMsg: msg});
       return false;
     }
 
     if (password !== confirmPassword) {
-      this.setState({errorMsg: "Senhas não são iguais", successMsg: ""})
+      this.setState({errorMsg: "Senhas não são iguais"})
       return false;
     }
 
@@ -130,7 +130,7 @@ class LoginRegister extends Component {
   }
 
   render() {
-    const {errorMsg, successMsg} = this.state;
+    const {errorMsg} = this.state;
     return (
       <Background src={BackgroundLogin}>
         <div className='background-color'>
@@ -226,13 +226,6 @@ class LoginRegister extends Component {
                     de uso.</TextStyle>
                 </Col>
               </Row>
-              {successMsg && (
-                <Row>
-                  <Col span={24}>
-                    <Alert message={successMsg} type="success" showIcon/>
-                  </Col>
-                </Row>
-              )}
               {errorMsg && (
                 <Row>
                   <Col span={24}>
