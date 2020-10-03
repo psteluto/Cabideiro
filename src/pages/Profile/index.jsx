@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {Row, Col, Tabs, Avatar, Upload, Spin, Button, Modal, Input} from 'antd';
+import {Row, Col, Tabs, Button, Modal, Input, Alert} from 'antd';
 import styled from 'styled-components';
-import {EditOutlined} from "@ant-design/icons";
 import UserService from '../../services/User';
 import MyCloset from "./MyCloset";
 import Rating from "./Rating";
@@ -11,6 +10,7 @@ import Logotipo from '../../components/Logotipo'
 import TextStyle from '../../components/TextStyle';
 import ButtonStyle from "../../components/ButtonStyle";
 import MaskedInput from "antd-mask-input";
+import UserProfile from "../../components/UserProfile";
 
 const {TabPane} = Tabs;
 
@@ -19,12 +19,7 @@ const LogoWrapper = styled.div`
    align-items: center;
    justify-content: center;
    flex-direction: column;
-`;
-
-const ProfileWrapper = styled.div`
-   display: flex;
-   justify-content: center;
-   margin-top: 72px;
+   margin-bottom: 72px;
 `;
 
 const IconsWrapper = styled.div`
@@ -32,12 +27,6 @@ const IconsWrapper = styled.div`
    align-items: center;
    flex-direction: column;
    margin-top: 62px;
-`;
-
-const RowInformation = styled.div`
-   display: flex;
-   justify-content: space-between;
-   margin-top: 16px;
 `;
 
 class Profile extends Component {
@@ -50,7 +39,7 @@ class Profile extends Component {
       fields: {
         name: "",
         email: "",
-        password: "",
+        oldPassword: "",
         newPassword: "",
         confirmPassword: "",
         zipcode: "",
@@ -61,6 +50,7 @@ class Profile extends Component {
         number: "",
         complement: ""
       },
+      errorMsg: ""
     }
   }
 
@@ -78,16 +68,13 @@ class Profile extends Component {
 
   validateForm = (fields) => {
     const {
-      name, email, password, newPassword, confirmPassword,
+      name, email, oldPassword, newPassword, confirmPassword,
       zipcode, state, city, neighborhood, street, number
     } = fields;
 
     let msg = "";
     if (!name) msg += "Campo 'Nome Completo' é obrigatório\n";
     if (!email) msg += "Campo 'E-mail' é obrigatório\n";
-    if (!password) msg += "Campo 'Senha Atual' é obrigatório\n";
-    if (!newPassword) msg += "Campo 'Nova Senha' é obrigatório\n";
-    if (!confirmPassword) msg += "Campo 'Confirmar Senha' é obrigatório\n";
     if (!zipcode) msg += "Campo 'CEP' é obrigatório\n";
     if (!state) msg += "Campo 'Estado' é obrigatório\n";
     if (!city) msg += "Campo 'Cidade' é obrigatório\n";
@@ -95,12 +82,14 @@ class Profile extends Component {
     if (!street) msg += "Campo 'Rua' é obrigatório\n";
     if (!number) msg += "Campo 'Número' é obrigatório\n";
 
+    if (newPassword && !oldPassword) msg += "Campo 'Senha Atual' é obrigatório\n";
+
     if (msg) {
       this.setState({errorMsg: msg, successMsg: ""});
       return false;
     }
 
-    if (password !== confirmPassword) {
+    if (newPassword !== confirmPassword) {
       this.setState({errorMsg: "Senhas não são iguais", successMsg: ""})
       return false;
     }
@@ -155,11 +144,43 @@ class Profile extends Component {
 
   saveProfile = async () => {
     const {fields} = this.state;
-    console.log(fields);
+    this.validateForm(fields);
+
+    try {
+
+      const profile = {
+        name: fields.name,
+        email: fields.email,
+        old_password: fields.oldPassword,
+        password: fields.newPassword,
+        password_confirmation: fields.confirmPassword
+      };
+      await UserService.updateProfile(profile);
+
+      const address = {
+        street: fields.street,
+        city: fields.city,
+        state: fields.state,
+        neighborhood: fields.neighborhood,
+        zipcode: fields.zipcode,
+        complement: fields.complement,
+        number: fields.number
+      }
+      await UserService.updateAddress(address)
+
+      await this.getUserData();
+      this.setState({modalProfile: false});
+    } catch (e) {
+      console.error(e)
+      if (e.response)
+        this.setState({errorMsg: e.response.data.message})
+      else
+        this.setState({errorMsg: "Ocorreu um erro!"})
+    }
   }
 
   render() {
-    const {userData, loadImage, modalProfile, fields} = this.state;
+    const {userData, loadImage, modalProfile, fields, errorMsg} = this.state;
 
     return (
       <div>
@@ -167,48 +188,19 @@ class Profile extends Component {
           <Logotipo/>
           <TextStyle color="#262626" fontSize="17px">PERFIL</TextStyle>
         </LogoWrapper>
-        <ProfileWrapper>
-          <Row>
-            <Col span={8}>
-              <Upload onChange={this.changeImage} fileList={[]}>
-                <Avatar style={{marginRight: 60}} size={80} src={userData.avatar_url}></Avatar>
-                {loadImage && (<Spin/>)}
-              </Upload>
-            </Col>
-            <Col span={16}>
-              <Row>
-                <TextStyle color="#262626" fontSize="14px">{userData.name}</TextStyle>
-                <a
-                  style={{marginLeft: 10}}
-                  href="#"
-                  onClick={() => this.setState({modalProfile: true})}
-                >
-                  <EditOutlined/>
-                </a>
-              </Row>
-              <RowInformation>
-                <Col span={4}>
-                  <Row>
-                    <TextStyle color="#262626" fontSize="15px" strong>{userData.countProducts}</TextStyle>
-                    <TextStyle color="#262626" fontSize="11px">Produtos</TextStyle>
-                  </Row>
-                </Col>
-                <Col span={4}>
-                  <Row>
-                    <TextStyle color="#262626" fontSize="15px" strong>{userData.followers}</TextStyle>
-                    <TextStyle color="#262626" fontSize="11px">Seguidores</TextStyle>
-                  </Row>
-                </Col>
-                <Col span={4}>
-                  <Row>
-                    <TextStyle color="#262626" fontSize="15px" strong>{userData.following}</TextStyle>
-                    <TextStyle color="#262626" fontSize="11px">Seguindo</TextStyle>
-                  </Row>
-                </Col>
-              </RowInformation>
-            </Col>
-          </Row>
-        </ProfileWrapper>
+
+        <UserProfile
+          selfProfile
+          profilePhoto={userData.avatar_url}
+          userName={userData.name}
+          countProducts={userData.countProducts}
+          followers={userData.followers}
+          following={userData.following}
+          onClickEdit={() => this.setState({modalProfile: true})}
+          onChangeImage={this.changeImage}
+          loadImage={loadImage}
+        />
+
         <IconsWrapper>
           <Tabs defaultActiveKey="1" centered>
             <TabPane tab="Meu Closet" key="1">
@@ -255,7 +247,7 @@ class Profile extends Component {
                 </Col>
                 <Col span={8}>
                   <TextStyle color="#656668">Senha Atual</TextStyle>
-                  <Input.Password onChange={(e) => this.changeFields('password', e.target.value)}/>
+                  <Input.Password onChange={(e) => this.changeFields('oldPassword', e.target.value)}/>
                 </Col>
                 <Col span={8}>
                   <TextStyle color="#656668">Nova Senha</TextStyle>
@@ -323,6 +315,13 @@ class Profile extends Component {
               </Row>
             </TabPane>
           </Tabs>
+          {errorMsg && (
+            <Row>
+              <Col span={24}>
+                <Alert message={errorMsg} type="error" showIcon/>
+              </Col>
+            </Row>
+          )}
         </Modal>
 
       </div>

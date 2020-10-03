@@ -98,7 +98,7 @@ class LoginRegister extends Component {
   validateForm = (fields) => {
     const {
       name, email, cpf, cellphone, password, confirmPassword,
-      zipcode, state, city, neighborhood, street, number
+      zipcode, state, city, neighborhood, street, number, complement
     } = fields;
 
     let msg = "";
@@ -114,6 +114,7 @@ class LoginRegister extends Component {
     if (!neighborhood) msg += "Campo 'Bairro' é obrigatório\n";
     if (!street) msg += "Campo 'Rua' é obrigatório\n";
     if (!number) msg += "Campo 'Número' é obrigatório\n";
+    if (!complement) msg += "Campo 'Complemento' é obrigatório\n";
 
     if (msg) {
       this.setState({errorMsg: msg, successMsg: ""});

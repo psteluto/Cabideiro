@@ -24,6 +24,7 @@ const BodyWrapper = styled.img`
    width: 100%;
    height: 513px;
    margin: 38px 0;
+   opacity: .5;
 `;
 
 const CarouselWrapper = styled.div`

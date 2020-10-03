@@ -21,6 +21,11 @@ const updateAddress = async (address) => {
   return await api.post("/users/address", address);
 }
 
+
+const updateProfile = async (profile) => {
+  return await api.put("/profile", profile)
+}
+
 const uploadPhoto = async (file) => {
   const fd = new FormData();
   fd.append('avatar', file);
@@ -34,5 +39,6 @@ export default {
   getUserData,
   uploadPhoto,
   getAddress,
-  updateAddress
+  updateAddress,
+  updateProfile
 }
