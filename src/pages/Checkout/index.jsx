@@ -270,7 +270,7 @@ class Checkout extends Component {
                 </Col>
                 <Col span={12}>
                   <ResumeRow aling="text-align: center">
-                    <TextStyle color="#262626" strong>{product.name} - {product.color}</TextStyle>
+                    <TextStyle color="#262626" strong>{product.name} - {product.color && product.color.name}</TextStyle>
                     <TextStyle color="#e73554" fontSize="13px" marginTop="22px" strong>
                       R$ {price.toFixed(2).replace('.', ',')}
                     </TextStyle>

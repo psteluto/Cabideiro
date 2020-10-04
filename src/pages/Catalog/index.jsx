@@ -42,7 +42,8 @@ class Catalog extends Component {
       filters: {
         sizes: [],
         clothingParts: [],
-        brands: []
+        brands: [],
+        colors: []
       }
     }
   }
@@ -84,7 +85,11 @@ class Catalog extends Component {
                 <Option value={brand.id}>{brand.name}</Option>
               ))}
             </SelectStyle>
-            <SelectStyle defaultValue="Cor"></SelectStyle>
+            <SelectStyle defaultValue="Cor">
+              {filters.colors.map(color => (
+                <Option value={color.id}>{color.name}</Option>
+              ))}
+            </SelectStyle>
           </FilterWrapper>
         </Row>
         <Row>

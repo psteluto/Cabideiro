@@ -7,6 +7,7 @@ import ListImage2 from "../../images/image2.jpg";
 import ListImage3 from "../../images/image3.jpg";
 import ListImage4 from "../../images/image4.png";
 import DetailCard from "./DetailCard";
+import ProductService from '../../services/Product';
 
 const Container = styled.div`
   max-width: 1000px;
@@ -25,6 +26,20 @@ class Income extends Component {
   }
 
   getIncomes = async () => {
+    const res = await ProductService.getIncome();
+
+    const income = res.data.map(item => ({
+      status: item.status,
+      name: item.product,
+      color: "????",
+      client: item.name,
+      clientId: "???",
+      devolutionDate: item.expirationDate,
+      rentValue: item.price,
+      paymentStatus: item.paymentStatus,
+      image: "????"
+    }));
+
     const mock = [
       {
         status: "APPROVED",

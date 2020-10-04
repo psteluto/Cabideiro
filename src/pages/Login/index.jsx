@@ -70,7 +70,7 @@ class Login extends Component {
         dispatchToken(res.data.token);
         this.props.history.push(`/`);
       } catch (error) {
-        if (error.isAxiosError && error.response.status === 401) {
+        if (error.isAxiosError && (error.response.status === 401 || error.response.status === 400)) {
           this.setState({errorMsg: "Usuário ou senha inválido"});
         } else {
           this.setState({errorMsg: "Ocorreu um erro"});

@@ -1,7 +1,7 @@
 import api from "../../utils/api";
 
-const getAll = async () => {
-  return await api.get("/products");
+const getAll = async (page, size) => {
+  return await api.get("/products", {params:{page, size}});
 }
 
 const getOne = async (id) => {
@@ -59,6 +59,14 @@ const registerOrder = async (productId, ownerId) => {
   return await api.post("/orders", {owner_id: ownerId, product_id: productId});
 }
 
+const getHistory = async () => {
+  return await api.get("/orders/history");
+}
+
+const getIncome = async () => {
+  return await api.get("/orders/receipt");
+}
+
 export default {
   getAll,
   getOne,
@@ -70,5 +78,7 @@ export default {
   add,
   getFilters,
   validateCoupon,
-  registerOrder
+  registerOrder,
+  getHistory,
+  getIncome
 }
