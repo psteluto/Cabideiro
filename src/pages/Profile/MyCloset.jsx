@@ -43,6 +43,7 @@ class MyCloset extends Component {
       products: [],
       brands: [],
       sizes: [],
+      colors: [],
       clothingParts: [],
       selectedProduct: {
         id: "",
@@ -50,7 +51,7 @@ class MyCloset extends Component {
         price: "",
         full_price: "",
         size: "",
-        color: "",
+        color_id: "",
         brand_id: "",
         max_days_location: "",
         gender: "",
@@ -87,7 +88,7 @@ class MyCloset extends Component {
     if (!selectedProduct.price) msg += "Campo 'Valor' é obrigatório\n";
     if (!selectedProduct.full_price) msg += "Campo 'Valor Original' é obrigatório\n";
     if (!selectedProduct.size) msg += "Campo 'Tamanho' é obrigatório\n";
-    if (!selectedProduct.color) msg += "Campo 'Cor' é obrigatório\n";
+    if (!selectedProduct.color_id) msg += "Campo 'Cor' é obrigatório\n";
     if (!selectedProduct.brand_id) msg += "Campo 'Marca' é obrigatório\n";
     if (!selectedProduct.max_days_location) msg += "Campo 'Tempo Máximo de Locação' é obrigatório\n";
     if (!selectedProduct.gender) msg += "Campo 'Gênero da Peça' é obrigatório\n";
@@ -113,13 +114,13 @@ class MyCloset extends Component {
   }
 
   formatProduct = ({
-                     id, name, price, full_price, size, color, brand_id,
+                     id, name, price, full_price, size, color_id, brand_id,
                      max_days_location, gender, clothing_part_id, available_price,
                      available_days_location, description, image_products
                    }) => {
     return {
       id, name, price, full_price,
-      size, color, brand_id,
+      size, color_id, brand_id,
       max_days_location, gender,
       clothing_part_id, available_price,
       available_days_location, description,
@@ -133,7 +134,7 @@ class MyCloset extends Component {
     const products = rawProducts.map(product => this.formatProduct(product));
 
     let selectedProduct = products[0] || {};
-    this.setState({products, selectedProduct});
+    this.setState({products, selectedProduct, editMode: products.length});
   }
 
   getFilters = async () => {
@@ -142,7 +143,8 @@ class MyCloset extends Component {
     this.setState({
       clothingParts: res.data.clothingParts,
       brands: res.data.brands,
-      sizes: res.data.sizes
+      sizes: res.data.sizes,
+      colors: res.data.colors
     });
   }
 
@@ -203,7 +205,7 @@ class MyCloset extends Component {
   }
 
   render() {
-    const {products, brands, sizes, clothingParts,
+    const {products, brands, sizes, colors, clothingParts,
       selectedProduct, successMsg, errorMsg, editMode} = this.state;
 
     return (
@@ -270,10 +272,14 @@ class MyCloset extends Component {
             <Col span={6}>
               <ItensWrapper>
                 <TextStyle color="#262626">Cor</TextStyle>
-                <Input
-                  onChange={(e) => this.changeFields('color', e.target.value)}
-                  value={selectedProduct.color}
-                />
+
+                <Select
+                  style={{width: "100%"}}
+                  onChange={(value) => this.changeFields('color_id', value)}
+                  value={selectedProduct.color_id}
+                >
+                  {colors.map(color => <Option value={color.id}>{color.name}</Option>)}
+                </Select>
               </ItensWrapper>
             </Col>
           </Row>
@@ -295,7 +301,7 @@ class MyCloset extends Component {
                 <TextStyle color="#262626">Tempo Máximo de Locação</TextStyle>
                 <InputNumberStyle
                   min={0}
-                  onChange={(e) => this.changeFields('max_days_location', e.target.value)}
+                  onChange={(value) => this.changeFields('max_days_location', value)}
                   value={selectedProduct.max_days_location}
                 />
               </ItensWrapper>
