@@ -8,7 +8,7 @@ import Logotipo from '../../components/Logotipo'
 import Menu from '../../components/Menu';
 import HomeImage from '../../images/banner.jpg'
 import Locador from '../../images/locador.png'
-import Locatario from '../../images/locatario.png'
+import Locatario from '../../images/locatario.jpg'
 import WardrobeIcon from '../../images/wardrobe.svg';
 import CameraIcon from '../../images/camera.svg';
 import HandIcon from '../../images/hand.svg';
@@ -24,7 +24,7 @@ const BodyWrapper = styled.img`
    width: 100%;
    height: 513px;
    margin: 38px 0;
-   opacity: .5;
+   opacity: .7;
 `;
 
 const CarouselWrapper = styled.div`
