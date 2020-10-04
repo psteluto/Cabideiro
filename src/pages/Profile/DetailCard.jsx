@@ -57,7 +57,7 @@ const RentButton = styled(Button)`
 const DetailCard = ({image, status, name, color, owner, client, devolutionDate, rentValue, paymentStatus, onClickProfile}) => {
   rentValue = Number(rentValue);
 
-  const daysLeft = moment(devolutionDate).diff(moment(), "days");
+  const daysLeft = moment(devolutionDate, 'DD/MM/YYYY').diff(moment(), "days");
 
   let statusDescription = ""
   switch (status) {
@@ -103,8 +103,8 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate, 
           </span>
         )}
         <p>
-          Data de Devolução: <ContrastText>{moment(devolutionDate).format('DD/MM/YYYY')}</ContrastText>&nbsp;
-          {daysLeft >= 0 && <DaysLeftText>(Falta {daysLeft} dias)</DaysLeftText>}
+          Data de Devolução: <ContrastText>{devolutionDate}</ContrastText>&nbsp;
+          {daysLeft >= 0 && <DaysLeftText>(Faltam {daysLeft} dias)</DaysLeftText>}
         </p>
         <p>Valor de Aluguel: <ContrastText>R$ {rentValue.toFixed(2).replace('.', ',')}</ContrastText></p>
 

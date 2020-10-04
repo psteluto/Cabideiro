@@ -10,7 +10,7 @@ import DetailCard from "./DetailCard";
 import ProductService from '../../services/Product';
 
 const Container = styled.div`
-  max-width: 1000px;
+  width: 1000px;
 `;
 
 class Income extends Component {
@@ -28,16 +28,16 @@ class Income extends Component {
   getIncomes = async () => {
     const res = await ProductService.getIncome();
 
-    const income = res.data.map(item => ({
+    const incomes = res.data.map(item => ({
       status: item.status,
-      name: item.product,
-      color: "????",
-      client: item.name,
-      clientId: "???",
+      name: item.productName,
+      color: item.productColor.name,
+      client: item.customer,
+      clientId: item.customerId,
       devolutionDate: item.expirationDate,
-      rentValue: item.price,
+      rentValue: item.productPrice,
       paymentStatus: item.paymentStatus,
-      image: "????"
+      image: item.productImages[0].image_url
     }));
 
     const mock = [

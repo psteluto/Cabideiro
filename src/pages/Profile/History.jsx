@@ -10,7 +10,7 @@ import DetailCard from "./DetailCard";
 import ProductService from '../../services/Product';
 
 const Container = styled.div`
-  max-width: 1000px;
+  width: 1000px;
 `;
 
 class History extends Component {
@@ -30,13 +30,13 @@ class History extends Component {
 
     const history = res.data.map(item => ({
       status: item.status,
-      name: item.product,
-      color: "???",
-      owner: item.name,
-      ownerId: "???",
+      name: item.productName,
+      color: item.productColor.name,
+      owner: item.owner,
+      ownerId: item.ownerId,
       devolutionDate: item.expirationDate,
-      rentValue: item.price,
-      image: "????"
+      rentValue: item.productPrice,
+      image: item.productImages[0].image_url
     }))
 
     const mock = [
