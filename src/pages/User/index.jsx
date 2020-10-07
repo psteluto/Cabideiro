@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Tabs} from 'antd';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import UserService from '../../services/User';
 import Rating from "./Rating";
@@ -53,7 +54,9 @@ class Profile extends Component {
     return (
       <div>
         <LogoWrapper>
-          <Logotipo/>
+          <Link to="/">
+            <Logotipo/>
+          </Link>
           <TextStyle color="#262626" fontSize="17px">PERFIL</TextStyle>
         </LogoWrapper>
         <UserProfile

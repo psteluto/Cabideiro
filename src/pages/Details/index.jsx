@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Row, Col, Button, Collapse, Input, Alert} from 'antd';
+import {Link} from 'react-router-dom';
 import Logotipo from '../../components/Logotipo'
 import Menu from '../../components/Menu';
 import TextStyle from '../../components/TextStyle';
@@ -126,7 +127,9 @@ class Details extends Component {
     return (
       <div>
         <LogoWrapper>
-          <Logotipo/>
+          <Link to="/">
+            <Logotipo/>
+          </Link>
           <Menu/>
         </LogoWrapper>
         <Row justify="center">
@@ -134,17 +137,20 @@ class Details extends Component {
             <ColImages>
               <RowDescriptionItem marginBottom="16px">
                 {product.image_products && product.image_products[1] && product.image_products[1].image_url && (
-                  <ImageWrapper onClick={()=>this.clickImage(1)} src={images[1] && images[1].image_url}></ImageWrapper>
+                  <ImageWrapper onClick={() => this.clickImage(1)}
+                                src={images[1] && images[1].image_url}></ImageWrapper>
                 )}
               </RowDescriptionItem>
               <RowDescriptionItem marginBottom="16px">
                 {product.image_products && product.image_products[2] && product.image_products[2].image_url && (
-                  <ImageWrapper onClick={()=>this.clickImage(2)} src={images[2] && images[2].image_url}></ImageWrapper>
+                  <ImageWrapper onClick={() => this.clickImage(2)}
+                                src={images[2] && images[2].image_url}></ImageWrapper>
                 )}
               </RowDescriptionItem>
               <RowDescriptionItem>
                 {product.image_products && product.image_products[3] && product.image_products[3].image_url && (
-                  <ImageWrapper onClick={()=>this.clickImage(3)} src={images[3] && images[3].image_url}></ImageWrapper>
+                  <ImageWrapper onClick={() => this.clickImage(3)}
+                                src={images[3] && images[3].image_url}></ImageWrapper>
                 )}
               </RowDescriptionItem>
             </ColImages>
@@ -162,7 +168,7 @@ class Details extends Component {
                 </RowDescriptionItem>
                 <RowDescriptionItem marginBottom="10px">
                   <TextStyle color="#e73554" strong>
-                    R$ {Number(product.price).toFixed(2).replace('.',',')}
+                    R$ {Number(product.price).toFixed(2).replace('.', ',')}
                   </TextStyle>
                 </RowDescriptionItem>
                 <RowDescriptionItem>
@@ -171,7 +177,8 @@ class Details extends Component {
                 </RowDescriptionItem>
                 <RowDescriptionItem>
                   <TextStyle color="#000000" marginBottom="24px">MARCA: </TextStyle>
-                  <TextStyle color="#000000" marginBottom="24px" strong>{product.brand && product.brand.name}</TextStyle>
+                  <TextStyle color="#000000" marginBottom="24px"
+                             strong>{product.brand && product.brand.name}</TextStyle>
                 </RowDescriptionItem>
               </RowDescriptionItem>
               <RowDescriptionItem>
@@ -197,7 +204,7 @@ class Details extends Component {
                 {successMsg && (
                   <Row>
                     <Col span={24}>
-                      <Alert message={successMsg} type="success" showIcon />
+                      <Alert message={successMsg} type="success" showIcon/>
                     </Col>
                   </Row>
                 )}

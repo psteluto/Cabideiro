@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Row, Col} from 'antd';
+import {Link} from 'react-router-dom';
 import {LeftSquareFilled, RightSquareFilled} from '@ant-design/icons';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
@@ -107,7 +108,9 @@ class Home extends Component {
     return (
       <div>
         <LogoWrapper>
-          <Logotipo/>
+          <Link to="/">
+            <Logotipo/>
+          </Link>
           <Menu/>
           <Container>
             <BodyWrapper src={HomeImage}/>
@@ -128,7 +131,7 @@ class Home extends Component {
                     offset={15} itemWidth={200} stopAutoPlayOnHover centered
                     arrowLeft={<LeftSquareFilled style={{fontSize: '30px', color: '#000000'}}/>}
                     arrowRight={<RightSquareFilled style={{fontSize: '30px', color: '#000000'}}/>} addArrowClickHandler>
-            
+
             {carouselProducts.map(product =>
               <Card
                 key={product.id}

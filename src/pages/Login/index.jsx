@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Row, Col, Input, Button, Alert} from 'antd';
+import {Link} from 'react-router-dom';
 import UserService from '../../services/User'
 import Logotipo from '../../components/Logotipo'
 import styled from 'styled-components';
@@ -90,7 +91,9 @@ class Login extends Component {
         <div className='background-color'>
           <FormWrapper>
             <LogoWrapper>
-              <Logotipo/>
+              <Link to="/">
+                <Logotipo/>
+              </Link>
               <TextStyle color="#262626" fontSize="16px">ENTRAR</TextStyle>
             </LogoWrapper>
             <FormStyle>

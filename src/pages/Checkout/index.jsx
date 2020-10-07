@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Row, Col, Divider, Button, Collapse, Modal, Input, Alert} from 'antd';
+import {Link} from 'react-router-dom';
 import MaskedInput from 'antd-mask-input'
 import Logotipo from '../../components/Logotipo'
 import CreditCard from '../../components/CreditCard'
@@ -183,13 +184,15 @@ class Checkout extends Component {
     const {modalAddress, fields, product, shippingPrice, discount, modalErrorMsg, couponErrorMsg, couponSuccessMsg} = this.state;
 
     const price = Number(product.price);
-    const discountPrice = price * (discount/100);
+    const discountPrice = price * (discount / 100);
     const totalPrice = price - discountPrice + shippingPrice;
 
     return (
       <div>
         <LogoWrapper>
-          <Logotipo/>
+          <Link to="/">
+            <Logotipo/>
+          </Link>
         </LogoWrapper>
         <Row>
           <Col span={14}>
@@ -284,7 +287,8 @@ class Checkout extends Component {
                 <Col span={12}>
                   <ResumeRow>
                     <TextStyle color="#262626" fontSize="10px">SUBTOTAL:</TextStyle>
-                    {discount ? (<TextStyle color="#262626" fontSize="10px" marginTop="8px">DESCONTO:</TextStyle>) : null}
+                    {discount ? (
+                      <TextStyle color="#262626" fontSize="10px" marginTop="8px">DESCONTO:</TextStyle>) : null}
                     <TextStyle color="#262626" fontSize="10px" marginTop="8px">FRETE:</TextStyle>
                   </ResumeRow>
                 </Col>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Row, Col, Input, Button, Alert as AntdAlert, message} from 'antd';
+import {Link} from 'react-router-dom';
 import MaskedInput from 'antd-mask-input'
 import UserService from '../../services/User';
 import Logotipo from '../../components/Logotipo'
@@ -136,7 +137,9 @@ class LoginRegister extends Component {
         <div className='background-color'>
           <FormWrapper>
             <LogoWrapper>
-              <Logotipo/>
+              <Link to="/">
+                <Logotipo/>
+              </Link>
               <TextStyle color="#262626" fontSize="16px">CRIAR CONTA</TextStyle>
             </LogoWrapper>
             <FormStyle>

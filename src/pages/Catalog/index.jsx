@@ -108,7 +108,9 @@ class Catalog extends Component {
     return (
       <div>
         <LogoWrapper>
-          <Logotipo/>
+          <Link to="/">
+            <Logotipo/>
+          </Link>
           <InputWrapper>
             <Input placeholder="O que você está procurando ?"></Input>
           </InputWrapper>
