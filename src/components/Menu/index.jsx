@@ -37,10 +37,10 @@ const Menu = () => {
         <Link to="/catalog" replace>
           <TextStyle color="#000000" strong>NOVIDADES</TextStyle>
         </Link>
-        <Link to="/catalog" replace>
+        <Link to="/catalog/Feminino" replace>
           <TextStyle color="#000000" strong>FEMININO</TextStyle>
         </Link>
-        <Link to="/catalog" replace>
+        <Link to="/catalog/Masculino" replace>
           <TextStyle color="#000000" strong>MASCULINO</TextStyle>
         </Link>
         <Link to="/catalog" replace>

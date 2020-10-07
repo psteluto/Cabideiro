@@ -54,17 +54,17 @@ class Catalog extends Component {
       page: 1,
       pageSize: 10,
       filterValue: {
-        size: "",
-        clothingPart: "",
-        brand: "",
-        color: ""
+        size: undefined,
+        clothingPart: undefined,
+        brand: undefined,
+        color: undefined,
+        gender: undefined
       }
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getFilters();
-    this.getProducts();
   }
 
   changeFilterValue = (field, value) => {
@@ -78,14 +78,24 @@ class Catalog extends Component {
 
   getProducts = async () => {
     const {page, pageSize, filterValue} = this.state;
-    console.log('aaa', filterValue);
     const res = await ProductService.getAll(page, pageSize, filterValue);
     this.setState({products: res.data})
   }
 
   getFilters = async () => {
-    const res = await ProductService.getFilters()
-    this.setState({filters: res.data});
+    const {match} = this.props;
+    const {filterValue} = this.state;
+
+    const res = await ProductService.getFilters();
+    const externalFilter = match.params.filter;
+    const values = {
+      ...filterValue,
+      gender: externalFilter
+    }
+
+    this.setState({
+      filters: res.data, filterValue: values
+    }, this.getProducts);
   }
 
   changePage = async (page, pageSize) => {
@@ -106,6 +116,14 @@ class Catalog extends Component {
 
         <Row>
           <FilterWrapper>
+            <SelectStyle
+              value={filterValue.gender}
+              onChange={(value)=>this.changeFilterValue('gender', value)}
+              defaultValue="Gênero"
+            >
+              <Option value="Feminino">Feminino</Option>
+              <Option value="Masculino">Masculino</Option>
+            </SelectStyle>
             <SelectStyle
               value={filterValue.size}
               onChange={(value)=>this.changeFilterValue('size', value)}

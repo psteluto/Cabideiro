@@ -20,7 +20,8 @@ const Router = () => {
                 <Route path="/" exact component={Home} /> 
                 <Route path="/about" exact component={About} />
                 <Route path="/login" exact component={Login} />                 
-                <Route path="/catalog" exact component={Catalog} />                 
+                <Route path="/catalog/:filter" exact component={Catalog} />
+                <Route path="/catalog" exact component={Catalog} />
                 <Route path="/login/register" exact component={LoginRegister} />
                 <Route path="/user/:id" exact component={User} />
                 <Route path="/profile" exact component={Profile} />

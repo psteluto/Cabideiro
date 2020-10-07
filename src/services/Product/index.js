@@ -1,7 +1,7 @@
 import api from "../../utils/api";
 
 const getAll = async (page, size, filterValue = {}) => {
-  const {size: filterSize, clothingPart, brand, color} = filterValue
+  const {size: filterSize, clothingPart, brand, color, gender} = filterValue
 
   const params = {
     page, size
@@ -11,6 +11,7 @@ const getAll = async (page, size, filterValue = {}) => {
   if (color) params.color = color;
   if (brand) params.brand = brand;
   if (filterSize) params.sizes = filterSize;
+  if (gender) params.gender = gender;
 
   return await api.get("/products", {params});
 }
