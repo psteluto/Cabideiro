@@ -128,7 +128,7 @@ class Home extends Component {
                     offset={15} itemWidth={200} stopAutoPlayOnHover centered
                     arrowLeft={<LeftSquareFilled style={{fontSize: '30px', color: '#000000'}}/>}
                     arrowRight={<RightSquareFilled style={{fontSize: '30px', color: '#000000'}}/>} addArrowClickHandler>
-
+            
             {carouselProducts.map(product =>
               <Card
                 key={product.id}
