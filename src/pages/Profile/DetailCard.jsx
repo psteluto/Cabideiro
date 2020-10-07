@@ -56,29 +56,6 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate, 
 
   const daysLeft = moment(devolutionDate, 'DD/MM/YYYY').diff(moment(), "days");
 
-  let statusDescription = ""
-  switch (status) {
-    case "APPROVED":
-      statusDescription = "Aprovado"
-      break;
-    case "SEPARATION":
-      statusDescription = "Em Separação";
-      break;
-    case "FINISHED":
-      statusDescription = "Finalizado";
-      break;
-  }
-
-  let paymentStatusDescription = "";
-  switch (paymentStatus) {
-    case "AVAILABLE":
-      paymentStatusDescription = "Disponível";
-      break;
-    case "PROCESS":
-      paymentStatusDescription = "Em Andamento";
-      break;
-  }
-
   let userDescription = "";
   if (owner) userDescription = "Proprietário";
   if (client) userDescription = "Cliente";
@@ -96,7 +73,7 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate, 
       />
 
       <TextWrapper>
-        <StatusText>Status {status === 'FINISHED' ? statusDescription : (<span>{statusDescription}</span>)}</StatusText>
+        <StatusText>Status {status === 'FINISHED' ? status : (<span>{status}</span>)}</StatusText>
         {userDescription && (
           <span>
             <p>
@@ -110,9 +87,9 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate, 
           {daysLeft >= 0 && <DaysLeftText>(Faltam {daysLeft} dias)</DaysLeftText>}
         </p>
         <p>Valor de Aluguel: <ContrastText>R$ {rentValue.toFixed(2).replace('.', ',')}</ContrastText></p>
-
-        {paymentStatusDescription && (
-          <p>Resgate: {paymentStatusDescription}</p>
+        
+        {paymentStatus && (
+          <p>Pagamento: {paymentStatus}</p>
         )}
 
         {!paymentStatus && status === 'FINISHED' && (
@@ -125,14 +102,14 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate, 
 
 DetailCard.propTypes = {
   image: PropTypes.string.isRequired,
-  status: PropTypes.oneOf(["APPROVED", "SEPARATION", "FINISHED"]).isRequired,
+  status: PropTypes.oneOf(["Em aprovação"]).isRequired,
   name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   owner: PropTypes.string,
   client: PropTypes.string,
   devolutionDate: PropTypes.string.isRequired,
   rentValue: PropTypes.string.isRequired,
-  paymentStatus: PropTypes.oneOf(["AVAILABLE", "PROCESS"]),
+  paymentStatus: PropTypes.oneOf(["Aprovado"]),
   onClickProfile: PropTypes.func.isRequired,
   onClickProduct: PropTypes.func.isRequired
 }
