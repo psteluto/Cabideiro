@@ -15,13 +15,13 @@ const ImageStyle = styled.img`
     height: ${props => props.heightStyle || "100%"};;
 `;
 
-const Card = ({imageUrl, name, price, onClick}) => {
+const Card = ({imageUrl, name, price, onClick, className}) => {
   const handleClick = () => {
     if (onClick) onClick()
   }
 
   return (
-    <CardWrapper onClick={handleClick} hasClick={onClick}>
+    <CardWrapper className={className} onClick={handleClick} hasClick={onClick}>
       <ImageStyle src={imageUrl}/>
       <TextStyle color="#262626" fontSize="11px" marginTop="16px">{name}</TextStyle>
       {price && (
@@ -35,7 +35,7 @@ Card.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 }
 
 export default Card;

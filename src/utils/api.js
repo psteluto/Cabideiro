@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 const urlApi = {
-    value: `http://167.172.154.78:3333`
+    value: `http://167.172.154.78`
 };
 
 const api = Axios.create({

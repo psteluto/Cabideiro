@@ -149,7 +149,7 @@ class MyCloset extends Component {
   }
 
   selectProduct = (product) => {
-    this.setState({selectedProduct: product, successMsg: ""})
+    this.setState({selectedProduct: product, successMsg: "", editMode: true})
   }
 
   convertImages = async (images) => {

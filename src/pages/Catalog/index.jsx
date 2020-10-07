@@ -12,6 +12,12 @@ const LogoWrapper = styled.div`
    text-align: center;
 `;
 
+const ProductsRow = styled.div`
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1000px;
+`;
+
 const FilterWrapper = styled.div`
    display: flex;
    align-items: center;
@@ -31,8 +37,7 @@ const PaginationWrapper = styled.div`
 `;
 
 const InputWrapper = styled.div`
-   margin: 0 240px;
-   margin-top: 20px;
+   margin: 20px 240px 0;
 `;
 
 class Catalog extends Component {
@@ -44,12 +49,38 @@ class Catalog extends Component {
         clothingParts: [],
         brands: [],
         colors: []
+      },
+      products: [],
+      page: 1,
+      pageSize: 10,
+      filterValue: {
+        size: "",
+        clothingPart: "",
+        brand: "",
+        color: ""
       }
     }
   }
 
   componentDidMount() {
     this.getFilters();
+    this.getProducts();
+  }
+
+  changeFilterValue = (field, value) => {
+    const {filterValue} = this.state;
+    const newFilterValue = {
+      ...filterValue,
+      [field]: value
+    }
+    this.setState({filterValue: newFilterValue}, this.getProducts)
+  }
+
+  getProducts = async () => {
+    const {page, pageSize, filterValue} = this.state;
+    console.log('aaa', filterValue);
+    const res = await ProductService.getAll(page, pageSize, filterValue);
+    this.setState({products: res.data})
   }
 
   getFilters = async () => {
@@ -57,9 +88,13 @@ class Catalog extends Component {
     this.setState({filters: res.data});
   }
 
+  changePage = async (page, pageSize) => {
+    this.setState({page, pageSize}, this.getProducts);
+  }
+
   render() {
-    const {filters} = this.state;
-    
+    const {products, filters, pageSize, filterValue} = this.state;
+
     return (
       <div>
         <LogoWrapper>
@@ -68,148 +103,72 @@ class Catalog extends Component {
             <Input placeholder="O que você está procurando ?"></Input>
           </InputWrapper>
         </LogoWrapper>
+
         <Row>
           <FilterWrapper>
-            <SelectStyle defaultValue="Tamanho">
+            <SelectStyle
+              value={filterValue.size}
+              onChange={(value)=>this.changeFilterValue('size', value)}
+              defaultValue="Tamanho"
+            >
               {filters.sizes.map(size => (
                 <Option value={size}>{size}</Option>
               ))}
             </SelectStyle>
-            <SelectStyle defaultValue="Categoria">
+            <SelectStyle
+              value={filterValue.clothingPart}
+              onChange={(value)=>this.changeFilterValue('clothingPart', value)}
+              defaultValue="Categoria"
+            >
               {filters.clothingParts.map(part => (
-                <Option value={part.id}>{part.name}</Option>
+                <Option value={part.name}>{part.name}</Option>
               ))}
             </SelectStyle>
-            <SelectStyle defaultValue="Marca">
+            <SelectStyle
+              value={filterValue.brand}
+              onChange={(value)=>this.changeFilterValue('brand', value)}
+              defaultValue="Marca"
+            >
               {filters.brands.map(brand => (
-                <Option value={brand.id}>{brand.name}</Option>
+                <Option value={brand.name}>{brand.name}</Option>
               ))}
             </SelectStyle>
-            <SelectStyle defaultValue="Cor">
+            <SelectStyle
+              value={filterValue.color}
+              onChange={(value)=>this.changeFilterValue('color', value)}
+              defaultValue="Cor"
+            >
               {filters.colors.map(color => (
-                <Option value={color.id}>{color.name}</Option>
+                <Option value={color.name}>{color.name}</Option>
               ))}
             </SelectStyle>
           </FilterWrapper>
         </Row>
-        <Row>
-          <FilterWrapper>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-          </FilterWrapper>
-        </Row>
-        <Row>
-          <FilterWrapper>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-          </FilterWrapper>
-        </Row>
-        <Row>
-          <FilterWrapper>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-          </FilterWrapper>
-        </Row>
-        <Row>
-          <FilterWrapper>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-            <Col span={4}>
-              <Link to="/product/1/details" replace>
-                <Card/>
-              </Link>
-            </Col>
-          </FilterWrapper>
-        </Row>
+
+
+        <ProductsRow>
+          <Row>
+            {products.map(product => (
+              <Col span={3} offset={1}>
+                <Link to={`/product/${product.id}/details`} replace>
+                  <Card
+                    name={product.name}
+                    imageUrl={product.image_products[0].image_url}
+                  />
+                </Link>
+              </Col>
+            ))}
+          </Row>
+        </ProductsRow>
+
+
         <PaginationWrapper>
-          <Pagination defaultCurrent={1} total={50}/>
+          <Pagination
+            defaultCurrent={1}
+            total={100}
+            pageSize={pageSize}
+            onChange={this.changePage}
+          />
         </PaginationWrapper>
       </div>
     )

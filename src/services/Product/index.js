@@ -1,11 +1,21 @@
 import api from "../../utils/api";
 
-const getAll = async (page, size) => {
-  return await api.get("/products", {params:{page, size}});
+const getAll = async (page, size, filterValue = {}) => {
+  const {size: filterSize, clothingPart, brand, color} = filterValue
+
+  const params = {
+    page, size
+  }
+
+  if (clothingPart) params.clothing_part = clothingPart;
+  if (color) params.color = color;
+  if (brand) params.brand = brand;
+
+  return await api.get("/products", {params});
 }
 
 const getOne = async (id) => {
-  return await api.get("/products/"+id);
+  return await api.get("/products/" + id);
 }
 
 const calculateShipping = async (zipcode) => {
@@ -23,7 +33,7 @@ const getUserProducts = async () => {
 
 const add = async (product) => {
   const fd = new FormData();
-  for ( const key in product ) {
+  for (const key in product) {
     if (key !== 'images')
       fd.append(key, product[key]);
   }
@@ -34,7 +44,7 @@ const add = async (product) => {
 
 const update = async (product) => {
   const fd = new FormData();
-  for ( const key in product ) {
+  for (const key in product) {
     if (key !== 'images')
       fd.append(key, product[key]);
   }
