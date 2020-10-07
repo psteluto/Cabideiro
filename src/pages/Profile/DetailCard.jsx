@@ -28,10 +28,6 @@ const StatusText = styled.p`
   }
 `;
 
-const NameText = styled.p`
-  text-transform: uppercase;
-`;
-
 const ProfileLink = styled.a`  
   font-size: 12px;
   color: #1666c0;
@@ -55,7 +51,7 @@ const RentButton = styled(Button)`
   background-color: #e73554;
 `;
 
-const DetailCard = ({image, status, name, color, owner, client, devolutionDate, rentValue, paymentStatus, onClickProfile}) => {
+const DetailCard = ({image, status, name, color, owner, client, devolutionDate, rentValue, paymentStatus, onClickProfile, onClickProduct}) => {
   rentValue = Number(rentValue);
 
   const daysLeft = moment(devolutionDate, 'DD/MM/YYYY').diff(moment(), "days");
@@ -96,16 +92,16 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate, 
         imageUrl={image}
         name={`${name} - ${color}`}
         width={185}
+        onClick={onClickProduct}
       />
 
       <TextWrapper>
         <StatusText>Status {status === 'FINISHED' ? statusDescription : (<span>{statusDescription}</span>)}</StatusText>
-        <NameText>{name} - {color}</NameText>
         {userDescription && (
           <span>
             <p>
-              {userDescription}: {userName}&nbsp;
-              <ProfileLink onClick={onClickProfile} href="#">Visitar Perfil</ProfileLink>
+              {userDescription}:&nbsp;
+              <ProfileLink onClick={onClickProfile} href="#">{userName}</ProfileLink>
             </p>
           </span>
         )}
@@ -137,7 +133,8 @@ DetailCard.propTypes = {
   devolutionDate: PropTypes.string.isRequired,
   rentValue: PropTypes.string.isRequired,
   paymentStatus: PropTypes.oneOf(["AVAILABLE", "PROCESS"]),
-  onClickProfile: PropTypes.func.isRequired
+  onClickProfile: PropTypes.func.isRequired,
+  onClickProduct: PropTypes.func.isRequired
 }
 
 export default DetailCard;

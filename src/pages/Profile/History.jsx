@@ -25,6 +25,7 @@ class History extends Component {
     const res = await ProductService.getHistory();
 
     const history = res.data.map(item => ({
+      productId: item.productId,
       status: item.status,
       name: item.productName,
       color: item.productColor.name,
@@ -38,11 +39,16 @@ class History extends Component {
     this.setState({history})
   }
 
-  onCLickOwner(item){
+  onClickOwner(item){
     const {history} = this.props;
     history.push(`/user/${item.ownerId}`);
   }
 
+  onClickProduct(item){
+    const {history} = this.props;
+    history.push(`/product/${item.productId}/details`);
+  }
+  
   render() {
     const {history} = this.state;
 
@@ -59,7 +65,8 @@ class History extends Component {
                 owner={item.owner}
                 devolutionDate={item.devolutionDate}
                 rentValue={item.rentValue}
-                onClickProfile={()=>this.onCLickOwner(item)}
+                onClickProfile={()=>this.onClickOwner(item)}
+                onClickProduct={()=>this.onClickProduct(item)}
               />
             </Col>
           ))}

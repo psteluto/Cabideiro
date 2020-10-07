@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Col, Row} from "antd";
 import { withRouter } from 'react-router-dom'
-import ListImage1 from "../../images/image1.jpg";
-import ListImage2 from "../../images/image2.jpg";
-import ListImage3 from "../../images/image3.jpg";
-import ListImage4 from "../../images/image4.png";
 import DetailCard from "./DetailCard";
 import ProductService from '../../services/Product';
 
@@ -29,6 +25,7 @@ class Income extends Component {
     const res = await ProductService.getIncome();
 
     const incomes = res.data.map(item => ({
+      productId: item.productId,
       status: item.status,
       name: item.productName,
       color: item.productColor.name,
@@ -46,6 +43,11 @@ class Income extends Component {
   onCLickClient(item){
     const {history} = this.props;
     history.push(`/user/${item.clientId}`);
+  }
+
+  onClickProduct(item){
+    const {history} = this.props;
+    history.push(`/product/${item.productId}/details`);
   }
 
   render() {
@@ -66,6 +68,7 @@ class Income extends Component {
                 rentValue={item.rentValue}
                 paymentStatus={item.paymentStatus}
                 onClickProfile={()=>this.onCLickClient(item)}
+                onClickProduct={()=>this.onClickProduct(item)}
               />
             </Col>
           ))}
