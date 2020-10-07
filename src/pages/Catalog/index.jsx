@@ -169,11 +169,12 @@ class Catalog extends Component {
         <ProductsRow>
           <Row>
             {products.map(product => (
-              <Col span={3} offset={1}>
+              <Col span={5} offset={1}>
                 <Link to={`/product/${product.id}/details`} replace>
                   <Card
                     name={product.name}
                     imageUrl={product.image_products[0].image_url}
+                    price={product.price}
                   />
                 </Link>
               </Col>

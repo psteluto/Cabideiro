@@ -1,21 +1,15 @@
 import React, {Component} from 'react';
 import styled from "styled-components";
-import {Alert, Card, Checkbox, Col, Input, List, Row, Select, Upload, InputNumber} from "antd";
+import {Alert, Checkbox, Col, Input, List, Row, Select, Upload, InputNumber} from "antd";
 import ImgCrop from "antd-img-crop";
 import ProductService from '../../services/Product';
 import TextStyle from "../../components/TextStyle";
 import ButtonStyle from '../../components/ButtonStyle';
 import MoneyInput from "../../components/MoneyInput";
+import Card from '../../components/Card';
 
 const {TextArea} = Input;
 const {Option} = Select;
-const {Meta} = Card;
-
-const StyledCard = styled(Card)`
-  &:hover {
-    cursor: pointer;
-  }
-`;
 
 const ItensWrapper = styled.div`
    padding: 16px ${props => props.paddingRight || "0"} 0 0;
@@ -205,8 +199,10 @@ class MyCloset extends Component {
   }
 
   render() {
-    const {products, brands, sizes, colors, clothingParts,
-      selectedProduct, successMsg, errorMsg, editMode} = this.state;
+    const {
+      products, brands, sizes, colors, clothingParts,
+      selectedProduct, successMsg, errorMsg, editMode
+    } = this.state;
 
     return (
       <Row>
@@ -216,18 +212,15 @@ class MyCloset extends Component {
                          colorButton="#ffffff" color="#000000" onClick={this.clickNewProduct}>+ Nova Peça</ButtonStyle>
             <List style={{marginTop: 20}}>
               {products.map(product => (
-                <StyledCard
-                  key={product.id}
+
+                <Card
+                  imageUrl={product.images[0] && product.images[0].url}
                   onClick={() => this.selectProduct(product)}
-                  style={{
-                    width: 185,
-                    marginBottom: 16,
-                    border: (product.id === selectedProduct.id ? "2px solid #ffcb00" : "")
-                  }}
-                  cover={<img src={product.images[0] && product.images[0].url}/>}
-                >
-                  <Meta style={{fontSize: "12px"}} description={product.name}/>
-                </StyledCard>
+                  name={product.name}
+                  selected={product.id === selectedProduct.id}
+                  width={185}
+                />
+
               ))}
             </List>
           </CardWrapper>
@@ -367,7 +360,7 @@ class MyCloset extends Component {
             <List style={{padding: "7px 0 7px 0"}}>
               <ImgCrop>
                 <Upload
-                  customRequest={({ file, onSuccess }) => {
+                  customRequest={({file, onSuccess}) => {
                     setTimeout(() => {
                       onSuccess("ok");
                     }, 0);
@@ -426,7 +419,7 @@ class MyCloset extends Component {
           {!successMsg && errorMsg && (
             <Row>
               <Col span={24}>
-                <Alert style={{whiteSpace: 'pre'}} message={errorMsg} type="error" showIcon />
+                <Alert style={{whiteSpace: 'pre'}} message={errorMsg} type="error" showIcon/>
               </Col>
             </Row>
           )}

@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom'
 import {Col, Row} from "antd";
-import ListImage1 from "../../images/image1.jpg";
-import ListImage2 from "../../images/image2.jpg";
-import ListImage3 from "../../images/image3.jpg";
-import ListImage4 from "../../images/image4.png";
 import DetailCard from "./DetailCard";
 import ProductService from '../../services/Product';
 

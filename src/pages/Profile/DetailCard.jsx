@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {Button, Image} from "antd";
+import {Button} from "antd";
 import moment from 'moment';
+import Card from '../../components/Card';
 
 const Container = styled.div`
   margin-right: 20px;
@@ -13,7 +14,7 @@ const Container = styled.div`
 const TextWrapper = styled.div`
   padding: 0 10px 0 15px;
   color: #262626;
-  font-size: 16px;
+  font-size: 12px;
   p {
     margin: 4px 0;
   }
@@ -90,7 +91,13 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate, 
 
   return (
     <Container>
-      <Image width={185} src={image}/>
+
+      <Card
+        imageUrl={image}
+        name={`${name} - ${color}`}
+        width={185}
+      />
+
       <TextWrapper>
         <StatusText>Status {status === 'FINISHED' ? statusDescription : (<span>{statusDescription}</span>)}</StatusText>
         <NameText>{name} - {color}</NameText>
