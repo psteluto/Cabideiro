@@ -40,53 +40,7 @@ class Income extends Component {
       image: item.productImages[0].image_url
     }));
 
-    const mock = [
-      {
-        status: "APPROVED",
-        name: "Blusa Floral",
-        color: "Rosa Claro",
-        client: "Larissa Manoela",
-        clientId: 1,
-        devolutionDate: "2020-10-01",
-        rentValue: "152",
-        paymentStatus: "PROCESS",
-        image: ListImage1
-      },
-      {
-        status: "SEPARATION",
-        name: "Calça alfaiataria básico",
-        color: "Preto",
-        client: "Larissa Manoela",
-        clientId: 1,
-        devolutionDate: "2020-10-01",
-        rentValue: "152",
-        paymentStatus: "AVAILABLE",
-        image: ListImage2
-      },
-      {
-        status: "APPROVED",
-        name: "Blusa Floral",
-        color: "Rosa Claro",
-        client: "Larissa Manoela",
-        clientId: 1,
-        devolutionDate: "2020-10-01",
-        rentValue: "152",
-        paymentStatus: "PROCESS",
-        image: ListImage3
-      },
-      {
-        status: "FINISHED",
-        name: "Blusa Floral",
-        color: "Rosa Claro",
-        client: "Larissa Manoela",
-        clientId: 1,
-        devolutionDate: "2020-10-01",
-        rentValue: "152",
-        paymentStatus: "AVAILABLE",
-        image: ListImage4
-      }
-    ]
-    this.setState({incomes: mock})
+    this.setState({incomes})
   }
 
   onCLickClient(item){

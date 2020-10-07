@@ -10,6 +10,7 @@ const getAll = async (page, size, filterValue = {}) => {
   if (clothingPart) params.clothing_part = clothingPart;
   if (color) params.color = color;
   if (brand) params.brand = brand;
+  if (filterSize) params.sizes = filterSize;
 
   return await api.get("/products", {params});
 }

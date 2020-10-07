@@ -37,51 +37,9 @@ class History extends Component {
       devolutionDate: item.expirationDate,
       rentValue: item.productPrice,
       image: item.productImages[0].image_url
-    }))
+    }));
 
-    const mock = [
-      {
-        status: "APPROVED",
-        name: "Blusa Floral",
-        color: "Rosa Claro",
-        owner: "Larissa Manoela",
-        ownerId: 1,
-        devolutionDate: "2020-10-01",
-        rentValue: "152",
-        image: ListImage1
-      },
-      {
-        status: "SEPARATION",
-        name: "Calça alfaiataria básico",
-        color: "Preto",
-        owner: "Larissa Manoela",
-        ownerId: 1,
-        devolutionDate: "2020-10-01",
-        rentValue: "152",
-        image: ListImage2
-      },
-      {
-        status: "APPROVED",
-        name: "Blusa Floral",
-        color: "Rosa Claro",
-        owner: "Larissa Manoela",
-        ownerId: 1,
-        devolutionDate: "2020-10-01",
-        rentValue: "152",
-        image: ListImage3
-      },
-      {
-        status: "FINISHED",
-        name: "Blusa Floral",
-        color: "Rosa Claro",
-        owner: "Larissa Manoela",
-        ownerId: 1,
-        devolutionDate: "2020-10-01",
-        rentValue: "152",
-        image: ListImage4
-      }
-    ]
-    this.setState({history: mock})
+    this.setState({history})
   }
 
   onCLickOwner(item){
