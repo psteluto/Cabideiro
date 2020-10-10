@@ -18,16 +18,17 @@ const ProductsRow = styled.div`
   max-width: 1000px;
 `;
 
+const NoProductsLabel = styled.p`
+  text-align: center;
+`;
+
 const FilterWrapper = styled.div`
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   margin: 24px 240px 35px 240px;
-   width: 100%;
+  margin: 35px auto;
+  max-width: 1000px;
 `;
 
 const SelectStyle = styled(Select)`
-   width: 160px;
+   width: 100%;
 `;
 
 const PaginationWrapper = styled.div`
@@ -37,7 +38,7 @@ const PaginationWrapper = styled.div`
 `;
 
 const InputWrapper = styled.div`
-   margin: 20px 240px 0;
+   margin: 20px 0;
 `;
 
 class Catalog extends Component {
@@ -52,7 +53,7 @@ class Catalog extends Component {
       },
       products: [],
       page: 1,
-      pageSize: 10,
+      pageSize: 12,
       filterValue: {
         size: undefined,
         clothingPart: undefined,
@@ -111,63 +112,82 @@ class Catalog extends Component {
           <Link to="/">
             <Logotipo/>
           </Link>
-          <InputWrapper>
-            <Input placeholder="O que você está procurando ?"></Input>
-          </InputWrapper>
         </LogoWrapper>
 
-        <Row>
-          <FilterWrapper>
-            <SelectStyle
-              value={filterValue.gender}
-              onChange={(value)=>this.changeFilterValue('gender', value)}
-              defaultValue="Gênero"
-            >
-              <Option value="Feminino">Feminino</Option>
-              <Option value="Masculino">Masculino</Option>
-            </SelectStyle>
-            <SelectStyle
-              value={filterValue.size}
-              onChange={(value)=>this.changeFilterValue('size', value)}
-              defaultValue="Tamanho"
-            >
-              {filters.sizes.map(size => (
-                <Option value={size}>{size}</Option>
-              ))}
-            </SelectStyle>
-            <SelectStyle
-              value={filterValue.clothingPart}
-              onChange={(value)=>this.changeFilterValue('clothingPart', value)}
-              defaultValue="Categoria"
-            >
-              {filters.clothingParts.map(part => (
-                <Option value={part.name}>{part.name}</Option>
-              ))}
-            </SelectStyle>
-            <SelectStyle
-              value={filterValue.brand}
-              onChange={(value)=>this.changeFilterValue('brand', value)}
-              defaultValue="Marca"
-            >
-              {filters.brands.map(brand => (
-                <Option value={brand.name}>{brand.name}</Option>
-              ))}
-            </SelectStyle>
-            <SelectStyle
-              value={filterValue.color}
-              onChange={(value)=>this.changeFilterValue('color', value)}
-              defaultValue="Cor"
-            >
-              {filters.colors.map(color => (
-                <Option value={color.name}>{color.name}</Option>
-              ))}
-            </SelectStyle>
-          </FilterWrapper>
-        </Row>
+        <FilterWrapper>
+          <Row>
+            <Col span={23} offset={1}>
+              <InputWrapper>
+                <Input placeholder="O que você está procurando ?"/>
+              </InputWrapper>
+            </Col>
+            <Col span={4} offset={1}>
+              <SelectStyle
+                value={filterValue.gender}
+                onChange={(value) => this.changeFilterValue('gender', value)}
+                defaultValue="Gênero"
+              >
+                <Option value="Feminino">Feminino</Option>
+                <Option value="Masculino">Masculino</Option>
+              </SelectStyle>
+            </Col>
+            <Col span={3} offset={1}>
+              <SelectStyle
+                value={filterValue.size}
+                onChange={(value) => this.changeFilterValue('size', value)}
+                defaultValue="Tamanho"
+              >
+                {filters.sizes.map(size => (
+                  <Option value={size}>{size}</Option>
+                ))}
+              </SelectStyle>
+            </Col>
+            <Col span={4} offset={1}>
+              <SelectStyle
+                value={filterValue.clothingPart}
+                onChange={(value) => this.changeFilterValue('clothingPart', value)}
+                defaultValue="Categoria"
+              >
+                {filters.clothingParts.map(part => (
+                  <Option value={part.name}>{part.name}</Option>
+                ))}
+              </SelectStyle>
+            </Col>
+            <Col span={4} offset={1}>
+              <SelectStyle
+                value={filterValue.brand}
+                onChange={(value) => this.changeFilterValue('brand', value)}
+                defaultValue="Marca"
+              >
+                {filters.brands.map(brand => (
+                  <Option value={brand.name}>{brand.name}</Option>
+                ))}
+              </SelectStyle>
+            </Col>
+            <Col span={4} offset={1}>
+              <SelectStyle
+                value={filterValue.color}
+                onChange={(value) => this.changeFilterValue('color', value)}
+                defaultValue="Cor"
+              >
+                {filters.colors.map(color => (
+                  <Option value={color.name}>{color.name}</Option>
+                ))}
+              </SelectStyle>
+            </Col>
+          </Row>
+        </FilterWrapper>
 
 
         <ProductsRow>
           <Row>
+            {products.length === 0 && (
+              <Col span={23} offset={1}>
+                <NoProductsLabel>
+                  Não há produtos para mostrar aqui!
+                </NoProductsLabel>
+              </Col>
+            )}
             {products.map(product => (
               <Col span={5} offset={1}>
                 <Link to={`/product/${product.id}/details`} replace>
