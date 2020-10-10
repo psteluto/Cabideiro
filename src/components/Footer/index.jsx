@@ -41,13 +41,12 @@ const Footer = () => {
         <div>
             <FooterStyle>
                 <ColumnWrapper>
-                    <TextStyle color="#262626" strong>LOCADOR</TextStyle>  
-                    <TextStyle color="#656668" strong>Disponibilizar vestimenta</TextStyle>  
+                    <TextStyle color="#262626" strong>LOCADOR</TextStyle>
+                    <a href='#'>Contrato do proprietário</a>
                 </ColumnWrapper>        
                 <ColumnWrapper>  
-                    <TextStyle color="#262626" strong>LOCATÁRIO</TextStyle> 
-                    <TextStyle color="#656668" strong>Entenda o aluguel</TextStyle>  
-                    <TextStyle color="#656668" strong>Alugar vestimenta</TextStyle>  
+                    <TextStyle color="#262626" strong>LOCATÁRIO</TextStyle>
+                    <a href='#'>Contrato de locação</a>
                 </ColumnWrapper>  
                 <ColumnWrapper>
                     <TextStyle color="#262626" strong>SOBRE NÓS</TextStyle>    

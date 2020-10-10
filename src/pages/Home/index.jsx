@@ -29,8 +29,7 @@ const BodyWrapper = styled.img`
 `;
 
 const CarouselWrapper = styled.div`
-   margin: 0 216px;
-   margin-bottom: 38px
+   margin: 0 216px 38px;
 `;
 
 const HowItWorks = styled.div`
@@ -173,8 +172,9 @@ class Home extends Component {
           <Col span={12}>
             <TextWrapper>
               <TextStyle color="#262626" fontSize="20px">Locador</TextStyle>
-              <TextStyle color="#656668" marginTop="10px">Coloque suas melhores vestimentas e acessórios para eventos
-                aqui no Cabideiro e ganhe dinheiro com isto.</TextStyle>
+              <TextStyle color="#656668" marginTop="10px" fontSize="14px">
+                Coloque suas melhores vestimentas e acessórios para eventos aqui no Cabideiro e ganhe dinheiro com isto.
+              </TextStyle>
             </TextWrapper>
           </Col>
         </Row>
@@ -182,8 +182,9 @@ class Home extends Component {
           <Col span={12}>
             <TextWrapper>
               <TextStyle color="#262626" fontSize="20px">Locatário</TextStyle>
-              <TextStyle color="#656668" marginTop="10px">Encontre o seu look perfeito e aprecie usando-o em momentos
-                especiais por alguns dias.</TextStyle>
+              <TextStyle color="#656668" marginTop="10px" fontSize="14px">
+                Encontre o seu look perfeito e aprecie usando-o em momentos especiais por alguns dias.
+              </TextStyle>
             </TextWrapper>
           </Col>
           <Col span={12}>
