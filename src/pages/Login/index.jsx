@@ -107,7 +107,7 @@ class Login extends Component {
                 <Col span={24}>
                   <TextStyle color="#656668">Senha</TextStyle>
                   <Input.Password onChange={(e) => this.changeField('password', e.target.value)}/>
-                  <TextStyle color="#656668" fontSize="10px">Esqueceu a sua senha? Clique aqui </TextStyle>
+                  <TextStyle color="#656668" fontSize="12px">Esqueceu a sua senha? <a href='#'>Clique aqui </a></TextStyle>
                 </Col>
               </Row>
               {errorMsg && (
@@ -118,8 +118,13 @@ class Login extends Component {
                 </Row>
               )}
               <Row>
-                <Col span={24}>
+                <Col span={11}>
                   <ButtonStyle type="primary" block onClick={this.login}>CONTINUAR</ButtonStyle>
+                </Col>
+                <Col span={11} offset={2}>
+                  <Link to="/login/register">
+                    <ButtonStyle type="primary" block onClick={this.login}>CADASTRAR</ButtonStyle>
+                  </Link>
                 </Col>
               </Row>
             </FormStyle>
