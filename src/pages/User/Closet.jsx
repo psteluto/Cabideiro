@@ -1,22 +1,12 @@
 import React, {Component} from 'react';
 import styled from "styled-components";
-import { Card, Col, List, Row} from "antd";
+import {Link} from "react-router-dom";
+import {Col, Row} from "antd";
 import ProductService from '../../services/Product';
+import Card from '../../components/Card';
 
-const {Meta} = Card;
-
-const StyledCard = styled(Card)`
-  margin-left: 15px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const CardWrapper = styled.div`
-   display: flex;
-   align-items: center;
-   flex-wrap: wrap;
-   justify-content: center;
+const ClosetWrapper = styled.div`
+  width: 800px;
 `;
 
 class Closet extends Component {
@@ -67,30 +57,25 @@ class Closet extends Component {
   render() {
     let {products} = this.state;
 
-    products = products.concat(products)
-    products = products.concat(products)
+    // products = products.concat(products)
+    // products = products.concat(products)
 
     return (
-      <Row justify="center">
-        <Col span={18}>
-          <CardWrapper>
-
-              {products.map(product => (
-                <StyledCard
-                  key={product.id}
-                  style={{
-                    width: 185,
-                    marginBottom: 16
-                  }}
-                  cover={<img src={product.images[0] && product.images[0].url}/>}
-                >
-                  <Meta style={{fontSize: "12px"}} description={product.name}/>
-                </StyledCard>
-              ))}
-
-          </CardWrapper>
-        </Col>
-      </Row>
+      <ClosetWrapper>
+        <Row>
+          {products.map(product => (
+            <Col span={5} offset={1}>
+              <Link to={`/product/${product.id}/details`} replace>
+                <Card
+                  name={product.name}
+                  imageUrl={product.images[0] && product.images[0].url}
+                  price={product.price}
+                />
+              </Link>
+            </Col>
+          ))}
+        </Row>
+      </ClosetWrapper>
     );
   }
 }
