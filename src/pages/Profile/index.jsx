@@ -110,6 +110,7 @@ class Profile extends Component {
     const fields = {
       name: user.name,
       email: user.email,
+      premium: user.premium,
       zipcode: resAddress.data.zipcode,
       state: resAddress.data.state,
       city: resAddress.data.city,
@@ -202,6 +203,7 @@ class Profile extends Component {
           onClickEdit={() => this.setState({modalProfile: true})}
           onChangeImage={this.changeImage}
           loadImage={loadImage}
+          premium={userData.premium}
         />
 
         <IconsWrapper>

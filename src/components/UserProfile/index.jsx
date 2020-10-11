@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import {Avatar, Button, Col, Row, Spin, Upload} from "antd";
+import {Avatar, Button, Col, Row, Spin, Upload, Tooltip} from "antd";
+import {EditOutlined, CrownTwoTone} from "@ant-design/icons";
 import TextStyle from "../TextStyle";
-import {EditOutlined} from "@ant-design/icons";
 
 const UserProfile = ({profilePhoto, userName, countProducts, followers,
                        following, selfProfile, onFollow, onClickEdit,
-                       onChangeImage, loadImage}) => {
+                       onChangeImage, loadImage, premium}) => {
 
   const avatarComponent = (<Avatar style={{marginRight: 60}} size={80} src={profilePhoto}/>);
 
@@ -26,7 +25,14 @@ const UserProfile = ({profilePhoto, userName, countProducts, followers,
         <Col span={6}>
           <Row>
             <Col span={24}>
-              <TextStyle color="#262626" fontSize="14px">{userName}</TextStyle>
+              <TextStyle color="#262626" fontSize="14px">
+                {premium && (
+                  <Tooltip title="Premium">
+                    <CrownTwoTone twoToneColor="#ffcb00" />
+                  </Tooltip>
+                )}
+                &nbsp;{userName}
+              </TextStyle>
               {selfProfile && (
                 <a
                   style={{marginLeft: 10}}
@@ -73,7 +79,8 @@ UserProfile.defaultProps = {
   onFollow: ()=>{},
   onClickEdit: ()=>{},
   onChangeImage: ()=>{},
-  loadImage: false
+  loadImage: false,
+  premium: false
 }
 
 UserProfile.propTypes = {
@@ -86,7 +93,8 @@ UserProfile.propTypes = {
   onFollow: PropTypes.func,
   onClickEdit: PropTypes.func,
   onChangeImage: PropTypes.func,
-  loadImage: PropTypes.bool
+  loadImage: PropTypes.bool,
+  premium: PropTypes.bool,
 }
 
 export default UserProfile;

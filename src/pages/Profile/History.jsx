@@ -9,11 +9,17 @@ const Container = styled.div`
   width: 1000px;
 `;
 
+const LabelWrapper = styled.p`
+  margin: 15px 0 30px;
+  text-align: center;
+`;
+
 class History extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      history: []
+      history: [],
+      totalClothes: 0
     }
   }
 
@@ -24,7 +30,7 @@ class History extends Component {
   getHistory = async () => {
     const res = await ProductService.getHistory();
 
-    const history = res.data.map(item => ({
+    const history = res.data.orders.map(item => ({
       productId: item.productId,
       status: item.status,
       name: item.productName,
@@ -36,7 +42,7 @@ class History extends Component {
       image: item.productImages[0].image_url
     }));
 
-    this.setState({history})
+    this.setState({history, totalClothes: res.data.totalClothes})
   }
 
   onClickOwner(item){
@@ -50,10 +56,17 @@ class History extends Component {
   }
   
   render() {
-    const {history} = this.state;
+    const {history, totalClothes} = this.state;
 
     return (
       <Container>
+        <Row>
+          <Col span={24}>
+            <LabelWrapper>
+              Total de Peças: {totalClothes}
+            </LabelWrapper>
+          </Col>
+        </Row>
         <Row>
           {history.map(item => (
             <Col span={12}>

@@ -81,13 +81,13 @@ class MyCloset extends Component {
 
     let msg = "";
     if (!selectedProduct.name) msg += "Campo 'Nome' é obrigatório\n";
-    if (!selectedProduct.price) msg += "Campo 'Valor' é obrigatório\n";
+    if (!selectedProduct.price) msg += "Campo 'Valor do Aluguel' é obrigatório\n";
     if (!selectedProduct.full_price) msg += "Campo 'Valor Original' é obrigatório\n";
     if (!selectedProduct.size) msg += "Campo 'Tamanho' é obrigatório\n";
     if (!selectedProduct.color_id) msg += "Campo 'Cor' é obrigatório\n";
     if (!selectedProduct.brand_id) msg += "Campo 'Marca' é obrigatório\n";
-    if (!selectedProduct.max_days_location) msg += "Campo 'Tempo Máximo de Locação' é obrigatório\n";
-    if (!selectedProduct.gender) msg += "Campo 'Gênero da Peça' é obrigatório\n";
+    if (!selectedProduct.max_days_location) msg += "Campo 'Tempo de Locação' é obrigatório\n";
+    if (!selectedProduct.gender) msg += "Campo 'Sexo' é obrigatório\n";
     if (!selectedProduct.clothing_part_id) msg += "Campo 'Categoria da Peça' é obrigatório\n";
     if (!selectedProduct.description) msg += "Campo 'Descrição' é obrigatório\n";
     if (!selectedProduct.images) msg += "Pelo menos uma imagem é obrigatória\n";
@@ -237,7 +237,7 @@ class MyCloset extends Component {
           <Row>
             <Col span={6}>
               <ItensWrapper paddingRight="16px">
-                <TextStyle color="#262626">Valor</TextStyle>
+                <TextStyle color="#262626">Valor do Aluguel</TextStyle>
                 <MoneyInput
                   onChange={(value) => this.changeFields('price', value)}
                   value={selectedProduct.price}/>
@@ -294,7 +294,7 @@ class MyCloset extends Component {
             </Col>
             <Col span={12}>
               <ItensWrapper>
-                <TextStyle color="#262626">Tempo Máximo de Locação</TextStyle>
+                <TextStyle color="#262626">Tempo de Locação</TextStyle>
                 <InputNumberStyle
                   min={0}
                   onChange={(value) => this.changeFields('max_days_location', value)}
@@ -306,7 +306,7 @@ class MyCloset extends Component {
           <Row>
             <Col span={12}>
               <ItensWrapper paddingRight="16px">
-                <TextStyle color="#262626">Gênero da Peça</TextStyle>
+                <TextStyle color="#262626">Sexo</TextStyle>
                 <Select
                   style={{width: "100%"}}
                   onChange={(value) => this.changeFields('gender', value)}

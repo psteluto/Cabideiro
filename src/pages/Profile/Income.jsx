@@ -9,11 +9,19 @@ const Container = styled.div`
   width: 1000px;
 `;
 
+const LabelWrapper = styled.p`
+  margin: 15px 0 30px;
+  text-align: center;
+`;
+
 class Income extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      incomes: []
+      incomes: [],
+      totalPrice: 0,
+      totalClothes: 0,
+      totalReceiptAvailable: 0
     }
   }
 
@@ -24,7 +32,7 @@ class Income extends Component {
   getIncomes = async () => {
     const res = await ProductService.getIncome();
 
-    const incomes = res.data.map(item => ({
+    const incomes = res.data.orders.map(item => ({
       productId: item.productId,
       status: item.status,
       name: item.productName,
@@ -37,7 +45,12 @@ class Income extends Component {
       image: item.productImages[0].image_url
     }));
 
-    this.setState({incomes})
+    this.setState({
+      incomes,
+      totalPrice: res.data.totalPrice,
+      totalClothes: res.data.totalClothes,
+      totalReceiptAvailable: res.data.totalReceiptAvailable
+    })
   }
 
   onCLickClient(item){
@@ -51,10 +64,17 @@ class Income extends Component {
   }
 
   render() {
-    const {incomes} = this.state;
+    const {incomes, totalPrice, totalClothes, totalReceiptAvailable} = this.state;
 
     return (
       <Container>
+        <Row>
+          <Col span={24}>
+            <LabelWrapper>
+              Total Rendimentos: R$ {totalPrice} | Total Peças: {totalClothes} | Total Disponível para Resgate: R$ {totalReceiptAvailable}
+            </LabelWrapper>
+          </Col>
+        </Row>
         <Row>
           {incomes.map(item => (
             <Col span={12}>
