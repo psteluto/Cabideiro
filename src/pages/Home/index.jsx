@@ -93,7 +93,7 @@ class Home extends Component {
   }
 
   async getProducts() {
-    const res = await ProductService.getAll(1, 10);
+    const res = await ProductService.getFeatured();
     this.setState({carouselProducts: res.data})
   }
 

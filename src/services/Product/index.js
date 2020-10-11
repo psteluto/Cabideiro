@@ -16,6 +16,14 @@ const getAll = async (page, size, filterValue = {}) => {
   return await api.get("/products", {params});
 }
 
+const getFeatured = async () => {
+  return await api.get("/products", {params: {
+      page: 1,
+      size: 10,
+      premium: true
+    }});
+}
+
 const getOne = async (id) => {
   return await api.get("/products/" + id);
 }
@@ -81,6 +89,7 @@ const getIncome = async () => {
 
 export default {
   getAll,
+  getFeatured,
   getOne,
   calculateShipping,
   sendPropose,
