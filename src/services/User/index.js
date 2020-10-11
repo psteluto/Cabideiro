@@ -9,11 +9,8 @@ const login = async (email_cpf, password) => {
   return await api.post("/sessions", params);
 }
 
-const getUserData = async (id) => {
-  if (id)
-    return await api.get("/profile", {params: {user_id: id}})
-
-  return await api.get("/profile");
+const getUserData = async (id = localStorage.getItem("userId")) => {
+  return await api.get("/profile", {params: {user_id: id}})
 }
 
 const getAddress = async () => {
@@ -23,7 +20,6 @@ const getAddress = async () => {
 const updateAddress = async (address) => {
   return await api.post("/users/address", address);
 }
-
 
 const updateProfile = async (profile) => {
   return await api.put("/profile", profile)

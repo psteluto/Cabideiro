@@ -68,6 +68,8 @@ class Login extends Component {
       try {
         const res = await UserService.login(emailCpf, password);
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('userId', res.data.user.id);
+
         dispatchToken(res.data.token);
         this.props.history.push(`/`);
       } catch (error) {
