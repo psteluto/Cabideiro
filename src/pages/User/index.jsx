@@ -8,6 +8,7 @@ import Logotipo from '../../components/Logotipo'
 import TextStyle from '../../components/TextStyle';
 import Closet from "./Closet";
 import UserProfile from "../../components/UserProfile";
+import ProductService from "../../services/Product";
 
 const {TabPane} = Tabs;
 
@@ -30,8 +31,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userData: {},
-      loadImage: false
+      userData: {}
     }
   }
 
@@ -40,7 +40,10 @@ class Profile extends Component {
   }
 
   getUserData = async () => {
-    const res = await UserService.getUserData()
+    const {match} = this.props;
+    const userId = match.params.id;
+
+    const res = await UserService.getUserData(userId);
     const user = res.data.user;
     user.countProducts = res.data.totalProducts;
     user.followers = res.data.totalFollowers;
@@ -49,7 +52,7 @@ class Profile extends Component {
   }
 
   render() {
-    const {userData, loadImage} = this.state;
+    const {userData} = this.state;
 
     return (
       <div>
@@ -65,6 +68,7 @@ class Profile extends Component {
           countProducts={userData.countProducts}
           followers={userData.followers}
           following={userData.following}
+          premium={userData.premium}
         />
         <IconsWrapper>
           <Tabs defaultActiveKey="1" centered>

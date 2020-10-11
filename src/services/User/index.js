@@ -9,7 +9,10 @@ const login = async (email_cpf, password) => {
   return await api.post("/sessions", params);
 }
 
-const getUserData = async () => {
+const getUserData = async (id) => {
+  if (id)
+    return await api.get("/profile", {params: {user_id: id}})
+
   return await api.get("/profile");
 }
 
