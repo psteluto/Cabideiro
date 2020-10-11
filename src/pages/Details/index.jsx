@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {Row, Col, Button, Collapse, Input, Alert} from 'antd';
+import {Row, Col, Button, Collapse, Input, Alert, InputNumber} from 'antd';
 import {Link} from 'react-router-dom';
 import Logotipo from '../../components/Logotipo'
 import Menu from '../../components/Menu';
 import TextStyle from '../../components/TextStyle';
 import ProductService from '../../services/Product';
+import MoneyInput from "../../components/MoneyInput";
 
 const {Panel} = Collapse;
 
@@ -55,6 +56,9 @@ const ImageWrapper = styled.img`
    }
 `;
 
+const InputNumberStyle = styled(InputNumber)`
+  width: 100%;
+`;
 
 class Details extends Component {
 
@@ -122,7 +126,8 @@ class Details extends Component {
   }
 
   render() {
-    const {product, images, showShipping, showProposal, shippingPrice, successMsg} = this.state;
+    const {product, images, showShipping, showProposal,
+      shippingPrice, successMsg, proposeValue, proposeDays} = this.state;
 
     return (
       <div>
@@ -138,19 +143,19 @@ class Details extends Component {
               <RowDescriptionItem marginBottom="16px">
                 {product.image_products && product.image_products[1] && product.image_products[1].image_url && (
                   <ImageWrapper onClick={() => this.clickImage(1)}
-                                src={images[1] && images[1].image_url}></ImageWrapper>
+                                src={images[1] && images[1].image_url}/>
                 )}
               </RowDescriptionItem>
               <RowDescriptionItem marginBottom="16px">
                 {product.image_products && product.image_products[2] && product.image_products[2].image_url && (
                   <ImageWrapper onClick={() => this.clickImage(2)}
-                                src={images[2] && images[2].image_url}></ImageWrapper>
+                                src={images[2] && images[2].image_url}/>
                 )}
               </RowDescriptionItem>
               <RowDescriptionItem>
                 {product.image_products && product.image_products[3] && product.image_products[3].image_url && (
                   <ImageWrapper onClick={() => this.clickImage(3)}
-                                src={images[3] && images[3].image_url}></ImageWrapper>
+                                src={images[3] && images[3].image_url}/>
                 )}
               </RowDescriptionItem>
             </ColImages>
@@ -193,8 +198,25 @@ class Details extends Component {
               <RowDescriptionItem marginBottom="10px">
                 {showProposal && (
                   <span>
-                    <Input onChange={(e) => this.changeField('proposeValue', e.target.value)} placeholder="Valor"/>
-                    <Input onChange={(e) => this.changeField('proposeDays', e.target.value)} placeholder="Qtd de Dias"/>
+
+                    <div>
+                      <TextStyle color="#656668">Valor</TextStyle>
+                      <MoneyInput
+                        onChange={(value) => this.changeField('proposeValue', value)}
+                        value={proposeValue}
+                      />
+                    </div>
+
+                    <div>
+                      <TextStyle color="#656668">Quantidade de dias</TextStyle>
+                      <InputNumberStyle
+                        min={1}
+                        onChange={(value) => this.changeField('proposeDays', value)}
+                        value={proposeDays}
+                      />
+                    </div>
+
+
                     <ButtonStyle type="primary" backColorButtom="background-color: #e73554" backHoverButton="#e73554"
                                  colorButton="#ffffff" onClick={this.sendPropose}>
                       ENVIAR PROPOSTA
