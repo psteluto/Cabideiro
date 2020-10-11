@@ -127,6 +127,7 @@ class Catalog extends Component {
                 onChange={(value) => this.changeFilterValue('gender', value)}
                 defaultValue="Gênero"
               >
+                <Option value="">TODOS</Option>
                 <Option value="Feminino">Feminino</Option>
                 <Option value="Masculino">Masculino</Option>
               </SelectStyle>
@@ -137,6 +138,7 @@ class Catalog extends Component {
                 onChange={(value) => this.changeFilterValue('size', value)}
                 defaultValue="Tamanho"
               >
+                <Option value="">TODOS</Option>
                 {filters.sizes.map(size => (
                   <Option value={size}>{size}</Option>
                 ))}
@@ -148,6 +150,7 @@ class Catalog extends Component {
                 onChange={(value) => this.changeFilterValue('clothingPart', value)}
                 defaultValue="Categoria"
               >
+                <Option value="">TODOS</Option>
                 {filters.clothingParts.map(part => (
                   <Option value={part.name}>{part.name}</Option>
                 ))}
@@ -159,6 +162,7 @@ class Catalog extends Component {
                 onChange={(value) => this.changeFilterValue('brand', value)}
                 defaultValue="Marca"
               >
+                <Option value="">TODOS</Option>
                 {filters.brands.map(brand => (
                   <Option value={brand.name}>{brand.name}</Option>
                 ))}
@@ -170,6 +174,7 @@ class Catalog extends Component {
                 onChange={(value) => this.changeFilterValue('color', value)}
                 defaultValue="Cor"
               >
+                <Option value="">TODOS</Option>
                 {filters.colors.map(color => (
                   <Option value={color.name}>{color.name}</Option>
                 ))}
@@ -189,7 +194,11 @@ class Catalog extends Component {
               </Col>
             )}
             {products.map(product => (
-              <Col span={5} offset={1}>
+              <Col
+                key={product.id}
+                span={5}
+                offset={1}
+              >
                 <Link to={`/product/${product.id}/details`} replace>
                   <Card
                     name={product.name}
