@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from "styled-components";
-import {Alert, Checkbox, Col, Input, List, Row, Select, Upload, InputNumber} from "antd";
+import {Alert, Checkbox, Col, Input, List, Row, Select, Upload, InputNumber, Button, Modal} from "antd";
 import ImgCrop from "antd-img-crop";
 import ProductService from '../../services/Product';
 import TextStyle from "../../components/TextStyle";
@@ -53,11 +53,13 @@ class MyCloset extends Component {
         available_price: false,
         available_days_location: false,
         description: "",
-        images: []
+        images: [],
+        contract: false
       },
       successMsg: "",
       errorMsg: "",
-      editMode: true
+      editMode: true,
+      openContract: false
     }
   }
 
@@ -89,6 +91,7 @@ class MyCloset extends Component {
     if (!selectedProduct.clothing_part_id) msg += "Campo 'Categoria da Peça' é obrigatório\n";
     if (!selectedProduct.description) msg += "Campo 'Descrição' é obrigatório\n";
     if (!selectedProduct.images) msg += "Pelo menos uma imagem é obrigatória\n";
+    if (!selectedProduct.contract) msg += "Você precisa aceitar os termos do contrato\n";
 
     if (msg) {
       this.setState({errorMsg: msg});
@@ -201,7 +204,7 @@ class MyCloset extends Component {
   render() {
     const {
       products, brands, sizes, colors, clothingParts,
-      selectedProduct, successMsg, errorMsg, editMode
+      selectedProduct, successMsg, errorMsg, editMode, openContract
     } = this.state;
 
     return (
@@ -374,6 +377,16 @@ class MyCloset extends Component {
               </ImgCrop>
             </List>
           </ItensWrapper>
+
+          <ItensWrapper>
+            <Checkbox
+              style={{fontSize: "12px"}}
+              onChange={(e) => this.changeFields('contract', e.target.checked)}
+              checked={selectedProduct.contract}
+            />
+            &nbsp;Eu aceito os termos do <a onClick={()=>this.setState({openContract: true})}>contrato</a>
+          </ItensWrapper>
+
           {editMode ? (
             <ButtonWrapper>
               <ButtonStyle
@@ -423,6 +436,17 @@ class MyCloset extends Component {
               </Col>
             </Row>
           )}
+
+          <Modal
+            visible={openContract}
+            title="Termos de contrato"
+            onCancel={() => this.setState({openContract: false})}
+            footer={[
+              <ButtonStyle type="primary" onClick={()=>this.setState({openContract: false})}>Ok</ButtonStyle>
+            ]}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </Modal>
 
         </Col>
       </Row>
