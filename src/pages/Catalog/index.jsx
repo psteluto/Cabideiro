@@ -54,6 +54,7 @@ class Catalog extends Component {
       products: [],
       page: 1,
       pageSize: 12,
+      totalProducts: 0,
       filterValue: {
         name: undefined,
         size: undefined,
@@ -81,7 +82,7 @@ class Catalog extends Component {
   getProducts = async () => {
     const {page, pageSize, filterValue} = this.state;
     const res = await ProductService.getAll(page, pageSize, filterValue);
-    this.setState({products: res.data.products})
+    this.setState({products: res.data.products, totalProducts: res.data.totalProducts});
   }
 
   getFilters = async () => {
@@ -113,7 +114,7 @@ class Catalog extends Component {
   }
 
   render() {
-    const {products, filters, pageSize, filterValue} = this.state;
+    const {products, filters, pageSize, filterValue, totalProducts} = this.state;
 
     return (
       <div>
@@ -224,7 +225,7 @@ class Catalog extends Component {
         <PaginationWrapper>
           <Pagination
             defaultCurrent={1}
-            total={100}
+            total={totalProducts}
             pageSize={pageSize}
             onChange={this.changePage}
           />
