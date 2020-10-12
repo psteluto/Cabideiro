@@ -23,20 +23,24 @@ const Header = () => {
     dispatch(dispatchToken(""));
   }
 
+  const clickLink = (to) => {
+    window.history.pushState(null, null, to)
+  }
+
   return (
     <HeaderStyle>
-      <a href="/"><TextStyle color="#ffcb00">Bem-vindo ao cabideiro</TextStyle></a>
+      <a href="#" onClick={()=>clickLink("/")}><TextStyle color="#ffcb00">Bem-vindo ao cabideiro</TextStyle></a>
       {token ? (
         <div>
-          <a href="/about"><TextStyle>Quem somos</TextStyle></a>
-          <a href="/profile"><TextStyle marginLeft="68px">Meu Perfil | </TextStyle></a>
+          <a href="#" onClick={()=>clickLink("/about")}><TextStyle>Quem somos</TextStyle></a>
+          <a href="#" onClick={()=>clickLink("/profile")}><TextStyle marginLeft="68px">Meu Perfil | </TextStyle></a>
           <a href="/" onClick={logout}><TextStyle>Sair</TextStyle></a>
         </div>
       ) : (
         <span>
-            <a href="/about"><TextStyle>Quem somos</TextStyle></a>
-            <a href="/login"><TextStyle marginLeft="68px">Entrar | </TextStyle></a>
-            <a href="/login/register"><TextStyle>Criar conta</TextStyle></a>
+            <a href="#" onClick={()=>clickLink("/about")}><TextStyle>Quem somos</TextStyle></a>
+            <a href="#" onClick={()=>clickLink("/login")}><TextStyle marginLeft="68px">Entrar | </TextStyle></a>
+            <a href="#" onClick={()=>clickLink("/login/register")}><TextStyle>Criar conta</TextStyle></a>
           </span>
       )}
     </HeaderStyle>

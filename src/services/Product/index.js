@@ -89,6 +89,7 @@ const getIncome = async () => {
 }
 
 export default {
+  activeMock: true,
   getAll,
   getFeatured,
   getOne,

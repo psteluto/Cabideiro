@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
 import {Row, Col, Divider, Button, Collapse, Modal, Input, Alert} from 'antd';
 import {Link} from 'react-router-dom';
 import MaskedInput from 'antd-mask-input'
@@ -8,6 +9,7 @@ import CreditCard from '../../components/CreditCard'
 import TextStyle from '../../components/TextStyle';
 import UserService from '../../services/User';
 import ProductService from "../../services/Product";
+import {addProduct} from '../../redux/ProductsMockSlice';
 
 const {Panel} = Collapse;
 
@@ -176,6 +178,21 @@ class Checkout extends Component {
     const {history} = this.props;
 
     await ProductService.registerOrder(product.id, product.user.id);
+    if (ProductService.activeMock){
+      const {addProduct: dispatchProduct} = this.props;
+      const {product} = this.state;
+
+      dispatchProduct({
+        status: "Em aprovação",
+        name: product.name,
+        color: product.color.name,
+        owner: product.user.name,
+        devolutionDate: "20/12/2020",
+        rentValue: product.price,
+        image: product.image_products[0].image_url
+      })
+    }
+
     history.push("/success")
   }
 
@@ -401,4 +418,4 @@ class Checkout extends Component {
   }
 }
 
-export default Checkout;
+export default connect(null, {addProduct})(Checkout);
