@@ -445,7 +445,21 @@ class MyCloset extends Component {
               <ButtonStyle type="primary" onClick={()=>this.setState({openContract: false})}>Ok</ButtonStyle>
             ]}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <div>
+              Ao clicar em “Li e Aceito os Termos do Contrato de Locação” a LOCADORA declara estar de acordo e em cumprir com os termos e condições do presente Contrato de Locação, bem como aqueles constantes nos Termos e Condições e Política de Privacidade do Site.
+              <br /><br />
+              Cláusula 1ª – Valor e Forma de Pagamento da Locação
+              <br /><br />
+              1.1. A LOCADORA pode a qualquer momento reajustar o valor do aluguel do(s) Produto(s). Essa alteração não afetará o valor do(s) Produto(s) em pedido(s) préviamente realizado(s) pela LOCATÁRIA.
+              <br /><br />
+              Cláusula 2ª – Prazo da Locação
+              <br /><br />
+              2.1. O prazo da Locação será aquele escolhido pela LOCATÁRIA no ato da contratação, de acordo com as opções disponibilizadas pela LOCADORA.
+              <br /><br />
+              Cláusula 3ª – Entrega do(s) Produto(s) Locado(s)
+              <br /><br />
+              3.1. A LOCADORA se compromete a definir o endereço de cadastro para a entrega do(s) produto(s) locado(s) em um local de fácil acesso (portaria, recepção de prédio comercial ou pessoa responsável para o recebimento do produto).
+            </div>
           </Modal>
 
         </Col>
