@@ -89,7 +89,7 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate, 
         <p>Valor de Aluguel: <ContrastText>R$ {rentValue.toFixed(2).replace('.', ',')}</ContrastText></p>
         
         {paymentStatus && (
-          <p>Pagamento: {paymentStatus}</p>
+          <p>Resgate: {paymentStatus}</p>
         )}
 
         {!paymentStatus && status === 'FINISHED' && (

@@ -94,7 +94,7 @@ class Home extends Component {
 
   async getProducts() {
     const res = await ProductService.getFeatured();
-    this.setState({carouselProducts: res.data})
+    this.setState({carouselProducts: res.data.products});
   }
 
   clickProduct(id) {

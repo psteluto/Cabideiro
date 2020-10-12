@@ -9,9 +9,12 @@ const Container = styled.div`
   width: 1000px;
 `;
 
-const LabelWrapper = styled.p`
-  margin: 15px 0 30px;
+const LabelWrapper = styled.div`
+  margin: 15px auto 30px auto;
   text-align: center;
+  width: 700px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 class Income extends Component {
@@ -71,7 +74,11 @@ class Income extends Component {
         <Row>
           <Col span={24}>
             <LabelWrapper>
-              Total Rendimentos: R$ {totalPrice} | Total Peças: {totalClothes} | Total Disponível para Resgate: R$ {totalReceiptAvailable}
+              <span>Total Rendimentos: R$ {totalPrice}</span>
+              <span>|</span>
+              <span>Total Peças: {totalClothes}</span>
+              <span>|</span>
+              <span>Total Disponível para Resgate: R$ {totalReceiptAvailable}</span>
             </LabelWrapper>
           </Col>
         </Row>

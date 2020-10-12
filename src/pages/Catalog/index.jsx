@@ -80,7 +80,7 @@ class Catalog extends Component {
   getProducts = async () => {
     const {page, pageSize, filterValue} = this.state;
     const res = await ProductService.getAll(page, pageSize, filterValue);
-    this.setState({products: res.data})
+    this.setState({products: res.data.products})
   }
 
   getFilters = async () => {
