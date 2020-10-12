@@ -87,7 +87,7 @@ class History extends Component {
         <Row>
           <Col span={24}>
             <LabelWrapper>
-              Total de Peças: {totalClothes}
+              Total de Peças: <b>{totalClothes}</b>
             </LabelWrapper>
           </Col>
         </Row>

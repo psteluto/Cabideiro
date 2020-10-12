@@ -173,8 +173,13 @@ class Details extends Component {
                 </RowDescriptionItem>
                 <RowDescriptionItem marginBottom="10px">
                   <TextStyle color="#e73554" strong>
-                    R$ {Number(product.price).toFixed(2).replace('.', ',')} por {product.max_days_location} dias
+                    R$ {Number(product.price).toFixed(2).replace('.', ',')}
                   </TextStyle>
+                  <TextStyle color="#000">&nbsp;por&nbsp;</TextStyle>
+                  <TextStyle color="#e73554" strong>
+                    {product.max_days_location} dias
+                  </TextStyle>
+
                 </RowDescriptionItem>
                 <RowDescriptionItem>
                   <TextStyle color="#000000">TAMANHO: </TextStyle>

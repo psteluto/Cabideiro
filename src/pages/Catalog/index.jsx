@@ -135,7 +135,7 @@ class Catalog extends Component {
               <SelectStyle
                 value={filterValue.gender}
                 onChange={(value) => this.changeFilterValue('gender', value)}
-                defaultValue="Gênero"
+                defaultValue="Departamento"
               >
                 <Option value="">TODOS</Option>
                 <Option value="Feminino">Feminino</Option>

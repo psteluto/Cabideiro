@@ -371,7 +371,7 @@ class MyCloset extends Component {
           <Row>
             <Col span={12}>
               <ItensWrapper paddingRight="16px">
-                <TextStyle color="#262626">Sexo</TextStyle>
+                <TextStyle color="#262626">Departamento</TextStyle>
                 <Select
                   style={{width: "100%"}}
                   onChange={(value) => this.changeFields('gender', value)}
