@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {Col, Row} from "antd";
+import {Col, message, Row} from "antd";
 import { withRouter } from 'react-router-dom'
+import {connect} from 'react-redux';
 import DetailCard from "./DetailCard";
 import ProductService from '../../services/Product';
+import {changeStatus} from '../../redux/ProductsMockSlice';
 
 const Container = styled.div`
   width: 1000px;
@@ -32,28 +34,43 @@ class Income extends Component {
     this.getIncomes()
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.productMock !== this.props.productMock)
+      this.getIncomes();
+  }
+
   getIncomes = async () => {
-    const res = await ProductService.getIncome();
+    if (ProductService.activeMock) {
+      const {productMock} = this.props;
+      this.setState({
+        incomes: productMock.incomeProducts,
+        totalPrice: 0,
+        totalClothes: productMock.incomeProducts.length,
+        totalReceiptAvailable: 0
+      })
+    } else {
+      const res = await ProductService.getIncome();
 
-    const incomes = res.data.orders.map(item => ({
-      productId: item.productId,
-      status: item.status,
-      name: item.productName,
-      color: item.productColor.name,
-      client: item.customer,
-      clientId: item.customerId,
-      devolutionDate: item.expirationDate,
-      rentValue: item.productPrice,
-      paymentStatus: item.paymentStatus,
-      image: item.productImages[0].image_url
-    }));
+      const incomes = res.data.orders.map(item => ({
+        id: item.productId,
+        status: item.status,
+        name: item.productName,
+        color: item.productColor.name,
+        client: item.customer,
+        clientId: item.customerId,
+        devolutionDate: item.expirationDate,
+        rentValue: item.productPrice,
+        paymentStatus: item.paymentStatus,
+        image: item.productImages[0].image_url
+      }));
 
-    this.setState({
-      incomes,
-      totalPrice: res.data.totalPrice,
-      totalClothes: res.data.totalClothes,
-      totalReceiptAvailable: res.data.totalReceiptAvailable
-    })
+      this.setState({
+        incomes,
+        totalPrice: res.data.totalPrice,
+        totalClothes: res.data.totalClothes,
+        totalReceiptAvailable: res.data.totalReceiptAvailable
+      })
+    }
   }
 
   onCLickClient(item){
@@ -63,7 +80,16 @@ class Income extends Component {
 
   onClickProduct(item){
     const {history} = this.props;
-    history.push(`/product/${item.productId}/details`);
+    history.push(`/product/${item.id}/details`);
+  }
+
+  onSendTrack = (productId) => {
+    const {changeStatus: dispatchStatus} = this.props;
+    dispatchStatus({id: productId, status: "Enviado", target: 'incomeProducts'});
+  }
+
+  onSendEvaluation = () => {
+    message.success("Avaliação registrada com sucesso");
   }
 
   render() {
@@ -94,6 +120,8 @@ class Income extends Component {
                 paymentStatus={item.paymentStatus}
                 onClickProfile={()=>this.onCLickClient(item)}
                 onClickProduct={()=>this.onClickProduct(item)}
+                onSendTrack={()=>this.onSendTrack(item.id)}
+                onSendEvaluation={this.onSendEvaluation}
               />
             </Col>
           ))}
@@ -103,4 +131,8 @@ class Income extends Component {
   }
 }
 
-export default withRouter(Income)
+const mapStateToProps = (state) => {
+  const { productMock } = state
+  return { productMock }
+}
+export default connect(mapStateToProps, {changeStatus})(withRouter(Income));

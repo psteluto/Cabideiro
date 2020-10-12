@@ -101,11 +101,18 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate,
         </p>
         <p>Valor de Aluguel: <ContrastText>R$ {rentValue.toFixed(2).replace('.', ',')}</ContrastText></p>
 
+        {paymentStatus && (
+          <p>Resgate: {paymentStatus}</p>
+        )}
+
         {status === 'Enviado' && (
           <ProfileLink href="#">Acompanhar entrega</ProfileLink>
         )}
+        {status === 'Em devolução' && (
+          <ProfileLink href="#">Acompanhar devolução</ProfileLink>
+        )}
 
-        {status === 'Entregue' && (
+        {(status === 'Entregue' || (paymentStatus && status === 'Em separação')) && (
           <span>
             <ButtonWrapper>
               <ButtonStyle
@@ -145,7 +152,7 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate,
                 color="#000000"
                 width="100%"
               >
-                Avalie o locador e o produto
+                {paymentStatus ? "Avalie o locatário" : "Avalie o locador e o produto"}
               </ButtonStyle>
             </ButtonWrapper>
             {evaluationOpt && (
@@ -166,10 +173,6 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate,
             )}
           </span>
         )}
-
-        {paymentStatus && (
-          <p>Resgate: {paymentStatus}</p>
-        )}
       </TextWrapper>
     </Container>
   );
@@ -177,7 +180,7 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate,
 
 DetailCard.propTypes = {
   image: PropTypes.string.isRequired,
-  status: PropTypes.oneOf(["Em aprovação", "Enviado", "Entregue", "Finalizado", "Devolvido"]).isRequired,
+  status: PropTypes.oneOf(["Em aprovação", "Em separação", "Em devolução", "Enviado", "Entregue", "Finalizado", "Devolvido"]).isRequired,
   name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   owner: PropTypes.string,

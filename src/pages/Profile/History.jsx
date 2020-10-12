@@ -72,7 +72,7 @@ class History extends Component {
 
   onSendTrack = (productId) => {
     const {changeStatus: dispatchStatus} = this.props;
-    dispatchStatus({id: productId, status: "Em Devolução"});
+    dispatchStatus({id: productId, status: "Em Devolução", target: 'historyProducts'});
   }
 
   onSendEvaluation = () => {

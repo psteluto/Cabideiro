@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import styled from "styled-components";
 import {Alert, Checkbox, Col, Input, List, Row, Select, Upload, InputNumber, Button, Modal} from "antd";
 import ImgCrop from "antd-img-crop";
+import {connect} from 'react-redux';
 import ProductService from '../../services/Product';
 import TextStyle from "../../components/TextStyle";
 import ButtonStyle from '../../components/ButtonStyle';
 import MoneyInput from "../../components/MoneyInput";
 import Card from '../../components/Card';
+import {setIncomeProducts} from '../../redux/ProductsMockSlice';
 
 const {TextArea} = Input;
 const {Option} = Select;
@@ -128,10 +130,73 @@ class MyCloset extends Component {
   getProducts = async () => {
     const res = await ProductService.getUserProducts();
     const rawProducts = res.data;
-    const products = rawProducts.map(product => this.formatProduct(product));
 
+    if (ProductService.activeMock){
+      const {setIncomeProducts: dispatchIncomeProducts} = this.props;
+
+      let prod1 = {}
+      if (rawProducts[0])
+        prod1 = {
+          id: rawProducts[0].id,
+          status: "Em separação",
+          name: rawProducts[0].name,
+          color: rawProducts[0].color.name,
+          client: "Camila Almeida",
+          devolutionDate: "20/10/2020",
+          rentValue: rawProducts[0].price,
+          paymentStatus: "Em Andamento",
+          image: rawProducts[0].image_products[0].image_url
+        }
+
+      let prod2 = {}
+      if (rawProducts[1])
+        prod2 = {
+          id: rawProducts[1].id,
+          status: "Em devolução",
+          name: rawProducts[1].name,
+          color: rawProducts[1].color.name,
+          client: "Camila Almeida",
+          devolutionDate: "20/10/2020",
+          rentValue: rawProducts[1].price,
+          paymentStatus: "Em Andamento",
+          image: rawProducts[1].image_products[0].image_url
+        }
+
+      let prod3 = {}
+      if (rawProducts[2])
+        prod3 = {
+          id: rawProducts[2].id,
+          status: "Devolvido",
+          name: rawProducts[2].name,
+          color: rawProducts[2].color.name,
+          client: "Camila Almeida",
+          devolutionDate: "20/10/2020",
+          rentValue: rawProducts[2].price,
+          paymentStatus: "Em Andamento",
+          image: rawProducts[2].image_products[0].image_url
+        }
+
+      let prod4 = {}
+      if (rawProducts[3])
+        prod4 = {
+          id: rawProducts[3].id,
+          status: "Finalizado",
+          name: rawProducts[3].name,
+          color: rawProducts[3].color.name,
+          client: "Camila Almeida",
+          devolutionDate: "20/10/2020",
+          rentValue: rawProducts[3].price,
+          paymentStatus: "Disponível",
+          image: rawProducts[3].image_products[0].image_url
+        }
+
+      dispatchIncomeProducts([prod1, prod2, prod3, prod4])
+    }
+
+    const products = rawProducts.map(product => this.formatProduct(product));
     let selectedProduct = products[0] || {};
     this.setState({products, selectedProduct, editMode: products.length});
+
   }
 
   getFilters = async () => {
@@ -468,4 +533,4 @@ class MyCloset extends Component {
   }
 }
 
-export default MyCloset;
+export default connect(null, {setIncomeProducts})(MyCloset);

@@ -41,24 +41,27 @@ const productsMockSlice = createSlice({
         rentValue: 40,
         image: "https://app-cabideiro.s3.amazonaws.com/c0ca165335a76a4e910a-image1.jpg"
       }
-
-    ]
+    ],
+    incomeProducts: []
   },
   reducers: {
     addProduct: (state, action) => {
       state.historyProducts.push(action.payload);
     },
     changeStatus: (state, action) => {
-      const newProducts = state.historyProducts.map(prod => {
+      const newProducts = state[action.payload.target].map(prod => {
         if (prod.id === action.payload.id)
           prod.status = action.payload.status
         return prod;
       })
-      state.historyProducts = newProducts;
+      state[action.payload.target] = newProducts;
     },
+    setIncomeProducts: (state, action) => {
+      state.incomeProducts = action.payload
+    }
   }
 });
 
-export const {addProduct, changeStatus} = productsMockSlice.actions;
+export const {addProduct, changeStatus, setIncomeProducts} = productsMockSlice.actions;
 
 export default productsMockSlice.reducer;
