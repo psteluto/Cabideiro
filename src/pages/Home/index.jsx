@@ -148,19 +148,19 @@ class Home extends Component {
             <HowItWorksItemWrapper>
               <HowWorkImages src={WardrobeIcon}/>
               <TextStyle color="#262626" strong>Escolha</TextStyle>
-              <TextStyle color="#656668" marginTop="5px">Encontre aquela sua peça perfeita, pendurada há um tempo e que
+              <TextStyle color="#656668" marginTop="5px" fontSize="14px">Encontre aquela sua peça perfeita, pendurada há um tempo e que
                 esteja disponível para aluguel.</TextStyle>
             </HowItWorksItemWrapper>
             <HowItWorksItemWrapper>
               <HowWorkImages src={CameraIcon}/>
               <TextStyle color="#262626" strong>Preparo</TextStyle>
-              <TextStyle color="#656668" marginTop="5px">Tire fotos de bons ângulos que capite o quão incrível e
+              <TextStyle color="#656668" marginTop="5px" fontSize="14px">Tire fotos de bons ângulos que capite o quão incrível e
                 especial é a sua peça.</TextStyle>
             </HowItWorksItemWrapper>
             <HowItWorksItemWrapper>
               <HowWorkImages src={HandIcon}/>
               <TextStyle color="#262626" strong>Alugando</TextStyle>
-              <TextStyle color="#656668" marginTop="5px">Preencha o formulário para locação da sua peça e ela estará
+              <TextStyle color="#656668" marginTop="5px" fontSize="14px">Preencha o formulário para locação da sua peça e ela estará
                 disponível na loja para que outras pessoas tenham experiências incríveis com o seu look.</TextStyle>
             </HowItWorksItemWrapper>
           </HowItWorksWrapper>

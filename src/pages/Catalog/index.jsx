@@ -55,6 +55,7 @@ class Catalog extends Component {
       page: 1,
       pageSize: 12,
       filterValue: {
+        name: undefined,
         size: undefined,
         clothingPart: undefined,
         brand: undefined,
@@ -104,6 +105,13 @@ class Catalog extends Component {
     this.setState({page, pageSize}, this.getProducts);
   }
 
+  debounce = null;
+  changeNameFilter = (e) => {
+    const target = e.target;
+    clearTimeout(this.debounce);
+    this.debounce = setTimeout(()=>this.changeFilterValue('name', target.value), 500);
+  }
+
   render() {
     const {products, filters, pageSize, filterValue} = this.state;
 
@@ -119,7 +127,7 @@ class Catalog extends Component {
           <Row>
             <Col span={23} offset={1}>
               <InputWrapper>
-                <Input placeholder="O que você está procurando ?"/>
+                <Input onChange={this.changeNameFilter} placeholder="O que você está procurando ?"/>
               </InputWrapper>
             </Col>
             <Col span={4} offset={1}>

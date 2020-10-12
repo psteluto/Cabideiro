@@ -74,11 +74,9 @@ class Income extends Component {
         <Row>
           <Col span={24}>
             <LabelWrapper>
-              <span>Total Rendimentos: R$ {totalPrice}</span>
-              <span>|</span>
-              <span>Total Peças: {totalClothes}</span>
-              <span>|</span>
-              <span>Total Disponível para Resgate: R$ {totalReceiptAvailable}</span>
+              <span>Total Rendimentos: <b>R$ {totalPrice}</b></span>
+              <span>Total Peças: <b>{totalClothes}</b></span>
+              <span>Total Disponível para Resgate: <b>R$ {totalReceiptAvailable}</b></span>
             </LabelWrapper>
           </Col>
         </Row>
