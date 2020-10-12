@@ -89,9 +89,10 @@ class Catalog extends Component {
 
     const res = await ProductService.getFilters();
     const externalFilter = match.params.filter;
+    const externalFilterVal = match.params.value;
     const values = {
       ...filterValue,
-      gender: externalFilter
+      [externalFilter]: externalFilterVal
     }
 
     this.setState({

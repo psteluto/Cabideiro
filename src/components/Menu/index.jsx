@@ -37,13 +37,13 @@ const Menu = () => {
         <Link to="/catalog" replace>
           <TextStyle color="#000000" strong>NOVIDADES</TextStyle>
         </Link>
-        <Link to="/catalog/Feminino" replace>
+        <Link to="/catalog/gender/Feminino" replace>
           <TextStyle color="#000000" strong>FEMININO</TextStyle>
         </Link>
-        <Link to="/catalog/Masculino" replace>
+        <Link to="/catalog/gender/Masculino" replace>
           <TextStyle color="#000000" strong>MASCULINO</TextStyle>
         </Link>
-        <Link to="/catalog" replace>
+        <Link to="/catalog/clothingPart/Acessórios" replace>
           <TextStyle color="#000000" strong>ACESSÓRIOS</TextStyle>
         </Link>
         <ButtonStyle onClick={newPost} type="primary">
