@@ -128,7 +128,7 @@ class MyCloset extends Component {
   }
 
   getProducts = async () => {
-    const res = await ProductService.getUserProducts();
+    const res = await ProductService.getUserProducts(localStorage.getItem("userId"));
     const rawProducts = res.data;
 
     if (ProductService.activeMock){

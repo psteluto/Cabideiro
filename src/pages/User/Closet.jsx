@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Col, Row} from "antd";
+import {withRouter} from 'react-router-dom';
 import ProductService from '../../services/Product';
 import Card from '../../components/Card';
 
@@ -46,7 +47,8 @@ class Closet extends Component {
   }
 
   getProducts = async () => {
-    const res = await ProductService.getUserProducts();
+    const {match} = this.props;
+    const res = await ProductService.getUserProducts(match.params.id);
     const rawProducts = res.data;
     const products = rawProducts.map(product => this.formatProduct(product));
 
@@ -56,9 +58,6 @@ class Closet extends Component {
 
   render() {
     let {products} = this.state;
-
-    // products = products.concat(products)
-    // products = products.concat(products)
 
     return (
       <ClosetWrapper>
@@ -80,4 +79,4 @@ class Closet extends Component {
   }
 }
 
-export default Closet;
+export default withRouter(Closet);

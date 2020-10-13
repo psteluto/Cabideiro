@@ -18,11 +18,13 @@ const getAll = async (page, size, filterValue = {}) => {
 }
 
 const getFeatured = async () => {
-  return await api.get("/products", {params: {
+  return await api.get("/products", {
+    params: {
       page: 1,
       size: 10,
       premium: true
-    }});
+    }
+  });
 }
 
 const getOne = async (id) => {
@@ -38,8 +40,8 @@ const sendPropose = async (value, days) => {
   //TODO esperando endpoint
 }
 
-const getUserProducts = async () => {
-  return await api.get("/products-users");
+const getUserProducts = async (userId) => {
+  return await api.get("/products-users", {params: {user_id: userId}});
 }
 
 const add = async (product) => {
