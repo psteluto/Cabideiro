@@ -31,7 +31,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userData: {}
+      userData: {},
+      follow: false
     }
   }
 
@@ -51,8 +52,13 @@ class Profile extends Component {
     this.setState({userData: user});
   }
 
+  onFollow = () => {
+    const {follow} = this.state;
+    this.setState({follow: !follow})
+  }
+
   render() {
-    const {userData} = this.state;
+    const {userData, follow} = this.state;
 
     return (
       <div>
@@ -69,6 +75,8 @@ class Profile extends Component {
           followers={userData.followers}
           following={userData.following}
           premium={userData.premium}
+          onFollow={this.onFollow}
+          follow={follow}
         />
         <IconsWrapper>
           <Tabs defaultActiveKey="1" centered>

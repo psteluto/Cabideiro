@@ -152,7 +152,7 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate,
                 color="#000000"
                 width="100%"
               >
-                {paymentStatus ? "Avalie o locatário" : "Avalie o locador e o produto"}
+                {paymentStatus ? "AVALIE O LOCATÁRIO" : "AVALIE O LOCADOR E O PRODUTO"}
               </ButtonStyle>
             </ButtonWrapper>
             {evaluationOpt && (

@@ -43,11 +43,13 @@ class Income extends Component {
   getIncomes = async () => {
     if (ProductService.activeMock) {
       const {productMock} = this.props;
+
+      const incomes = productMock.incomeProducts
       this.setState({
-        incomes: productMock.incomeProducts,
-        totalPrice: 0,
-        totalClothes: productMock.incomeProducts.length,
-        totalReceiptAvailable: 0
+        incomes,
+        totalPrice: this.calculateTotalPrice(incomes),
+        totalClothes: incomes.length,
+        totalReceiptAvailable: this.calculateReceiptAvailable(incomes)
       })
     } else {
       const res = await ProductService.getIncome();
@@ -72,6 +74,25 @@ class Income extends Component {
         totalReceiptAvailable: res.data.totalReceiptAvailable
       })
     }
+  }
+
+  calculateTotalPrice = (incomes) => {
+    let totalPrice = 0
+    incomes.forEach(income => totalPrice += Number(income.rentValue))
+    console.log('price', totalPrice)
+    const commission = totalPrice * 0.3;
+    console.log('commision', commission)
+    return totalPrice - commission;
+  }
+
+  calculateReceiptAvailable = (incomes) => {
+    let totalReceiptAvailable = 0
+    incomes.forEach(income => {
+      if (income.status === 'Finalizado')
+        totalReceiptAvailable += Number(income.rentValue)
+    })
+    const commission = totalReceiptAvailable * 0.3;
+    return totalReceiptAvailable - commission;
   }
 
   onCLickClient(item){

@@ -6,7 +6,7 @@ import TextStyle from "../TextStyle";
 
 const UserProfile = ({profilePhoto, userName, countProducts, followers,
                        following, selfProfile, onFollow, onClickEdit,
-                       onChangeImage, loadImage, premium}) => {
+                       onChangeImage, loadImage, premium, follow}) => {
 
   const avatarComponent = (<Avatar style={{marginRight: 60}} size={80} src={profilePhoto}/>);
 
@@ -65,7 +65,11 @@ const UserProfile = ({profilePhoto, userName, countProducts, followers,
         {!selfProfile && (
           <Col span={2}>
             <Row style={{marginTop: 48}}>
-              <Button onClick={onFollow}>Seguir</Button>
+              {follow ? (
+                <Button type="primary" onClick={onFollow}>Seguindo</Button>
+              ) : (
+                <Button onClick={onFollow}>Seguir</Button>
+              )}
             </Row>
           </Col>
         )}
@@ -80,7 +84,8 @@ UserProfile.defaultProps = {
   onClickEdit: ()=>{},
   onChangeImage: ()=>{},
   loadImage: false,
-  premium: false
+  premium: false,
+  follow: false
 }
 
 UserProfile.propTypes = {
@@ -95,6 +100,7 @@ UserProfile.propTypes = {
   onChangeImage: PropTypes.func,
   loadImage: PropTypes.bool,
   premium: PropTypes.bool,
+  follow: PropTypes.bool
 }
 
 export default UserProfile;
