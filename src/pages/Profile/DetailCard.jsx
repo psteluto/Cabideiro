@@ -123,7 +123,7 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate,
                 color="#000000"
                 width="100%"
               >
-                Produto Devolvido
+                {paymentStatus ? "PRODUTO ENVIADO" : "PRODUTO DEVOLVIDO"}
               </ButtonStyle>
             </ButtonWrapper>
             {trackOpt && (
