@@ -54,6 +54,7 @@ const add = async (product) => {
 }
 
 const update = async (product) => {
+  product.product_id = product.id;
   const fd = new FormData();
   for (const key in product) {
     if (key !== 'images')
