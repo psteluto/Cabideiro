@@ -26,7 +26,8 @@ class Income extends Component {
       incomes: [],
       totalPrice: 0,
       totalClothes: 0,
-      totalReceiptAvailable: 0
+      totalReceiptAvailable: 0,
+      hasReview: false
     }
   }
 
@@ -90,10 +91,11 @@ class Income extends Component {
 
   onSendEvaluation = () => {
     message.success("Avaliação registrada com sucesso");
+    this.setState({hasReview: true})
   }
 
   render() {
-    const {incomes, totalPrice, totalClothes, totalReceiptAvailable} = this.state;
+    const {incomes, totalPrice, totalClothes, totalReceiptAvailable, hasReview} = this.state;
 
     return (
       <Container>
@@ -122,6 +124,7 @@ class Income extends Component {
                 onClickProduct={()=>this.onClickProduct(item)}
                 onSendTrack={()=>this.onSendTrack(item.id)}
                 onSendEvaluation={this.onSendEvaluation}
+                hasReview={hasReview}
               />
             </Col>
           ))}

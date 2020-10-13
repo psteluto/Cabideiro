@@ -50,7 +50,7 @@ const ButtonWrapper = styled.div`
 
 const DetailCard = ({image, status, name, color, owner, client, devolutionDate,
                       rentValue, paymentStatus, onClickProfile, onClickProduct,
-                      onSendTrack, onSendEvaluation}) => {
+                      onSendTrack, onSendEvaluation, hasReview}) => {
 
   const [trackOpt, setTrackOpt] = useState(false);
   const [evaluationOpt, setEvaluationOpt] = useState(false);
@@ -141,7 +141,7 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate,
           </span>
         )}
 
-        {status === 'Devolvido' && (
+        {status === 'Devolvido' && !hasReview && (
           <span>
             <ButtonWrapper>
               <ButtonStyle
@@ -167,7 +167,7 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate,
                   backColorButtom="background-color: #ffcb00"
                   width="100%"
                 >
-                    Enviar
+                    ENVIAR
                 </ButtonStyle>
               </span>
             )}
@@ -191,7 +191,8 @@ DetailCard.propTypes = {
   onClickProfile: PropTypes.func.isRequired,
   onClickProduct: PropTypes.func.isRequired,
   onSendTrack: PropTypes.func,
-  onSendEvaluation: PropTypes.func
+  onSendEvaluation: PropTypes.func,
+  hasReview: PropTypes.bool
 }
 
 export default DetailCard;

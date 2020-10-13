@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import TextStyle from '../../components/TextStyle';
 import BackgroundLogin from '../../images/background-login.jpg';
 import {setToken} from '../../redux/TokenSlice';
-
+import ButtonStyle from '../../components/ButtonStyle';
 
 const Background = styled.div`
    background: url(${BackgroundLogin});
@@ -38,11 +38,6 @@ const LogoWrapper = styled.div`
 
 const FormStyle = styled.div`
    padding: 43px 115px 80px 115px;
-`;
-
-const ButtonStyle = styled(Button)`
-   color: #000000;
-   margin-top: 25px;
 `;
 
 class Login extends Component {
@@ -121,11 +116,21 @@ class Login extends Component {
               )}
               <Row>
                 <Col span={11}>
-                  <ButtonStyle type="primary" block onClick={this.login}>CONTINUAR</ButtonStyle>
+                  <ButtonStyle type="primary" width="100%" onClick={this.login}>CONTINUAR</ButtonStyle>
                 </Col>
                 <Col span={11} offset={2}>
                   <Link to="/login/register">
-                    <ButtonStyle type="primary" block onClick={this.login}>CADASTRAR</ButtonStyle>
+                    <ButtonStyle
+                      type="primary"
+                      backColorButtom="background-color: #e73554"
+                      backHoverButton="#e73554"
+                      colorButton="#ffffff"
+                      color="#000000"
+                      width="100%"
+                      onClick={this.login}
+                    >
+                      CADASTRAR
+                    </ButtonStyle>
                   </Link>
                 </Col>
               </Row>

@@ -46,7 +46,7 @@ const productsMockSlice = createSlice({
   },
   reducers: {
     addProduct: (state, action) => {
-      state.historyProducts.push(action.payload);
+      state.historyProducts.unshift(action.payload);
     },
     changeStatus: (state, action) => {
       const newProducts = state[action.payload.target].map(prod => {

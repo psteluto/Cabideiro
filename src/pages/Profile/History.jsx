@@ -21,7 +21,8 @@ class History extends Component {
     super(props);
     this.state = {
       history: [],
-      totalClothes: 0
+      totalClothes: 0,
+      hasReview: false
     }
   }
 
@@ -77,10 +78,11 @@ class History extends Component {
 
   onSendEvaluation = () => {
     message.success("Avaliação registrada com sucesso");
+    this.setState({hasReview: true})
   }
   
   render() {
-    const {history, totalClothes} = this.state;
+    const {history, totalClothes, hasReview} = this.state;
 
     return (
       <Container>
@@ -106,6 +108,7 @@ class History extends Component {
                 onClickProduct={()=>this.onClickProduct(item)}
                 onSendTrack={()=>this.onSendTrack(item.id)}
                 onSendEvaluation={this.onSendEvaluation}
+                hasReview={hasReview}
               />
             </Col>
           ))}
