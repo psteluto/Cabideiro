@@ -7,39 +7,39 @@ const productsMockSlice = createSlice({
       {
         id: 1,
         status: "Em separação",
-        name: "Camisa Florida",
-        color: "Rosa",
-        owner: "Camila Aparecida",
+        name: "Vestido Curto",
+        color: "Preto",
+        owner: "Luciana Aparecida",
         devolutionDate: "20/10/2020",
         rentValue: 50,
-        image: "https://app-cabideiro.s3.amazonaws.com/c0ca165335a76a4e910a-image1.jpg"
+        image: "https://app-cabideiro.s3.amazonaws.com/b8fc7822-3a8b-4073-8e3c-c358d0f4e58e.jpg"
       },{
         id: 2,
         status: "Enviado",
-        name: "Terno",
-        color: "Preto",
-        owner: "Camila Aparecida",
+        name: "Macacão Longo",
+        color: "Branco",
+        owner: " Luiza Cassiano",
         devolutionDate: "20/10/2020",
         rentValue: 100,
-        image: "https://app-cabideiro.s3.amazonaws.com/c0ca165335a76a4e910a-image1.jpg"
+        image: "https://app-cabideiro.s3.amazonaws.com/ed9382a1-f502-4370-9e33-4e6d44f9da69.jpg\n"
       },{
         id: 3,
         status: "Entregue",
-        name: "Vestido Longo",
+        name: "Saia Longa",
         color: "Azul",
-        owner: "Camila Aparecida",
+        owner: "Luiza Cassiano",
         devolutionDate: "20/10/2020",
-        rentValue: 80,
-        image: "https://app-cabideiro.s3.amazonaws.com/c0ca165335a76a4e910a-image1.jpg"
+        rentValue: 180,
+        image: "https://app-cabideiro.s3.amazonaws.com/e6a4efc4-9fb3-43d0-9da1-bea60902aa63.jpg"
       },{
         id: 4,
         status: "Devolvido",
-        name: "Camisa",
-        color: "Branco",
-        owner: "Camila Aparecida",
+        name: "Vestido Curto",
+        color: "Vermelho",
+        owner: "Luiza Cassiano",
         devolutionDate: "10/10/2020",
-        rentValue: 40,
-        image: "https://app-cabideiro.s3.amazonaws.com/c0ca165335a76a4e910a-image1.jpg"
+        rentValue: 90,
+        image: "https://app-cabideiro.s3.amazonaws.com/e56d551a-7801-4de0-9873-fa2dd692c109.jpg"
       }
     ],
     incomeProducts: []
