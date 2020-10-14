@@ -13,6 +13,7 @@ const getAll = async (page, size, filterValue = {}) => {
   if (filterSize) params.sizes = filterSize;
   if (gender) params.gender = gender;
   if (name) params.name = name;
+  params.user_id = localStorage.getItem("userId");
 
   return await api.get("/products", {params});
 }
