@@ -178,8 +178,14 @@ const DetailCard = ({
                 </p>
               </span>
             )}
-            <p>Data de Devolução: <ContrastText>{devolutionDate}</ContrastText>&nbsp;
-              {daysLeft >= 0 && <DaysLeftText>(Faltam {daysLeft} dias)</DaysLeftText>}</p>
+
+            {status === 'Entregue' && (
+              <p>
+                Data de Devolução: <ContrastText>{devolutionDate}</ContrastText>&nbsp;
+                {daysLeft >= 0 && <DaysLeftText>(Faltam {daysLeft} dias)</DaysLeftText>}
+              </p>
+            )}
+
             <p>Valor de Aluguel: <ContrastText>R$ {rentValue.toFixed(2).replace('.', ',')}</ContrastText></p>
 
             {paymentStatus && (
