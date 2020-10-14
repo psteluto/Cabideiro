@@ -32,7 +32,7 @@ const getOne = async (id) => {
 }
 
 const calculateShipping = async (zipcode) => {
-  return {data: 12.00}
+  return {data: 11.00}
 }
 
 const sendPropose = async (value, days) => {

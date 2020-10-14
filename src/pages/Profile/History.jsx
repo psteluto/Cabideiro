@@ -39,7 +39,6 @@ class History extends Component {
     if (ProductService.activeMock){
       // Caso mock esteja ativo
       const {productMock} = this.props;
-      console.log('produtin', productMock)
       this.setState({history: productMock.historyProducts, totalClothes: productMock.historyProducts.length})
     } else {
       // Caso mock NÃO esteja ativo

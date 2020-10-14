@@ -12,6 +12,7 @@ import TextStyle from '../../components/TextStyle';
 import ButtonStyle from "../../components/ButtonStyle";
 import MaskedInput from "antd-mask-input";
 import UserProfile from "../../components/UserProfile";
+import Propose from "./Propose";
 
 const {TabPane} = Tabs;
 
@@ -211,14 +212,17 @@ class Profile extends Component {
             <TabPane tab="Meu Closet" key="1">
               <MyCloset/>
             </TabPane>
-            <TabPane tab="Avaliações" key="2">
+            <TabPane tab="Minhas Avaliações" key="2">
               <Rating/>
             </TabPane>
-            <TabPane tab="Histórico" key="3">
+            <TabPane tab="Meu Histórico" key="3">
               <History/>
             </TabPane>
-            <TabPane tab="Rendimentos" key="4">
+            <TabPane tab="Meus Rendimentos" key="4">
               <Income/>
+            </TabPane>
+            <TabPane tab="Minhas Propostas" key="5">
+              <Propose/>
             </TabPane>
           </Tabs>
         </IconsWrapper>

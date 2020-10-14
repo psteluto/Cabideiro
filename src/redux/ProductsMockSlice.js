@@ -42,7 +42,24 @@ const productsMockSlice = createSlice({
         image: "https://app-cabideiro.s3.amazonaws.com/e56d551a-7801-4de0-9873-fa2dd692c109.jpg"
       }
     ],
-    incomeProducts: []
+    incomeProducts: [],
+    proposeProducts: [
+      {
+        id: "ab26f631-9e6b-412d-a324-4145e866742d",
+        status: "Aguardando resposta",
+        name: "Vestido Longo",
+        color: "Preto",
+        proposeSender: "Paloma Steluto",
+        proposeReceiver: "Luiza Cassiano",
+        senderId: "8607381f-40c4-4d46-96db-a4debdf89167",
+        receiverId: "5685e0e2-a6bc-4326-87d3-8ab9cd9ea44b",
+        rentValue: 250,
+        offerValue: 300,
+        locationDays: 2,
+        offerDays: 5,
+        image: "https://app-cabideiro.s3.amazonaws.com/8198cdc570a2ccfffcfb-image.jpg"
+      }
+    ]
   },
   reducers: {
     addProduct: (state, action) => {

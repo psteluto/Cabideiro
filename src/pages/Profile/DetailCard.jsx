@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {Input, Rate} from "antd";
+import {Input, InputNumber, Rate} from "antd";
 import moment from 'moment';
 import Card from '../../components/Card';
 import ButtonStyle from "../../components/ButtonStyle";
 import TextStyle from "../../components/TextStyle";
+import MoneyInput from "../../components/MoneyInput";
 
 const Container = styled.div`
   margin-right: 20px;
@@ -48,12 +49,24 @@ const ButtonWrapper = styled.div`
   margin: 5px 0;
 `;
 
-const DetailCard = ({image, status, name, color, owner, client, devolutionDate,
+const InputNumberStyle = styled(InputNumber)`
+  width: 100%;
+`;
+
+
+const DetailCard = ({
+                      image, status, name, color, owner, client, devolutionDate,
                       rentValue, paymentStatus, onClickProfile, onClickProduct,
-                      onSendTrack, onSendEvaluation, hasReview}) => {
+                      onSendTrack, onSendEvaluation, hasReview, isPropose,
+                      isProposeReceiver, proposeReceiver, proposeSender,
+                      offerValue, locationDays, offerDays, onAcceptOffer,
+                      onRefuseOffer, onSendPropose
+                    }) => {
 
   const [trackOpt, setTrackOpt] = useState(false);
   const [evaluationOpt, setEvaluationOpt] = useState(false);
+  const [showProposal, setShowProposal] = useState(false);
+  const [proposeVal, setProposeVal] = useState("");
 
   rentValue = Number(rentValue);
 
@@ -87,88 +100,158 @@ const DetailCard = ({image, status, name, color, owner, client, devolutionDate,
 
       <TextWrapper>
         <StatusText>Status {status === 'Finalizado' ? status : (<span>{status}</span>)}</StatusText>
-        {userDescription && (
+
+        {isPropose ? (
           <span>
-            <p>
-              {userDescription}:&nbsp;
-              <ProfileLink onClick={onClickProfile} href="#">{userName}</ProfileLink>
-            </p>
-          </span>
-        )}
-        <p>
-          Data de Devolução: <ContrastText>{devolutionDate}</ContrastText>&nbsp;
-          {daysLeft >= 0 && <DaysLeftText>(Faltam {daysLeft} dias)</DaysLeftText>}
-        </p>
-        <p>Valor de Aluguel: <ContrastText>R$ {rentValue.toFixed(2).replace('.', ',')}</ContrastText></p>
+            {isProposeReceiver ? `O seu produto recebeu uma oferta de ` : `Você realizou uma oferta no produto de `}
+            {isProposeReceiver ? (
+              <ProfileLink onClick={onClickProfile} href="#">{proposeSender}</ProfileLink>
+            ) : (
+              <ProfileLink onClick={onClickProfile} href="#">{proposeReceiver}</ProfileLink>
+            )}
 
-        {paymentStatus && (
-          <p>Resgate: {paymentStatus}</p>
-        )}
+            <p>Preço atual: <ContrastText>R$ {rentValue.toFixed(2).replace('.', ',')}</ContrastText></p>
+            <p>Preço na oferta: <ContrastText>R$ {offerValue.toFixed(2).replace('.', ',')}</ContrastText></p>
+            <p>Dias de Locação atual: <ContrastText>{locationDays}</ContrastText></p>
+            <p>Dias de Locação na oferta: <ContrastText>{offerDays}</ContrastText></p>
 
-        {status === 'Enviado' && (
-          <ProfileLink href="#">Acompanhar entrega</ProfileLink>
-        )}
-        {status === 'Em devolução' && (
-          <ProfileLink href="#">Acompanhar devolução</ProfileLink>
-        )}
-
-        {(status === 'Entregue' || (paymentStatus && status === 'Em separação')) && (
-          <span>
-            <ButtonWrapper>
-              <ButtonStyle
-                onClick={() => setTrackOpt(true)}
-                backColorButtom="background-color: #e73554"
-                backHoverButton="#e73554"
-                colorButton="#ffffff"
-                color="#000000"
-                width="100%"
-              >
-                {paymentStatus ? "PRODUTO ENVIADO" : "PRODUTO DEVOLVIDO"}
-              </ButtonStyle>
-            </ButtonWrapper>
-            {trackOpt && (
+            {isProposeReceiver && status === "Aguardando resposta" && (
               <span>
-                <Input placeholder="Cód. Rastreio"/>
                 <ButtonStyle
-                  onClick={sendTrackOpt}
+                  onClick={onAcceptOffer}
                   backColorButtom="background-color: #ffcb00"
                   width="100%"
                 >
-                    ENVIAR
+                  ACEITAR
                 </ButtonStyle>
+                <ButtonStyle
+                  onClick={onRefuseOffer}
+                  backColorButtom="background-color: #ffcb00"
+                  width="100%"
+                >
+                  RECUSAR
+                </ButtonStyle>
+                <ButtonStyle
+                  onClick={()=>setShowProposal(true)}
+                  backColorButtom="background-color: #ffcb00"
+                  width="100%"
+                >
+                  FAZER CONTRAPROPOSTA
+                </ButtonStyle>
+
+                {showProposal && (
+                  <span>
+                    <div>
+                      <TextStyle color="#656668">Valor</TextStyle>
+                      <MoneyInput
+                        onChange={(value)=>setProposeVal(value)}
+                        value={proposeVal}
+                      />
+                    </div>
+                    <div>
+                      <TextStyle color="#656668">Quantidade de dias</TextStyle>
+                      <InputNumberStyle min={1}/>
+                    </div>
+                    <ButtonStyle
+                      type="primary"
+                      backColorButtom="background-color: #e73554"
+                      backHoverButton="#e73554"
+                      colorButton="#ffffff"
+                      width="100%"
+                      onClick={onSendPropose}
+                    >
+                      ENVIAR
+                    </ButtonStyle>
+                  </span>
+                )}
+
               </span>
             )}
           </span>
-        )}
-
-        {status === 'Devolvido' && !hasReview && (
+        ) : (
           <span>
-            <ButtonWrapper>
-              <ButtonStyle
-                onClick={() => setEvaluationOpt(true)}
-                backColorButtom="background-color: #e73554"
-                backHoverButton="#e73554"
-                colorButton="#ffffff"
-                color="#000000"
-                width="100%"
-              >
-                {paymentStatus ? "AVALIE O LOCATÁRIO" : "AVALIE O LOCADOR E O PRODUTO"}
-              </ButtonStyle>
-            </ButtonWrapper>
-            {evaluationOpt && (
+            {userDescription && (
               <span>
-                <TextStyle color="#262626">Avaliação</TextStyle>
-                <Input.TextArea
-                  rows={3}
-                />
-                <Rate defaultValue={0}/>
-                <ButtonStyle
-                  onClick={sendEvaluation}
-                  backColorButtom="background-color: #ffcb00"
-                  width="100%"
-                >
-                    ENVIAR
-                </ButtonStyle>
+                <p>
+                  {userDescription}:&nbsp;
+                  <ProfileLink onClick={onClickProfile} href="#">{userName}</ProfileLink>
+                </p>
+              </span>
+            )}
+            <p>Data de Devolução: <ContrastText>{devolutionDate}</ContrastText>&nbsp;
+              {daysLeft >= 0 && <DaysLeftText>(Faltam {daysLeft} dias)</DaysLeftText>}</p>
+            <p>Valor de Aluguel: <ContrastText>R$ {rentValue.toFixed(2).replace('.', ',')}</ContrastText></p>
+
+            {paymentStatus && (
+              <p>Resgate: {paymentStatus}</p>
+            )}
+
+            {status === 'Enviado' && (
+              <ProfileLink href="#">Acompanhar entrega</ProfileLink>
+            )}
+            {status === 'Em devolução' && (
+              <ProfileLink href="#">Acompanhar devolução</ProfileLink>
+            )}
+
+            {(status === 'Entregue' || (paymentStatus && status === 'Em separação')) && (
+              <span>
+                <ButtonWrapper>
+                  <ButtonStyle
+                    onClick={() => setTrackOpt(true)}
+                    backColorButtom="background-color: #e73554"
+                    backHoverButton="#e73554"
+                    colorButton="#ffffff"
+                    color="#000000"
+                    width="100%"
+                  >
+                    {paymentStatus ? "PRODUTO ENVIADO" : "PRODUTO DEVOLVIDO"}
+                  </ButtonStyle>
+                </ButtonWrapper>
+                {trackOpt && (
+                  <span>
+                    <Input placeholder="Cód. Rastreio"/>
+                    <ButtonStyle
+                      onClick={sendTrackOpt}
+                      backColorButtom="background-color: #ffcb00"
+                      width="100%"
+                    >
+                        ENVIAR
+                    </ButtonStyle>
+                  </span>
+                )}
+              </span>
+            )}
+
+            {status === 'Devolvido' && !hasReview && (
+              <span>
+                <ButtonWrapper>
+                  <ButtonStyle
+                    onClick={() => setEvaluationOpt(true)}
+                    backColorButtom="background-color: #e73554"
+                    backHoverButton="#e73554"
+                    colorButton="#ffffff"
+                    color="#000000"
+                    width="100%"
+                  >
+                    {paymentStatus ? "AVALIE O LOCATÁRIO" : "AVALIE O LOCADOR E O PRODUTO"}
+                  </ButtonStyle>
+                </ButtonWrapper>
+                {evaluationOpt && (
+                  <span>
+                    <TextStyle color="#262626">Avaliação</TextStyle>
+                    <Input.TextArea
+                      rows={3}
+                    />
+                    <Rate defaultValue={0}/>
+                    <ButtonStyle
+                      onClick={sendEvaluation}
+                      backColorButtom="background-color: #ffcb00"
+                      width="100%"
+                    >
+                        ENVIAR
+                    </ButtonStyle>
+                  </span>
+                )}
               </span>
             )}
           </span>
@@ -192,7 +275,17 @@ DetailCard.propTypes = {
   onClickProduct: PropTypes.func.isRequired,
   onSendTrack: PropTypes.func,
   onSendEvaluation: PropTypes.func,
-  hasReview: PropTypes.bool
+  hasReview: PropTypes.bool,
+  isPropose: PropTypes.bool,
+  isProposeReceiver: PropTypes.bool,
+  proposeReceiver: PropTypes.string,
+  proposeSender: PropTypes.string,
+  offerValue: PropTypes.string,
+  locationDays: PropTypes.string,
+  offerDays: PropTypes.string,
+  onAcceptOffer: PropTypes.func,
+  onRefuseOffer: PropTypes.func,
+  onSendPropose: PropTypes.func
 }
 
 export default DetailCard;
