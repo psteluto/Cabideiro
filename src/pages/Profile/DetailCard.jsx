@@ -133,7 +133,10 @@ const DetailCard = ({
                 </ButtonStyle>
                 <ButtonStyle
                   onClick={()=>setShowProposal(true)}
-                  backColorButtom="background-color: #ffcb00"
+                  backColorButtom="background-color: #e73554"
+                  backHoverButton="#e73554"
+                  colorButton="#ffffff"
+                  color="#000000"
                   width="100%"
                 >
                   FAZER CONTRAPROPOSTA
