@@ -59,7 +59,7 @@ const productsMockSlice = createSlice({
         receiverId: "5685e0e2-a6bc-4326-87d3-8ab9cd9ea44b",
         rentValue: 250,
         offerValue: 300,
-        locationDays: 2,
+        locationDays: 3,
         offerDays: 5,
         image: "https://app-cabideiro.s3.amazonaws.com/8198cdc570a2ccfffcfb-image.jpg"
       }
