@@ -70,7 +70,7 @@ const DetailCard = ({
 
   rentValue = Number(rentValue);
 
-  const daysLeft = moment(devolutionDate, 'DD/MM/YYYY').diff(moment(), "days");
+  const daysLeft = moment(devolutionDate, 'DD/MM/YYYY').endOf('day').diff(moment(), "d");
 
   let userDescription = "";
   if (owner) userDescription = "Proprietário";
