@@ -144,7 +144,7 @@ class MyCloset extends Component {
           client: "Camila Almeida",
           devolutionDate: "20/10/2020",
           rentValue: rawProducts[0].price,
-          paymentStatus: "Em Andamento",
+          paymentStatus: "Aguardando Finalização",
           image: rawProducts[0].image_products[0].image_url
         }
 
@@ -158,7 +158,7 @@ class MyCloset extends Component {
           client: "Camila Almeida",
           devolutionDate: "20/10/2020",
           rentValue: rawProducts[1].price,
-          paymentStatus: "Em Andamento",
+          paymentStatus: "Aguardando Finalização",
           image: rawProducts[1].image_products[0].image_url
         }
 
@@ -172,7 +172,7 @@ class MyCloset extends Component {
           client: "Camila Almeida",
           devolutionDate: "20/10/2020",
           rentValue: rawProducts[2].price,
-          paymentStatus: "Em Andamento",
+          paymentStatus: "Aguardando Finalização",
           image: rawProducts[2].image_products[0].image_url
         }
 

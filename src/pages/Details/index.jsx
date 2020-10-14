@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Row, Col, Button, Collapse, Input, Alert, InputNumber} from 'antd';
 import {Link} from 'react-router-dom';
+import MaskInput from 'antd-mask-input';
 import Logotipo from '../../components/Logotipo'
 import Menu from '../../components/Menu';
 import TextStyle from '../../components/TextStyle';
@@ -242,7 +243,11 @@ class Details extends Component {
                 </a>
                 {showShipping && (
                   <span>
-                    <Input onChange={(e) => this.changeField('zipCode', e.target.value)} placeholder="00000-000"/>
+                    <MaskInput
+                      mask='11111-111'
+                      onChange={(e) => this.changeField('zipCode', e.target.value)}
+                      placeholder="00000-000"
+                    />
                     {!!shippingPrice && (
                       <TextStyle color="#e73554" strong>R$ {shippingPrice.toFixed(2).replace('.', ',')}</TextStyle>
                     )}

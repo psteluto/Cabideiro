@@ -6,6 +6,7 @@ const productsMockSlice = createSlice({
     historyProducts: [
       {
         id: 1,
+        productId: 'c08eb70b-b3f6-4a76-b53e-851f1940f027',
         status: "Em separação",
         name: "Vestido Curto",
         color: "Preto",
@@ -15,6 +16,7 @@ const productsMockSlice = createSlice({
         image: "https://app-cabideiro.s3.amazonaws.com/b8fc7822-3a8b-4073-8e3c-c358d0f4e58e.jpg"
       },{
         id: 2,
+        productId: "4749ed3e-3eed-4462-9e77-71caf330dcf4",
         status: "Enviado",
         name: "Macacão Longo",
         color: "Branco",
@@ -24,6 +26,7 @@ const productsMockSlice = createSlice({
         image: "https://app-cabideiro.s3.amazonaws.com/ed9382a1-f502-4370-9e33-4e6d44f9da69.jpg\n"
       },{
         id: 3,
+        productId: "02587edd-3723-44d2-976f-f22c5c29ce4f",
         status: "Entregue",
         name: "Saia Longa",
         color: "Azul",
@@ -33,6 +36,7 @@ const productsMockSlice = createSlice({
         image: "https://app-cabideiro.s3.amazonaws.com/e6a4efc4-9fb3-43d0-9da1-bea60902aa63.jpg"
       },{
         id: 4,
+        productId: "95a2dadf-9660-4f26-a759-8a625744818e",
         status: "Devolvido",
         name: "Vestido Curto",
         color: "Vermelho",

@@ -186,7 +186,7 @@ const DetailCard = ({
               <p>Resgate: {paymentStatus}</p>
             )}
 
-            {status === 'Enviado' && (
+            {!paymentStatus && status === 'Enviado' && (
               <ProfileLink href="#">Acompanhar entrega</ProfileLink>
             )}
             {status === 'Em devolução' && (
